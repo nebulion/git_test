@@ -70,6 +70,23 @@ final class MapView extends View {
 
     Festival fest;
     Favorites favs;
+
+    // you are here (map units); NaN = no fix
+    float youX = Float.NaN, youY = Float.NaN, youAcc;
+    private final Paint youFill = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint youRing = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint accRing = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+    void setYou(float x, float y, float acc) {
+        youX = x;
+        youY = y;
+        youAcc = acc;
+        invalidate();
+    }
+
+    boolean youOnMap() {
+        return !Float.isNaN(youX) && view.contains(youX, youY);
+    }
     Set<String> hiddenCats;
 
     // label paints
@@ -105,6 +122,14 @@ final class MapView extends View {
         halo.setStrokeWidth(Ui.px(4));
         halo.setColor(WHITE);
         halo.setStrokeJoin(Paint.Join.ROUND);
+        youFill.setColor(BLACK);
+        youRing.setColor(WHITE);
+        youRing.setStyle(Paint.Style.STROKE);
+        youRing.setStrokeWidth(Ui.px(4));
+        accRing.setColor(BLACK);
+        accRing.setStyle(Paint.Style.STROKE);
+        accRing.setStrokeWidth(Ui.px(1.5f));
+        accRing.setPathEffect(new DashPathEffect(new float[]{Ui.px(5), Ui.px(4)}, 0));
         arrow.setColor(BLACK);
         arrow.setStrokeWidth(Ui.px(3.5f));
         arrow.setStrokeCap(Paint.Cap.ROUND);
@@ -264,6 +289,18 @@ final class MapView extends View {
         }
         c.restore();
         drawLabels(c, detail);
+        drawYou(c);
+    }
+
+    /** You-are-here: black dot in a white ring and a black outer ring; dashed circle = GPS accuracy. */
+    private void drawYou(Canvas c) {
+        if (Float.isNaN(youX)) return;
+        float x = sx(youX), y = sy(youY);
+        float acc = youAcc * scale;
+        if (acc > Ui.px(14)) c.drawCircle(x, y, acc, accRing);
+        c.drawCircle(x, y, Ui.px(11), youFill);
+        c.drawCircle(x, y, Ui.px(7.5f), youRing);
+        c.drawCircle(x, y, Ui.px(4), youFill);
     }
 
     private float sx(float x) {

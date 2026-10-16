@@ -170,8 +170,9 @@ final class Ui {
 
     /** Small vector glyphs drawn with paths (no image assets, crisp at any density). */
     static final class Glyph extends View {
-        static final int BACK = 0, CHEVRON = 1;
+        static final int BACK = 0, CHEVRON = 1, LOCATE = 2;
         private final int kind;
+        boolean on;
         private final Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
         int color = INK;
 
@@ -189,6 +190,19 @@ final class Ui {
             p.setColor(isPressed() ? PAPER : color);
             p.setStrokeWidth(px(3.2f));
             Path path = new Path();
+            if (kind == LOCATE) {   // crosshair: ring, centre dot, four ticks
+                float r = Math.min(w, h) * 0.22f, t = Math.min(w, h) * 0.12f;
+                p.setStyle(Paint.Style.STROKE);
+                c.drawCircle(w / 2, h / 2, r, p);
+                c.drawLine(w / 2, h / 2 - r - t, w / 2, h / 2 - r + px(2), p);
+                c.drawLine(w / 2, h / 2 + r - px(2), w / 2, h / 2 + r + t, p);
+                c.drawLine(w / 2 - r - t, h / 2, w / 2 - r + px(2), h / 2, p);
+                c.drawLine(w / 2 + r - px(2), h / 2, w / 2 + r + t, h / 2, p);
+                p.setStyle(Paint.Style.FILL);
+                if (on) c.drawCircle(w / 2, h / 2, r * 0.45f, p);
+                p.setStyle(Paint.Style.STROKE);
+                return;
+            }
             if (kind == BACK) {
                 float s = Math.min(w, h) * 0.2f;
                 path.moveTo(w / 2 + s * 0.6f, h / 2 - s * 1.6f);

@@ -1,7 +1,12 @@
 package com.iiipoints.kompakt;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,6 +38,12 @@ public class MainActivity extends Activity {
     private static final int TAB_MAP = 0, TAB_LINEUP = 1, TAB_FAVS = 2;
 
     private Festival fest;
+    private Gps gps;
+    private boolean tracking;            // "locate me" on (remembered while the app runs)
+    private boolean recenter;            // centre the map on the next fix
+    private Location lastFix;
+    private Ui.Glyph locateBtn;
+    private TextView mapSubtitle, lastSubtitle;
     private Favorites favs;
     private MapView map;
     private int tab = TAB_MAP;
@@ -59,6 +70,11 @@ public class MainActivity extends Activity {
             throw new RuntimeException("lineup.json", e);
         }
         favs = new Favorites(this);
+        try {
+            gps = new Gps(this);
+        } catch (Exception e) {
+            throw new RuntimeException("gps.json", e);
+        }
         testHooks();
         show();
     }
@@ -90,6 +106,16 @@ public class MainActivity extends Activity {
         else if (screen.equals("info")) stack.add(infoScreen());
         else if (screen.startsWith("stage:")) stack.add(stageScreen(screen.substring(6)));
         else if (screen.startsWith("mapstage:")) mapStage = screen.substring(9);
+        String loc = getIntent().getStringExtra("loc");          // --es loc "25.79826,-80.20353"
+        if (loc != null) {
+            Location l = new Location("test");
+            l.setLatitude(Double.parseDouble(loc.split(",")[0]));
+            l.setLongitude(Double.parseDouble(loc.split(",")[1]));
+            l.setAccuracy(12);
+            tracking = true;
+            recenter = true;
+            onFix(l);
+        }
     }
 
     @Override
@@ -97,12 +123,110 @@ public class MainActivity extends Activity {
         super.onResume();
         show();
         tick.postDelayed(minute, 60_000);
+        if (tracking) startGps();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         tick.removeCallbacks(minute);
+        stopGps();   // no GPS in the background
+    }
+
+    // ------------------------------------------------------------------------------------- gps
+
+    private final LocationListener listener = new LocationListener() {
+        public void onLocationChanged(Location l) {
+            onFix(l);
+        }
+
+        public void onStatusChanged(String p, int s, Bundle b) {
+        }
+
+        public void onProviderEnabled(String p) {
+        }
+
+        public void onProviderDisabled(String p) {
+        }
+    };
+
+    private boolean hasPermission() {
+        return android.os.Build.VERSION.SDK_INT < 23
+                || checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void toggleLocate() {
+        if (tracking) {
+            tracking = false;
+            stopGps();
+            lastFix = null;
+            if (map != null) map.setYou(Float.NaN, Float.NaN, 0);
+            refreshLocateUi();
+            return;
+        }
+        tracking = true;
+        recenter = true;
+        if (!hasPermission()) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }
+        startGps();
+        refreshLocateUi();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int code, String[] perms, int[] results) {
+        if (results.length > 0 && results[0] == PackageManager.PERMISSION_GRANTED) {
+            startGps();
+        } else {
+            tracking = false;
+        }
+        refreshLocateUi();
+    }
+
+    /** GPS every 10 s / 5 m at most: enough for walking, gentle on the battery and the E Ink panel. */
+    @SuppressWarnings("MissingPermission")
+    private void startGps() {
+        if (!hasPermission()) return;
+        LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (lm == null) return;
+        try {
+            for (String p : new String[]{LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER}) {
+                if (!lm.getAllProviders().contains(p)) continue;
+                Location last = lm.getLastKnownLocation(p);
+                if (last != null && (lastFix == null || last.getTime() > lastFix.getTime())) onFix(last);
+                lm.requestLocationUpdates(p, 10_000, 5, listener);
+            }
+        } catch (SecurityException ignored) {
+            tracking = false;
+        }
+    }
+
+    private void stopGps() {
+        LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (lm != null) lm.removeUpdates(listener);
+    }
+
+    private void onFix(Location l) {
+        if (lastFix != null && l.getAccuracy() > lastFix.getAccuracy() * 2
+                && l.getTime() - lastFix.getTime() < 30_000) return;   // ignore a much worse fix right after a good one
+        lastFix = l;
+        float[] p = gps.toMap(l.getLatitude(), l.getLongitude());
+        MapView m = map();
+        m.setYou(p[0], p[1], l.getAccuracy() * gps.unitsPerMetre());
+        if (recenter && m.youOnMap()) {
+            m.focus(p[0], p[1], Math.max(MapView.ICON_ZOOM, 0.7f));
+            recenter = false;
+        }
+        refreshLocateUi();
+    }
+
+    private void refreshLocateUi() {
+        if (locateBtn != null) {
+            locateBtn.on = tracking && lastFix != null;
+            locateBtn.invalidate();
+        }
+        if (mapSubtitle != null) mapSubtitle.setText(statusLine());
     }
 
     @Override
@@ -227,6 +351,7 @@ public class MainActivity extends Activity {
         texts.addView(t);
         if (subtitle != null) {
             TextView s = Ui.text(c, subtitle, Ui.medium, 16);
+            lastSubtitle = s;
             s.setPadding(0, Ui.px(3), 0, 0);
             texts.addView(s);
         }
@@ -242,6 +367,12 @@ public class MainActivity extends Activity {
     }
 
     private String statusLine() {
+        if (tracking && lastFix == null) return "Finding your location\u2026";
+        if (tracking && map != null && !map.youOnMap()) {
+            double m = gps.metresFromVenue(lastFix.getLatitude(), lastFix.getLongitude());
+            return m >= 1000 ? String.format(java.util.Locale.US, "You're %.1f km from the venue", m / 1000)
+                    : "You're " + Math.round(m / 10) * 10 + " m from the venue";
+        }
         Festival.Clock k = Festival.clock();
         if (k.day >= 0 && k.live) return Festival.DAY_LONG[k.day].split(",")[0] + " · live · " + Festival.time(k.t);
         if (k.day >= 0 && k.t < Festival.OPEN) return Festival.DAY_LONG[k.day] + " · doors 4:00 PM";
@@ -266,6 +397,7 @@ public class MainActivity extends Activity {
                                 push(infoScreen());
                             }
                         }}, false));
+        mapSubtitle = lastSubtitle;
         root.addView(Ui.rule(c, 2));
 
         final FrameLayout area = new FrameLayout(c);
@@ -289,6 +421,17 @@ public class MainActivity extends Activity {
         LinearLayout.LayoutParams mlp = new LinearLayout.LayoutParams(Ui.px(48), Ui.px(48));
         mlp.topMargin = Ui.px(8);
         zoom.addView(minus, mlp);
+        locateBtn = new Ui.Glyph(c, Ui.Glyph.LOCATE);
+        locateBtn.setBackground(Ui.outline(9, Ui.PAPER, 2));
+        locateBtn.on = tracking && lastFix != null;
+        locateBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                toggleLocate();
+            }
+        });
+        LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(Ui.px(48), Ui.px(48));
+        llp.topMargin = Ui.px(16);
+        zoom.addView(locateBtn, llp);
         FrameLayout.LayoutParams zlp = Ui.frame(-2, -2, Gravity.TOP | Gravity.RIGHT);
         zlp.setMargins(0, Ui.px(10), Ui.px(10), 0);
         area.addView(zoom, zlp);
