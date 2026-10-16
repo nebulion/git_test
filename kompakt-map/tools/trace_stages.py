@@ -19,7 +19,7 @@ OX, OY, SC = 61, 19, 3
 
 # stage, part, seeds (ref), colour tolerance, style (floor / roof / side / screen / struct)
 PARTS = [
-    ("sec3", "floor", [(940, 960), (900, 1060), (1000, 1050)], 40, "floor"),
+    ("sec3", "floor", [(940, 960), (900, 1060), (1000, 1050), (1022, 1060), (1012, 1085), (1030, 1040)], 40, "floor"),
     ("sec3", "roof", [(950, 1140), (1000, 1150), (900, 1160)], 52, "roof"),
     ("grand-central", "floor", [(1260, 1260), (1240, 1150), (1300, 1180)], 32, "floor"),
     ("grand-central", "stage", [(1140, 1195), (1140, 1225)], 40, "roof"),

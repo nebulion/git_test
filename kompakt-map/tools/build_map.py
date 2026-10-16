@@ -117,14 +117,13 @@ def rect(x, y, w, h, fill="w", stroke=0, color="b", rx=0, rot=0, lvl=0):
     op(d, lvl)
 
 
-def wall(pts):
-    """Visible side walls of a raised block: sweep the outline along WALL."""
-    ex, ey = WALL
+def wall(pts, ext=WALL):
+    """Visible side walls of a raised block: sweep the outline along the extrusion (light hatch)."""
+    ex, ey = ext
     n = len(pts)
     for i in range(n):
         a, b = pts[i], pts[(i + 1) % n]
-        poly([a, b, (b[0] + ex, b[1] + ey), (a[0] + ex, a[1] + ey)], fill="b")
-    poly([(x + ex, y + ey) for x, y in pts], fill="b")
+        poly([a, b, (b[0] + ex, b[1] + ey), (a[0] + ex, a[1] + ey)], fill="h2", stroke=2.5)
 
 
 # --------------------------------------------------------------------------------------------
@@ -137,10 +136,11 @@ NORTH_E = [P(868, 402), P(1490, 402), P(1490, 840), P(868, 840)]    # Players Cl
 VIP_LOUNGE = [P(1062, 122), P(1282, 122), P(1282, 402), P(1062, 402)]
 CHECK_SHAPES = ["SOUTH", "ISO", "NORTH_S3", "NORTH_E", "VIP_LOUNGE"]
 
-for shape in (SOUTH, ISO, NORTH_E, VIP_LOUNGE):
+for shape in (SOUTH, NORTH_E, VIP_LOUNGE):
     wall(shape)
+wall(ISO, (6, 44))
 for shape in (SOUTH, ISO, NORTH_S3, NORTH_E, VIP_LOUNGE):
-    poly(shape, fill="b")
+    poly(shape, fill="w", stroke=3)
 
 BLOCKS = {
     "iso": [P(458, 846), P(612, 846), P(612, 1106), P(458, 1106)],
@@ -152,7 +152,7 @@ BLOCKS = {
     "lounge": rect_uv(1068, 128, 1276, 396),
 }
 for pts in BLOCKS.values():
-    poly(pts, fill="w")
+    poly(pts, fill="w", stroke=3)
 
 # streets drawn as outlines on open ground north of the blocks
 for u0, u1, w0, w1 in [(403, 451, 560, 840), (647, 694, 560, 840), (868, 911, 150, 402), (1020, 1062, 150, 402)]:
@@ -162,14 +162,14 @@ for u0, u1, w0, w1 in [(403, 451, 560, 840), (647, 694, 560, 840), (868, 911, 15
 # --------------------------------------------------------------------------------------------
 # Street names (big, on the black streets)
 # --------------------------------------------------------------------------------------------
-for (u, w, t) in [(1150, 861, "NW 5th AVE"), (800, 1404, "NW 6th AVE")]:
+for (u, w, t) in [(1152, 861, "NW 5th AVE"), (745, 1404, "NW 6th AVE")]:
     x, y = P(u, w)
-    text(x, y + 11, t, font="bc6i", size=32, color="w", rot=AVENUE_ANGLE)
-for (u, w, t, on) in [(1002, 1290, "NW 23rd ST", True), (1341, 1290, "NW 22nd ST", True), (636, 1000, "NW 24th ST", True),
+    text(x, y + 13, t, font="bc6i", size=38, color="b", rot=AVENUE_ANGLE)
+for (u, w, t, on) in [(1002, 1290, "NW 23rd ST", True), (1341, 1310, "NW 22nd ST", True), (636, 1000, "NW 24th ST", True),
                       (427, 700, "NW 25th ST", False), (670, 700, "NW 24th ST", False),
                       (889, 260, "NW 23rd ST", False), (1041, 260, "NW 22nd LN", False)]:
     x, y = P(u, w)
-    text(x + 11, y, t, font="bc6i", size=32 if on else 28, color="w" if on else "b", rot=STREET_ANGLE)
+    text(x + 11, y, t, font="bc6i", size=32 if on else 28, color="b", rot=STREET_ANGLE)
 
 # --------------------------------------------------------------------------------------------
 # Stages: flat drawings recreated from the official artwork (tools/stages.py)
@@ -177,8 +177,8 @@ for (u, w, t, on) in [(1002, 1290, "NW 23rd ST", True), (1341, 1290, "NW 22nd ST
 from stages import shapes  # noqa: E402
 
 PART_STYLE = {  # style -> (fill, stroke width, stroke colour, dash)
-    "floor": ("w", 3, "b", [12, 8]), "roof": ("b", 2, "w", None), "side": ("h", 2.5, "b", None),
-    "screen": ("w", 2.5, "b", None), "struct": ("w", 3, "b", None), "wline": (None, 2.5, "w", None),
+    "floor": ("w", 3, "b", [12, 8]), "roof": ("h", 3, "b", None), "side": ("h2", 2.5, "b", None),
+    "screen": ("w", 2.5, "b", None), "struct": ("w", 3, "b", None), "line": (None, 2.5, "b", None), "tri": ("w", 2.5, "b", None),
 }
 FOOTPRINTS = {}
 for stage, part, style, shape in shapes():
@@ -267,18 +267,17 @@ LABELS.append({"kind": "place", "id": "access-center", "t": "Access Center", "x"
 # SVG output
 # --------------------------------------------------------------------------------------------
 def svg_icon(kind, x, y, r, style):
+    """White disc, black glyph. GA: solid ring; GA+: double ring; VIP: dashed ring (VIP concierge: + inner ring)."""
     s = r / 12.0 * 0.82
-    dark = style in ("ga", "gaplus")
-    fg, bg = ("#fff", "#000") if dark else ("#000", "#fff")
+    vip = style in ("vip", "vipring")
+    ring = 'stroke-dasharray="5 3.5" stroke-width="2.5"' if vip else 'stroke-width="3.5"'
     out = [f'<circle cx="{x}" cy="{y}" r="{r + 3}" fill="#fff"/>',
-           f'<circle cx="{x}" cy="{y}" r="{r}" fill="{bg}" stroke="#000" stroke-width="{0 if dark else 3}"/>']
-    if style == "gaplus":
-        out.append(f'<circle cx="{x}" cy="{y}" r="{r - 4}" fill="none" stroke="#fff" stroke-width="1.6"/>')
-    if style == "vipring":
-        out.append(f'<circle cx="{x}" cy="{y}" r="{r - 5.5}" fill="none" stroke="#000" stroke-width="1.6"/>')
+           f'<circle cx="{x}" cy="{y}" r="{r}" fill="#fff" stroke="#000" {ring}/>']
+    if style in ("gaplus", "vipring"):
+        out.append(f'<circle cx="{x}" cy="{y}" r="{r - 5}" fill="none" stroke="#000" stroke-width="1.6"/>')
     out.append(f'<g transform="translate({x - 12 * s} {y - 12 * s}) scale({s})">')
     for o in ICONS[kind]:
-        col = bg if o[-1] == "bg" else fg
+        col = "#fff" if o[-1] == "bg" else "#000"
         if o[0] == "p":
             out.append(f'<path d="{o[1]}" fill="{col}"/>')
         elif o[0] == "c":
@@ -303,7 +302,7 @@ def svg_text(x, y, t, font, size, color, anchor="middle", rot=0, fit=None):
 
 
 def to_svg(ops_list):
-    col = {"b": "#000", "w": "#fff", "n": "none", "h": "url(#hatch)"}
+    col = {"b": "#000", "w": "#fff", "n": "none", "h": "url(#hatch)", "h2": "url(#hatch2)"}
     vx, vy, vw, vh = VIEW
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vx} {vy} {vw} {vh}" width="{vw}" height="{vh}">', "<style>"]
     for key, f in FONT_FILES.items():
@@ -312,7 +311,9 @@ def to_svg(ops_list):
         out.append(f'@font-face{{font-family:"{key.upper()}";src:url(data:font/ttf;base64,{b64})}}')
     out.append("</style>")
     out.append('<defs><pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">'
-               '<rect width="9" height="9" fill="#fff"/><rect width="2.5" height="9" fill="#000"/></pattern></defs>')
+               '<rect width="9" height="9" fill="#fff"/><rect width="2" height="9" fill="#000"/></pattern>'
+               '<pattern id="hatch2" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">'
+               '<rect width="14" height="14" fill="#fff"/><rect width="1.6" height="14" fill="#000"/></pattern></defs>')
     out.append(f'<rect x="{vx}" y="{vy}" width="{vw}" height="{vh}" fill="#fff"/>')
     for o in ops_list:
         k = o["o"]
