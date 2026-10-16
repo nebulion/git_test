@@ -230,47 +230,38 @@ for d in detected:
     op({"o": "icon", "k": glyph, "x": d["x"], "y": d["y"], "r": ICON_R, "st": style, "cat": cat}, DETAIL)
 # Access Center (a pill on the original)
 op({"o": "icon", "k": "accessible", "x": 790, "y": 1217, "r": ICON_R, "st": "ga", "cat": "access"}, DETAIL)
-text(814, 1213, "ACCESS", font="bc8", size=19, align="l", lvl=DETAIL)
-text(814, 1231, "CENTER", font="bc8", size=19, align="l", lvl=DETAIL)
 
 # --------------------------------------------------------------------------------------------
-# Attractions (smaller boxed labels, zoomed in) and stages (big labels, tap targets)
+# Labels: data only. The app draws them (Mudita-style), the SVG doesn't.
+#   kind: stage | attraction | entrance | place;  x, y: anchor;  tag: where the official map put its tag
 # --------------------------------------------------------------------------------------------
-for t, x, y in [("MOKIWORLD", 1113, 583), ("SKATE SPACE", 1238, 794), ("FORTUNE ROW", 611, 1093),
-                ("DIGITAL GALLERY", 1105, 867), ("VIP+ LOUNGE", 1119, 206)]:
-    w = text_width(t, "bc8", 22) + 16
-    rect(x - w / 2, y - 14, w, 28, fill="w", stroke=2.5, lvl=DETAIL)
-    text(x, y + 8, t, font="bc8", size=22, lvl=DETAIL)
+LABELS = []
 
-STAGES = [  # id, label, tag centre (from the official map)
-    ("mind-melt", "MIND MELT", 1103.5, 529), ("players-club", "PLAYER'S CLUB", 815, 581),
-    ("444", "::444::", 1248.5, 627), ("unforeseen", "UNFORESEEN", 1247, 762),
-    ("s3qu3nce", "S3QUENC3", 578, 758), ("door-iv", "DOOR IV", 853.5, 840),
-    ("isotropic", "ISOTROPIC", 294, 963), ("vertex", "VERTEX", 1280, 979),
-    ("iii-points-radio", "III POINTS RADIO", 624, 997), ("sec3", "SECTOR 3", 938, 1014),
-    ("halo-88", "HALO 88", 433, 1126), ("grand-central", "GRAND CENTRAL", 1274, 1188),
+
+def centroid(stage_id):
+    pts = [p for k, v in FOOTPRINTS.items() if k.split("/")[0] == stage_id for p in v]
+    return (round(sum(p[0] for p in pts) / len(pts), 1), round(sum(p[1] for p in pts) / len(pts), 1)) if pts else None
+
+
+STAGES = [  # id, name, official tag centre
+    ("mind-melt", "Mind Melt", 1103.5, 529), ("players-club", "Players Club", 815, 581),
+    ("444", "::444::", 1248.5, 627), ("unforeseen", "Unforeseen", 1247, 700),
+    ("s3qu3nce", "S3QUENC3", 578, 758), ("door-iv", "Door IV", 853.5, 840),
+    ("isotropic", "Isotropic", 294, 963), ("vertex", "Vertex", 1280, 979),
+    ("iii-points-radio", "III Points Radio", 624, 997), ("sec3", "Sector 3", 938, 1014),
+    ("halo-88", "Halo 88", 433, 1126), ("grand-central", "Grand Central", 1274, 1188),
     ("rc95", "RC95", 560, 1325),
 ]
-STAGE_SIZE = 30
-for sid, t, x, y in STAGES:
-    w = text_width(t, "bc8", STAGE_SIZE) + 20
-    h = STAGE_SIZE * 1.25
-    op({"o": "stage", "id": sid, "t": t, "x": x, "y": y, "sz": STAGE_SIZE, "w": round(w, 1), "h": round(h, 1)})
-    hits.append({"id": "stage:" + sid, "x": round(x - w / 2, 1), "y": round(y - h / 2, 1), "w": round(w, 1), "h": round(h, 1)})
-
-# --------------------------------------------------------------------------------------------
-# Entrances: arrow + label
-# --------------------------------------------------------------------------------------------
-ENTRANCES = [  # id, label, label centre, arrow tip, arrow direction (degrees, screen)
-    ("main", "ENTRANCE", (705, 1530), (725, 1440), -80),
-    ("vip", "VIP ENTRANCE", (220, 1285), (296, 1260), -10),
-    ("vipplus", "VIP+ ENTRANCE", (935, 175), (930, 260), 95),
-]
-for eid, t, (lx, ly), (ax, ay), ang in ENTRANCES:
-    op({"o": "entrance", "id": eid, "t": t, "x": lx, "y": ly, "ax": ax, "ay": ay, "ang": ang, "sz": 26})
-    w = text_width(t, "bc8", 26) + 20
-    hits.append({"id": "entrance:" + eid, "x": lx - w / 2, "y": ly - 18, "w": w, "h": 36})
-
+for sid, name, tx, ty in STAGES:
+    c = centroid(sid) or (tx, ty)
+    LABELS.append({"kind": "stage", "id": sid, "t": name, "x": c[0], "y": c[1], "tag": [tx, ty]})
+for name, x, y in [("Mokiworld", 1113, 583), ("Skate Space", 1238, 794), ("Fortune Row", 611, 1093),
+                   ("Digital Gallery", 1105, 867), ("VIP+ Lounge", 1119, 206)]:
+    LABELS.append({"kind": "attraction", "id": name.lower().replace(" ", "-"), "t": name, "x": x, "y": y})
+for eid, name, x, y, ang in [("main", "Entrance", 725, 1440, -80), ("vip", "VIP Entrance", 296, 1260, -10),
+                             ("vipplus", "VIP+ Entrance", 930, 260, 95)]:
+    LABELS.append({"kind": "entrance", "id": eid, "t": name, "x": x, "y": y, "dir": ang})
+LABELS.append({"kind": "place", "id": "access-center", "t": "Access Center", "x": 790, "y": 1217})
 
 # --------------------------------------------------------------------------------------------
 # SVG output
@@ -375,7 +366,7 @@ def to_svg(ops_list):
 
 def main():
     assets = os.path.join(ROOT, "app", "assets")
-    doc = {"view": VIEW, "ops": ops, "hits": hits, "fonts": FONT_FILES}
+    doc = {"view": VIEW, "ops": ops, "labels": LABELS, "fonts": FONT_FILES}
     with open(os.path.join(assets, "map.json"), "w") as f:
         json.dump(doc, f, separators=(",", ":"))
     with open(os.path.join(assets, "icons.json"), "w") as f:
@@ -383,7 +374,7 @@ def main():
     os.makedirs(os.path.join(ROOT, "mockup"), exist_ok=True)
     with open(os.path.join(ROOT, "mockup", "map.svg"), "w") as f:
         f.write(to_svg(ops))
-    print(f"{len(ops)} ops, {len(hits)} tap targets")
+    print(f"{len(ops)} ops, {len(LABELS)} labels")
 
 
 if __name__ == "__main__":
