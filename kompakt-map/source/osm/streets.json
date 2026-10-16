@@ -1,0 +1,4895 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-10-16T09:15:50Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "way",
+  "id": 11117705,
+  "bounds": {
+    "minlat": 25.7971970,
+    "minlon": -80.2038990,
+    "maxlat": 25.7976780,
+    "maxlon": -80.2038590
+  },
+  "nodes": [
+    99072711,
+    99072714
+  ],
+  "geometry": [
+    { "lat": 25.7971970, "lon": -80.2038590 },
+    { "lat": 25.7976780, "lon": -80.2038990 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 5th Court",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "5th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ct",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11127715,
+  "bounds": {
+    "minlat": 25.7979379,
+    "minlon": -80.2091452,
+    "maxlat": 25.7980098,
+    "maxlon": -80.2071157
+  },
+  "nodes": [
+    99133328,
+    9810515307,
+    11146645794,
+    99133329,
+    99133331
+  ],
+  "geometry": [
+    { "lat": 25.7980098, "lon": -80.2071157 },
+    { "lat": 25.7980063, "lon": -80.2072234 },
+    { "lat": 25.7980048, "lon": -80.2072691 },
+    { "lat": 25.7979910, "lon": -80.2077010 },
+    { "lat": 25.7979379, "lon": -80.2091452 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 22nd Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "22nd",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33142",
+    "tiger:zip_right": "33142"
+  }
+},
+{
+  "type": "way",
+  "id": 11127720,
+  "bounds": {
+    "minlat": 25.7980710,
+    "minlon": -80.2050480,
+    "maxlat": 25.7981468,
+    "maxlon": -80.2030470
+  },
+  "nodes": [
+    99133377,
+    13050896123,
+    7507277756,
+    99133379
+  ],
+  "geometry": [
+    { "lat": 25.7981468, "lon": -80.2030470 },
+    { "lat": 25.7981423, "lon": -80.2031670 },
+    { "lat": 25.7981255, "lon": -80.2036095 },
+    { "lat": 25.7980710, "lon": -80.2050480 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 22nd Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "22nd",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11127723,
+  "bounds": {
+    "minlat": 25.7976152,
+    "minlon": -80.2030343,
+    "maxlat": 25.7977290,
+    "maxlon": -80.1989773
+  },
+  "nodes": [
+    99133384,
+    9328596285,
+    6849307528,
+    3641264651,
+    99133387,
+    11013932894,
+    99133389,
+    6912257538,
+    99133391,
+    6912257534,
+    99133395
+  ],
+  "geometry": [
+    { "lat": 25.7977290, "lon": -80.1989773 },
+    { "lat": 25.7977268, "lon": -80.1990568 },
+    { "lat": 25.7977195, "lon": -80.1993160 },
+    { "lat": 25.7976905, "lon": -80.2003503 },
+    { "lat": 25.7976864, "lon": -80.2004970 },
+    { "lat": 25.7976717, "lon": -80.2010200 },
+    { "lat": 25.7976662, "lon": -80.2012181 },
+    { "lat": 25.7976396, "lon": -80.2021671 },
+    { "lat": 25.7976324, "lon": -80.2024237 },
+    { "lat": 25.7976259, "lon": -80.2026552 },
+    { "lat": 25.7976152, "lon": -80.2030343 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 22nd Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "22nd",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11127741,
+  "bounds": {
+    "minlat": 25.7980080,
+    "minlon": -80.1989881,
+    "maxlat": 25.7981160,
+    "maxlon": -80.1949142
+  },
+  "nodes": [
+    99133539,
+    13947859139,
+    13947859140,
+    99133541,
+    13947859132,
+    13050896121,
+    13947859131,
+    99133543,
+    13050896158,
+    13050896110,
+    99133545,
+    13050896132,
+    99133547,
+    9328596242,
+    99133549
+  ],
+  "geometry": [
+    { "lat": 25.7981160, "lon": -80.1949142 },
+    { "lat": 25.7981131, "lon": -80.1950240 },
+    { "lat": 25.7980936, "lon": -80.1957655 },
+    { "lat": 25.7980913, "lon": -80.1958523 },
+    { "lat": 25.7980892, "lon": -80.1959299 },
+    { "lat": 25.7980684, "lon": -80.1967108 },
+    { "lat": 25.7980678, "lon": -80.1967335 },
+    { "lat": 25.7980655, "lon": -80.1968191 },
+    { "lat": 25.7980627, "lon": -80.1969267 },
+    { "lat": 25.7980420, "lon": -80.1977054 },
+    { "lat": 25.7980401, "lon": -80.1977779 },
+    { "lat": 25.7980377, "lon": -80.1978684 },
+    { "lat": 25.7980193, "lon": -80.1985623 },
+    { "lat": 25.7980103, "lon": -80.1989028 },
+    { "lat": 25.7980080, "lon": -80.1989881 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 22nd Street",
+    "oneway": "no",
+    "sidewalk:left": "separate",
+    "sidewalk:right": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 11129223,
+  "bounds": {
+    "minlat": 25.7989126,
+    "minlon": -80.2078933,
+    "maxlat": 25.8007599,
+    "maxlon": -80.2078317
+  },
+  "nodes": [
+    99141513,
+    11146675610,
+    11146675611,
+    99141514,
+    99141516
+  ],
+  "geometry": [
+    { "lat": 25.7989126, "lon": -80.2078317 },
+    { "lat": 25.7989658, "lon": -80.2078333 },
+    { "lat": 25.7989947, "lon": -80.2078341 },
+    { "lat": 25.7998460, "lon": -80.2078590 },
+    { "lat": 25.8007599, "lon": -80.2078933 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 7th Court",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "7th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ct",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11130806,
+  "bounds": {
+    "minlat": 25.7984150,
+    "minlon": -80.2093833,
+    "maxlat": 25.8043807,
+    "maxlon": -80.2091820
+  },
+  "nodes": [
+    99149830,
+    99149832,
+    99149836,
+    99149838,
+    99149840,
+    7509152763,
+    99018710,
+    8531715586,
+    7895704749,
+    99149842,
+    99149844,
+    99149846
+  ],
+  "geometry": [
+    { "lat": 25.7984150, "lon": -80.2091820 },
+    { "lat": 25.7984820, "lon": -80.2091830 },
+    { "lat": 25.7988709, "lon": -80.2091847 },
+    { "lat": 25.7998097, "lon": -80.2092116 },
+    { "lat": 25.8007210, "lon": -80.2092320 },
+    { "lat": 25.8014547, "lon": -80.2092596 },
+    { "lat": 25.8016250, "lon": -80.2092660 },
+    { "lat": 25.8016516, "lon": -80.2092673 },
+    { "lat": 25.8019526, "lon": -80.2092821 },
+    { "lat": 25.8025617, "lon": -80.2093119 },
+    { "lat": 25.8034859, "lon": -80.2093466 },
+    { "lat": 25.8043807, "lon": -80.2093833 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 8th Avenue",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "8th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11130835,
+  "bounds": {
+    "minlat": 25.7951800,
+    "minlon": -80.2091452,
+    "maxlat": 25.7979379,
+    "maxlon": -80.2090550
+  },
+  "nodes": [
+    99150111,
+    9810515297,
+    7904022075,
+    99150113,
+    99150115,
+    99133331
+  ],
+  "geometry": [
+    { "lat": 25.7951800, "lon": -80.2090550 },
+    { "lat": 25.7952872, "lon": -80.2090576 },
+    { "lat": 25.7956431, "lon": -80.2090671 },
+    { "lat": 25.7960960, "lon": -80.2090790 },
+    { "lat": 25.7970240, "lon": -80.2091120 },
+    { "lat": 25.7979379, "lon": -80.2091452 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 8th Avenue",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "8th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11130855,
+  "bounds": {
+    "minlat": 25.8043671,
+    "minlon": -80.2099854,
+    "maxlat": 25.8095368,
+    "maxlon": -80.2097964
+  },
+  "nodes": [
+    99150215,
+    99146296,
+    99150216,
+    99150218,
+    99080736,
+    99150220,
+    2059268981
+  ],
+  "geometry": [
+    { "lat": 25.8043671, "lon": -80.2097964 },
+    { "lat": 25.8048434, "lon": -80.2098176 },
+    { "lat": 25.8058070, "lon": -80.2098390 },
+    { "lat": 25.8062960, "lon": -80.2098540 },
+    { "lat": 25.8081360, "lon": -80.2099420 },
+    { "lat": 25.8090840, "lon": -80.2099679 },
+    { "lat": 25.8095368, "lon": -80.2099854 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 8th Avenue",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "8th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11132808,
+  "bounds": {
+    "minlat": 25.8013360,
+    "minlon": -80.2031073,
+    "maxlat": 25.8015659,
+    "maxlon": -80.1950315
+  },
+  "nodes": [
+    99161044,
+    9946130168,
+    6892270734,
+    7904330728,
+    99161047,
+    7232456373,
+    7396621353,
+    4629300923,
+    6521599729,
+    99161049,
+    6521599724,
+    4629300924,
+    9620887044,
+    99161052,
+    9620887047,
+    11275724824,
+    5756088754
+  ],
+  "geometry": [
+    { "lat": 25.8015659, "lon": -80.1950315 },
+    { "lat": 25.8015633, "lon": -80.1951326 },
+    { "lat": 25.8015512, "lon": -80.1954592 },
+    { "lat": 25.8015474, "lon": -80.1955704 },
+    { "lat": 25.8014937, "lon": -80.1971262 },
+    { "lat": 25.8015126, "lon": -80.1973183 },
+    { "lat": 25.8014762, "lon": -80.1981615 },
+    { "lat": 25.8014405, "lon": -80.1989872 },
+    { "lat": 25.8014408, "lon": -80.1990278 },
+    { "lat": 25.8014579, "lon": -80.1991202 },
+    { "lat": 25.8014787, "lon": -80.1992088 },
+    { "lat": 25.8014785, "lon": -80.1992445 },
+    { "lat": 25.8014120, "lon": -80.2010454 },
+    { "lat": 25.8014095, "lon": -80.2011141 },
+    { "lat": 25.8014068, "lon": -80.2011862 },
+    { "lat": 25.8013391, "lon": -80.2030207 },
+    { "lat": 25.8013360, "lon": -80.2031073 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "maxspeed": "25 mph",
+    "name": "Northwest 26th Street",
+    "sidewalk:both": "separate"
+  }
+},
+{
+  "type": "way",
+  "id": 11132810,
+  "bounds": {
+    "minlat": 25.8008780,
+    "minlon": -80.2051730,
+    "maxlat": 25.8009686,
+    "maxlon": -80.2030940
+  },
+  "nodes": [
+    5756089040,
+    99161059,
+    13050896126,
+    7210286337,
+    13050896151,
+    99161060
+  ],
+  "geometry": [
+    { "lat": 25.8009686, "lon": -80.2030940 },
+    { "lat": 25.8009583, "lon": -80.2032041 },
+    { "lat": 25.8009534, "lon": -80.2033244 },
+    { "lat": 25.8009336, "lon": -80.2038086 },
+    { "lat": 25.8008820, "lon": -80.2050751 },
+    { "lat": 25.8008780, "lon": -80.2051730 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "maxspeed": "25 mph",
+    "name": "Northwest 26th Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "26th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11132826,
+  "bounds": {
+    "minlat": 25.8011710,
+    "minlon": -80.2072259,
+    "maxlat": 25.8012030,
+    "maxlon": -80.2059460
+  },
+  "nodes": [
+    99161163,
+    9810542532,
+    99161165
+  ],
+  "geometry": [
+    { "lat": 25.8012030, "lon": -80.2059460 },
+    { "lat": 25.8011735, "lon": -80.2071257 },
+    { "lat": 25.8011710, "lon": -80.2072259 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 26th Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "26th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11133006,
+  "bounds": {
+    "minlat": 25.7960333,
+    "minlon": -80.2113080,
+    "maxlat": 25.7961611,
+    "maxlon": -80.2070529
+  },
+  "nodes": [
+    99162146,
+    9810515300,
+    99162148,
+    99150113,
+    8531250229,
+    8531250228,
+    7904022072,
+    8531250221,
+    8531250248,
+    13904518224,
+    13093028120,
+    99162150,
+    11339177205,
+    7904022061
+  ],
+  "geometry": [
+    { "lat": 25.7961611, "lon": -80.2070529 },
+    { "lat": 25.7961589, "lon": -80.2071542 },
+    { "lat": 25.7961380, "lon": -80.2080940 },
+    { "lat": 25.7960960, "lon": -80.2090790 },
+    { "lat": 25.7960877, "lon": -80.2093933 },
+    { "lat": 25.7960778, "lon": -80.2097705 },
+    { "lat": 25.7960681, "lon": -80.2101393 },
+    { "lat": 25.7960663, "lon": -80.2102062 },
+    { "lat": 25.7960599, "lon": -80.2104505 },
+    { "lat": 25.7960553, "lon": -80.2106055 },
+    { "lat": 25.7960428, "lon": -80.2110273 },
+    { "lat": 25.7960400, "lon": -80.2111210 },
+    { "lat": 25.7960389, "lon": -80.2111904 },
+    { "lat": 25.7960333, "lon": -80.2113080 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 21st Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "21st",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33142",
+    "tiger:zip_right": "33142"
+  }
+},
+{
+  "type": "way",
+  "id": 11133020,
+  "bounds": {
+    "minlat": 25.7966971,
+    "minlon": -80.1989328,
+    "maxlat": 25.7968425,
+    "maxlon": -80.1948788
+  },
+  "nodes": [
+    99071513,
+    9620829184,
+    10722680166,
+    99162242,
+    7287092596,
+    13050896155,
+    9619786379,
+    99162243,
+    9619786382,
+    13050896144,
+    7509763445,
+    7287092587,
+    7287092593,
+    13050896131,
+    99162245,
+    13050896139,
+    99162246,
+    13050896147,
+    9328596253,
+    99162248
+  ],
+  "geometry": [
+    { "lat": 25.7968425, "lon": -80.1948788 },
+    { "lat": 25.7968394, "lon": -80.1949701 },
+    { "lat": 25.7968329, "lon": -80.1951621 },
+    { "lat": 25.7968106, "lon": -80.1958241 },
+    { "lat": 25.7967873, "lon": -80.1965921 },
+    { "lat": 25.7967852, "lon": -80.1966579 },
+    { "lat": 25.7967840, "lon": -80.1966932 },
+    { "lat": 25.7967810, "lon": -80.1967813 },
+    { "lat": 25.7967772, "lon": -80.1968742 },
+    { "lat": 25.7967758, "lon": -80.1969072 },
+    { "lat": 25.7967666, "lon": -80.1971316 },
+    { "lat": 25.7967596, "lon": -80.1972743 },
+    { "lat": 25.7967481, "lon": -80.1975098 },
+    { "lat": 25.7967413, "lon": -80.1976469 },
+    { "lat": 25.7967368, "lon": -80.1977385 },
+    { "lat": 25.7967330, "lon": -80.1978537 },
+    { "lat": 25.7967107, "lon": -80.1985231 },
+    { "lat": 25.7967013, "lon": -80.1988034 },
+    { "lat": 25.7966999, "lon": -80.1988467 },
+    { "lat": 25.7966971, "lon": -80.1989328 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 21st Street",
+    "sidewalk:right": "separate"
+  }
+},
+{
+  "type": "way",
+  "id": 11133026,
+  "bounds": {
+    "minlat": 25.7967853,
+    "minlon": -80.2004617,
+    "maxlat": 25.7968269,
+    "maxlon": -80.1989384
+  },
+  "nodes": [
+    99162256,
+    9328596292,
+    13050896152,
+    7648221992,
+    99162258
+  ],
+  "geometry": [
+    { "lat": 25.7968269, "lon": -80.1989384 },
+    { "lat": 25.7968246, "lon": -80.1990227 },
+    { "lat": 25.7968238, "lon": -80.1990528 },
+    { "lat": 25.7968019, "lon": -80.1998522 },
+    { "lat": 25.7967853, "lon": -80.2004617 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 21st Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "21st",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11138651,
+  "bounds": {
+    "minlat": 25.8045523,
+    "minlon": -80.2062695,
+    "maxlat": 25.8064053,
+    "maxlon": -80.2062300
+  },
+  "nodes": [
+    99146304,
+    99200950,
+    99200952,
+    11146675667,
+    99200954
+  ],
+  "geometry": [
+    { "lat": 25.8045523, "lon": -80.2062439 },
+    { "lat": 25.8054770, "lon": -80.2062300 },
+    { "lat": 25.8059530, "lon": -80.2062440 },
+    { "lat": 25.8063370, "lon": -80.2062650 },
+    { "lat": 25.8064053, "lon": -80.2062695 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "lanes": "2",
+    "name": "Northwest 6th Court",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "6th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ct",
+    "tiger:reviewed": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 11138659,
+  "bounds": {
+    "minlat": 25.7971270,
+    "minlon": -80.2062070,
+    "maxlat": 25.7975900,
+    "maxlon": -80.2061830
+  },
+  "nodes": [
+    99200979,
+    99200982
+  ],
+  "geometry": [
+    { "lat": 25.7971270, "lon": -80.2061830 },
+    { "lat": 25.7975900, "lon": -80.2062070 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 6th Court",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "6th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ct",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11139175,
+  "bounds": {
+    "minlat": 25.7967177,
+    "minlon": -80.2052808,
+    "maxlat": 25.8036532,
+    "maxlon": -80.2050126
+  },
+  "nodes": [
+    99203560,
+    8630809758,
+    99203561,
+    99133379,
+    99051307,
+    7672322303,
+    99203562,
+    99203564,
+    99161060,
+    6739033581,
+    99203566,
+    6739033575,
+    99203568,
+    13974364581,
+    99203570
+  ],
+  "geometry": [
+    { "lat": 25.7967177, "lon": -80.2050126 },
+    { "lat": 25.7970232, "lon": -80.2050126 },
+    { "lat": 25.7971524, "lon": -80.2050126 },
+    { "lat": 25.7980710, "lon": -80.2050480 },
+    { "lat": 25.7983180, "lon": -80.2050640 },
+    { "lat": 25.7985869, "lon": -80.2050798 },
+    { "lat": 25.7990001, "lon": -80.2051041 },
+    { "lat": 25.7999150, "lon": -80.2051252 },
+    { "lat": 25.8008780, "lon": -80.2051730 },
+    { "lat": 25.8012923, "lon": -80.2051886 },
+    { "lat": 25.8017810, "lon": -80.2052070 },
+    { "lat": 25.8019503, "lon": -80.2052138 },
+    { "lat": 25.8026800, "lon": -80.2052432 },
+    { "lat": 25.8031580, "lon": -80.2052583 },
+    { "lat": 25.8036532, "lon": -80.2052808 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "lanes": "2",
+    "name": "Northwest 6th Avenue",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "6th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11140737,
+  "bounds": {
+    "minlat": 25.7935162,
+    "minlon": -80.2043644,
+    "maxlat": 25.7953664,
+    "maxlon": -80.2041543
+  },
+  "nodes": [
+    4631135017,
+    4631135018,
+    4631135019,
+    99213250,
+    6739112399,
+    99032854,
+    6739112403,
+    99027229,
+    9042124612,
+    9042124611,
+    99213252
+  ],
+  "geometry": [
+    { "lat": 25.7935162, "lon": -80.2041543 },
+    { "lat": 25.7935902, "lon": -80.2042670 },
+    { "lat": 25.7936261, "lon": -80.2043006 },
+    { "lat": 25.7937136, "lon": -80.2043325 },
+    { "lat": 25.7940290, "lon": -80.2043393 },
+    { "lat": 25.7941530, "lon": -80.2043420 },
+    { "lat": 25.7942869, "lon": -80.2043430 },
+    { "lat": 25.7948460, "lon": -80.2043470 },
+    { "lat": 25.7951649, "lon": -80.2043631 },
+    { "lat": 25.7952576, "lon": -80.2043642 },
+    { "lat": 25.7953664, "lon": -80.2043644 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 5th Place",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "5th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Pl",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33136"
+  }
+},
+{
+  "type": "way",
+  "id": 11141874,
+  "bounds": {
+    "minlat": 25.7937130,
+    "minlon": -80.2049680,
+    "maxlat": 25.7937136,
+    "maxlon": -80.2043325
+  },
+  "nodes": [
+    99213250,
+    10755156225,
+    99222098
+  ],
+  "geometry": [
+    { "lat": 25.7937136, "lon": -80.2043325 },
+    { "lat": 25.7937135, "lon": -80.2044200 },
+    { "lat": 25.7937130, "lon": -80.2049680 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 5th Place",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "5th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Pl",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33136"
+  }
+},
+{
+  "type": "way",
+  "id": 11142518,
+  "bounds": {
+    "minlat": 25.7971524,
+    "minlon": -80.2050126,
+    "maxlat": 25.7972113,
+    "maxlon": -80.2031341
+  },
+  "nodes": [
+    99227037,
+    6912257526,
+    99072711,
+    99213271,
+    99203561
+  ],
+  "geometry": [
+    { "lat": 25.7972113, "lon": -80.2031341 },
+    { "lat": 25.7971998, "lon": -80.2037192 },
+    { "lat": 25.7971970, "lon": -80.2038590 },
+    { "lat": 25.7971736, "lon": -80.2044421 },
+    { "lat": 25.7971524, "lon": -80.2050126 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 21st Terrace",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "21st",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ter",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11142520,
+  "bounds": {
+    "minlat": 25.7969649,
+    "minlon": -80.2111460,
+    "maxlat": 25.7970932,
+    "maxlon": -80.2070824
+  },
+  "nodes": [
+    99227046,
+    9045683990,
+    11597803389,
+    99150115,
+    8531250234,
+    13093028117,
+    99205038
+  ],
+  "geometry": [
+    { "lat": 25.7970932, "lon": -80.2070824 },
+    { "lat": 25.7970817, "lon": -80.2071841 },
+    { "lat": 25.7970471, "lon": -80.2083402 },
+    { "lat": 25.7970240, "lon": -80.2091120 },
+    { "lat": 25.7969827, "lon": -80.2105328 },
+    { "lat": 25.7969674, "lon": -80.2110586 },
+    { "lat": 25.7969649, "lon": -80.2111460 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 21st Terrace",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "21st",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ter",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11144165,
+  "bounds": {
+    "minlat": 25.7916360,
+    "minlon": -80.2032260,
+    "maxlat": 25.7934791,
+    "maxlon": -80.2032130
+  },
+  "nodes": [
+    99241148,
+    6739112420,
+    6739112415,
+    99241155,
+    6912902900,
+    99222119
+  ],
+  "geometry": [
+    { "lat": 25.7916360, "lon": -80.2032130 },
+    { "lat": 25.7918108, "lon": -80.2032142 },
+    { "lat": 25.7925372, "lon": -80.2032189 },
+    { "lat": 25.7928067, "lon": -80.2032209 },
+    { "lat": 25.7928833, "lon": -80.2032215 },
+    { "lat": 25.7934791, "lon": -80.2032260 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 5th Avenue",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "5th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33136",
+    "tiger:zip_right": "33136"
+  }
+},
+{
+  "type": "way",
+  "id": 11144173,
+  "bounds": {
+    "minlat": 25.7972113,
+    "minlon": -80.2031341,
+    "maxlat": 25.7976152,
+    "maxlon": -80.2030297
+  },
+  "nodes": [
+    99227037,
+    3641264650,
+    99133395
+  ],
+  "geometry": [
+    { "lat": 25.7972113, "lon": -80.2031341 },
+    { "lat": 25.7973197, "lon": -80.2030297 },
+    { "lat": 25.7976152, "lon": -80.2030343 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 5th Avenue",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "5th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11147118,
+  "bounds": {
+    "minlat": 25.7988742,
+    "minlon": -80.2006650,
+    "maxlat": 25.7989160,
+    "maxlon": -80.1990263
+  },
+  "nodes": [
+    99267311,
+    9328596275,
+    10106090239,
+    10092195431,
+    1389591292
+  ],
+  "geometry": [
+    { "lat": 25.7989160, "lon": -80.1990263 },
+    { "lat": 25.7989142, "lon": -80.1990984 },
+    { "lat": 25.7989073, "lon": -80.1993687 },
+    { "lat": 25.7988889, "lon": -80.2000875 },
+    { "lat": 25.7988742, "lon": -80.2006650 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 22nd Lane",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "22nd",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ln",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11149691,
+  "bounds": {
+    "minlat": 25.7988914,
+    "minlon": -80.2085624,
+    "maxlat": 25.8007421,
+    "maxlon": -80.2084981
+  },
+  "nodes": [
+    99290752,
+    99290754,
+    99290756
+  ],
+  "geometry": [
+    { "lat": 25.7988914, "lon": -80.2084981 },
+    { "lat": 25.7998280, "lon": -80.2085291 },
+    { "lat": 25.8007421, "lon": -80.2085624 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 7th Place",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "7th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Pl",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11150390,
+  "bounds": {
+    "minlat": 25.8020475,
+    "minlon": -80.2031330,
+    "maxlat": 25.8022691,
+    "maxlon": -80.1950598
+  },
+  "nodes": [
+    99296974,
+    9946130171,
+    7904330725,
+    99181401,
+    13050896130,
+    6521599728,
+    99296105,
+    6521599720,
+    13050896153,
+    6849307568,
+    6849307562,
+    9533483439,
+    99296985,
+    9533483440,
+    7209689956,
+    7633845636,
+    7209689961,
+    7633845639,
+    7209689958,
+    11100258106,
+    9620887023,
+    5756089700
+  ],
+  "geometry": [
+    { "lat": 25.8022691, "lon": -80.1950598 },
+    { "lat": 25.8022661, "lon": -80.1951624 },
+    { "lat": 25.8022519, "lon": -80.1955987 },
+    { "lat": 25.8022030, "lon": -80.1971320 },
+    { "lat": 25.8021540, "lon": -80.1990048 },
+    { "lat": 25.8021532, "lon": -80.1990373 },
+    { "lat": 25.8021554, "lon": -80.1991405 },
+    { "lat": 25.8021596, "lon": -80.1992271 },
+    { "lat": 25.8021588, "lon": -80.1992517 },
+    { "lat": 25.8021305, "lon": -80.2001528 },
+    { "lat": 25.8021226, "lon": -80.2004746 },
+    { "lat": 25.8021083, "lon": -80.2010598 },
+    { "lat": 25.8021062, "lon": -80.2011374 },
+    { "lat": 25.8021041, "lon": -80.2012151 },
+    { "lat": 25.8020757, "lon": -80.2021792 },
+    { "lat": 25.8020720, "lon": -80.2023051 },
+    { "lat": 25.8020706, "lon": -80.2023507 },
+    { "lat": 25.8020659, "lon": -80.2025078 },
+    { "lat": 25.8020613, "lon": -80.2026647 },
+    { "lat": 25.8020531, "lon": -80.2029438 },
+    { "lat": 25.8020519, "lon": -80.2029830 },
+    { "lat": 25.8020475, "lon": -80.2031330 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "maxspeed": "25 mph",
+    "name": "Northwest 27th Street",
+    "sidewalk:both": "separate"
+  }
+},
+{
+  "type": "way",
+  "id": 11150394,
+  "bounds": {
+    "minlat": 25.8018529,
+    "minlon": -80.2072481,
+    "maxlat": 25.8018930,
+    "maxlon": -80.2060990
+  },
+  "nodes": [
+    99297067,
+    9810542538,
+    99034564
+  ],
+  "geometry": [
+    { "lat": 25.8018930, "lon": -80.2060990 },
+    { "lat": 25.8018564, "lon": -80.2071478 },
+    { "lat": 25.8018529, "lon": -80.2072481 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 27th Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "27th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11150403,
+  "bounds": {
+    "minlat": 25.8017810,
+    "minlon": -80.2052070,
+    "maxlat": 25.8018535,
+    "maxlon": -80.2031260
+  },
+  "nodes": [
+    5756089693,
+    99241200,
+    13050896112,
+    99297157,
+    6863209254,
+    6863209251,
+    13610881365,
+    6739033578,
+    99203566
+  ],
+  "geometry": [
+    { "lat": 25.8018535, "lon": -80.2031260 },
+    { "lat": 25.8018448, "lon": -80.2032382 },
+    { "lat": 25.8018433, "lon": -80.2033458 },
+    { "lat": 25.8018410, "lon": -80.2035180 },
+    { "lat": 25.8018280, "lon": -80.2039098 },
+    { "lat": 25.8018229, "lon": -80.2040628 },
+    { "lat": 25.8018172, "lon": -80.2042162 },
+    { "lat": 25.8017924, "lon": -80.2048866 },
+    { "lat": 25.8017810, "lon": -80.2052070 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "maxspeed": "25 mph",
+    "name": "Northwest 27th Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "27th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 11151045,
+  "bounds": {
+    "minlat": 25.7991351,
+    "minlon": -80.1990308,
+    "maxlat": 25.7992670,
+    "maxlon": -80.1949460
+  },
+  "nodes": [
+    99304113,
+    9946130165,
+    99304114,
+    7212757203,
+    13947859127,
+    99181261,
+    99165653,
+    99304116,
+    9328596235,
+    99296092
+  ],
+  "geometry": [
+    { "lat": 25.7992670, "lon": -80.1949460 },
+    { "lat": 25.7992633, "lon": -80.1950498 },
+    { "lat": 25.7992360, "lon": -80.1958928 },
+    { "lat": 25.7992220, "lon": -80.1963207 },
+    { "lat": 25.7992075, "lon": -80.1967657 },
+    { "lat": 25.7992052, "lon": -80.1968370 },
+    { "lat": 25.7991737, "lon": -80.1977994 },
+    { "lat": 25.7991480, "lon": -80.1985850 },
+    { "lat": 25.7991376, "lon": -80.1989439 },
+    { "lat": 25.7991351, "lon": -80.1990308 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "lit": "yes",
+    "name": "Northwest 23rd Street",
+    "sidewalk:left": "yes",
+    "sidewalk:right": "separate"
+  }
+},
+{
+  "type": "way",
+  "id": 11151052,
+  "bounds": {
+    "minlat": 25.7993801,
+    "minlon": -80.2031643,
+    "maxlat": 25.7994996,
+    "maxlon": -80.1990463
+  },
+  "nodes": [
+    99296096,
+    9328596270,
+    2921177494,
+    10026857362,
+    7069038041,
+    5860351272,
+    5834114505,
+    5834114506,
+    5756084676,
+    99241193
+  ],
+  "geometry": [
+    { "lat": 25.7994996, "lon": -80.1990463 },
+    { "lat": 25.7994988, "lon": -80.1991210 },
+    { "lat": 25.7994457, "lon": -80.2007023 },
+    { "lat": 25.7994154, "lon": -80.2018260 },
+    { "lat": 25.7994029, "lon": -80.2022919 },
+    { "lat": 25.7993884, "lon": -80.2028535 },
+    { "lat": 25.7993865, "lon": -80.2029243 },
+    { "lat": 25.7993857, "lon": -80.2029557 },
+    { "lat": 25.7993835, "lon": -80.2030368 },
+    { "lat": 25.7993801, "lon": -80.2031643 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 23rd Street",
+    "oneway": "yes",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "23rd",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11151053,
+  "bounds": {
+    "minlat": 25.7990001,
+    "minlon": -80.2051041,
+    "maxlat": 25.7990703,
+    "maxlon": -80.2030869
+  },
+  "nodes": [
+    99241192,
+    7507277764,
+    7507277758,
+    7672322306,
+    7672322314,
+    7672322307,
+    99203562
+  ],
+  "geometry": [
+    { "lat": 25.7990703, "lon": -80.2030869 },
+    { "lat": 25.7990590, "lon": -80.2034113 },
+    { "lat": 25.7990511, "lon": -80.2036398 },
+    { "lat": 25.7990362, "lon": -80.2040670 },
+    { "lat": 25.7990234, "lon": -80.2044280 },
+    { "lat": 25.7990123, "lon": -80.2047394 },
+    { "lat": 25.7990001, "lon": -80.2051041 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 23rd Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "23rd",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11151055,
+  "bounds": {
+    "minlat": 25.7988075,
+    "minlon": -80.2112142,
+    "maxlat": 25.7989341,
+    "maxlon": -80.2071465
+  },
+  "nodes": [
+    99304201,
+    9810542519,
+    8628459142,
+    99141513,
+    99290752,
+    7212777675,
+    99149836,
+    12434850185,
+    7509182746,
+    13093028114,
+    99205050
+  ],
+  "geometry": [
+    { "lat": 25.7989341, "lon": -80.2071465 },
+    { "lat": 25.7989309, "lon": -80.2072498 },
+    { "lat": 25.7989224, "lon": -80.2075213 },
+    { "lat": 25.7989126, "lon": -80.2078317 },
+    { "lat": 25.7988914, "lon": -80.2084981 },
+    { "lat": 25.7988785, "lon": -80.2089296 },
+    { "lat": 25.7988709, "lon": -80.2091847 },
+    { "lat": 25.7988533, "lon": -80.2097473 },
+    { "lat": 25.7988176, "lon": -80.2108922 },
+    { "lat": 25.7988097, "lon": -80.2111432 },
+    { "lat": 25.7988075, "lon": -80.2112142 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 23rd Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "23rd",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11151679,
+  "bounds": {
+    "minlat": 25.7999921,
+    "minlon": -80.2031851,
+    "maxlat": 25.7999982,
+    "maxlon": -80.2030615
+  },
+  "nodes": [
+    99241194,
+    5756088755
+  ],
+  "geometry": [
+    { "lat": 25.7999921, "lon": -80.2031851 },
+    { "lat": 25.7999982, "lon": -80.2030615 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "maxspeed": "25 mph",
+    "name": "Northwest 24th Street",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "24th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11151681,
+  "bounds": {
+    "minlat": 25.7998097,
+    "minlon": -80.2092116,
+    "maxlat": 25.7998558,
+    "maxlon": -80.2071779
+  },
+  "nodes": [
+    99308695,
+    9810542525,
+    7212250744,
+    99141514,
+    99290754,
+    99149838
+  ],
+  "geometry": [
+    { "lat": 25.7998558, "lon": -80.2071779 },
+    { "lat": 25.7998544, "lon": -80.2072775 },
+    { "lat": 25.7998501, "lon": -80.2075757 },
+    { "lat": 25.7998460, "lon": -80.2078590 },
+    { "lat": 25.7998280, "lon": -80.2085291 },
+    { "lat": 25.7998097, "lon": -80.2092116 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 24th Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "24th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11151683,
+  "bounds": {
+    "minlat": 25.7998180,
+    "minlon": -80.1990578,
+    "maxlat": 25.7999587,
+    "maxlon": -80.1949661
+  },
+  "nodes": [
+    99296099,
+    9328596228,
+    10673314303,
+    10673326310,
+    10673326306,
+    6857340650,
+    5843197298,
+    8386327033,
+    5834114486,
+    5834114487,
+    5591620781
+  ],
+  "geometry": [
+    { "lat": 25.7998180, "lon": -80.1990578 },
+    { "lat": 25.7998210, "lon": -80.1989714 },
+    { "lat": 25.7998329, "lon": -80.1986256 },
+    { "lat": 25.7998631, "lon": -80.1977480 },
+    { "lat": 25.7998694, "lon": -80.1975650 },
+    { "lat": 25.7998814, "lon": -80.1972146 },
+    { "lat": 25.7999347, "lon": -80.1956637 },
+    { "lat": 25.7999375, "lon": -80.1955833 },
+    { "lat": 25.7999541, "lon": -80.1950987 },
+    { "lat": 25.7999547, "lon": -80.1950776 },
+    { "lat": 25.7999587, "lon": -80.1949661 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "maxspeed": "25 mph",
+    "name": "Northwest 24th Street",
+    "oneway": "yes",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "24th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11151839,
+  "bounds": {
+    "minlat": 25.7959315,
+    "minlon": -80.2004287,
+    "maxlat": 25.7959768,
+    "maxlon": -80.1989051
+  },
+  "nodes": [
+    99296089,
+    9328596302,
+    11100258111,
+    6860091565,
+    99310307
+  ],
+  "geometry": [
+    { "lat": 25.7959768, "lon": -80.1989051 },
+    { "lat": 25.7959743, "lon": -80.1989935 },
+    { "lat": 25.7959737, "lon": -80.1990139 },
+    { "lat": 25.7959668, "lon": -80.1992556 },
+    { "lat": 25.7959315, "lon": -80.2004287 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 20th Terrace",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "20th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ter",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11156573,
+  "bounds": {
+    "minlat": 25.7928050,
+    "minlon": -80.2032209,
+    "maxlat": 25.7934810,
+    "maxlon": -80.2024099
+  },
+  "nodes": [
+    99241155,
+    99344173,
+    13351749528,
+    99344176,
+    99344178,
+    99344180,
+    8310654976,
+    99222115
+  ],
+  "geometry": [
+    { "lat": 25.7928067, "lon": -80.2032209 },
+    { "lat": 25.7928080, "lon": -80.2030200 },
+    { "lat": 25.7928084, "lon": -80.2027577 },
+    { "lat": 25.7928050, "lon": -80.2025330 },
+    { "lat": 25.7928420, "lon": -80.2024330 },
+    { "lat": 25.7928766, "lon": -80.2024099 },
+    { "lat": 25.7931404, "lon": -80.2024143 },
+    { "lat": 25.7934810, "lon": -80.2024200 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 4th Court",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "4th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ct",
+    "tiger:reviewed": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 11157058,
+  "bounds": {
+    "minlat": 25.7952690,
+    "minlon": -80.2061830,
+    "maxlat": 25.7971270,
+    "maxlon": -80.2061220
+  },
+  "nodes": [
+    99347106,
+    7904022077,
+    99200979
+  ],
+  "geometry": [
+    { "lat": 25.7952690, "lon": -80.2061220 },
+    { "lat": 25.7964002, "lon": -80.2061591 },
+    { "lat": 25.7971270, "lon": -80.2061830 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 6th Place",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "6th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Pl",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11163693,
+  "bounds": {
+    "minlat": 25.8006800,
+    "minlon": -80.2012189,
+    "maxlat": 25.8037861,
+    "maxlon": -80.2010950
+  },
+  "nodes": [
+    99399228,
+    11275724817,
+    10862195869,
+    6849307541,
+    9620887045,
+    99161052,
+    9620887046,
+    9533483438,
+    99296985,
+    9533483441,
+    99399230,
+    12128868242,
+    99269340,
+    12128868241,
+    6521599717,
+    99399232
+  ],
+  "geometry": [
+    { "lat": 25.8006800, "lon": -80.2010950 },
+    { "lat": 25.8007249, "lon": -80.2010959 },
+    { "lat": 25.8009381, "lon": -80.2011000 },
+    { "lat": 25.8010272, "lon": -80.2011017 },
+    { "lat": 25.8013540, "lon": -80.2011123 },
+    { "lat": 25.8014095, "lon": -80.2011141 },
+    { "lat": 25.8014823, "lon": -80.2011165 },
+    { "lat": 25.8020460, "lon": -80.2011352 },
+    { "lat": 25.8021062, "lon": -80.2011374 },
+    { "lat": 25.8021570, "lon": -80.2011394 },
+    { "lat": 25.8024935, "lon": -80.2011525 },
+    { "lat": 25.8026764, "lon": -80.2011602 },
+    { "lat": 25.8028484, "lon": -80.2011786 },
+    { "lat": 25.8029804, "lon": -80.2011938 },
+    { "lat": 25.8036958, "lon": -80.2012189 },
+    { "lat": 25.8037861, "lon": -80.2012043 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 3rd Avenue",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "3rd",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11167244,
+  "bounds": {
+    "minlat": 25.8024935,
+    "minlon": -80.2011525,
+    "maxlat": 25.8025482,
+    "maxlon": -80.1991519
+  },
+  "nodes": [
+    99296108,
+    6521599722,
+    6849307553,
+    11275724838,
+    99399230
+  ],
+  "geometry": [
+    { "lat": 25.8025470, "lon": -80.1991519 },
+    { "lat": 25.8025482, "lon": -80.1992395 },
+    { "lat": 25.8025048, "lon": -80.2006905 },
+    { "lat": 25.8024944, "lon": -80.2010862 },
+    { "lat": 25.8024935, "lon": -80.2011525 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 27th Terrace",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "27th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ter",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11168526,
+  "bounds": {
+    "minlat": 25.8007210,
+    "minlon": -80.2092320,
+    "maxlat": 25.8007782,
+    "maxlon": -80.2072098
+  },
+  "nodes": [
+    99381418,
+    9810542535,
+    99141516,
+    8531715583,
+    8531715576,
+    99290756,
+    99149840
+  ],
+  "geometry": [
+    { "lat": 25.8007782, "lon": -80.2072098 },
+    { "lat": 25.8007754, "lon": -80.2073134 },
+    { "lat": 25.8007599, "lon": -80.2078933 },
+    { "lat": 25.8007542, "lon": -80.2081059 },
+    { "lat": 25.8007494, "lon": -80.2082863 },
+    { "lat": 25.8007421, "lon": -80.2085624 },
+    { "lat": 25.8007210, "lon": -80.2092320 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 25th Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "25th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 11168530,
+  "bounds": {
+    "minlat": 25.8007324,
+    "minlon": -80.1991730,
+    "maxlat": 25.8008600,
+    "maxlon": -80.1950010
+  },
+  "nodes": [
+    99321626,
+    9946130167,
+    5843197306,
+    7232456364,
+    7232456359,
+    7232456365,
+    7904330722,
+    99181400,
+    6857340654,
+    7396621345,
+    7396621348,
+    13050896134,
+    6521599725,
+    8410331166,
+    4629300922
+  ],
+  "geometry": [
+    { "lat": 25.8008600, "lon": -80.1950010 },
+    { "lat": 25.8008563, "lon": -80.1951122 },
+    { "lat": 25.8008438, "lon": -80.1954123 },
+    { "lat": 25.8008302, "lon": -80.1957556 },
+    { "lat": 25.8008143, "lon": -80.1961597 },
+    { "lat": 25.8008040, "lon": -80.1964472 },
+    { "lat": 25.8007979, "lon": -80.1965944 },
+    { "lat": 25.8007770, "lon": -80.1971020 },
+    { "lat": 25.8007724, "lon": -80.1972989 },
+    { "lat": 25.8007513, "lon": -80.1982079 },
+    { "lat": 25.8007465, "lon": -80.1984107 },
+    { "lat": 25.8007330, "lon": -80.1989789 },
+    { "lat": 25.8007324, "lon": -80.1990041 },
+    { "lat": 25.8007338, "lon": -80.1990921 },
+    { "lat": 25.8007369, "lon": -80.1991730 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "maxspeed": "25 mph",
+    "name": "Northwest 25th Street",
+    "sidewalk:both": "separate"
+  }
+},
+{
+  "type": "way",
+  "id": 49239041,
+  "bounds": {
+    "minlat": 25.7953575,
+    "minlon": -80.2004004,
+    "maxlat": 25.7954638,
+    "maxlon": -80.2003772
+  },
+  "nodes": [
+    99378326,
+    8023844012
+  ],
+  "geometry": [
+    { "lat": 25.7953575, "lon": -80.2003772 },
+    { "lat": 25.7954638, "lon": -80.2004004 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 3rd Avenue",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "3rd",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 83069299,
+  "bounds": {
+    "minlat": 25.8055977,
+    "minlon": -80.2035252,
+    "maxlat": 25.8101954,
+    "maxlon": -80.2033707
+  },
+  "nodes": [
+    99241212,
+    5756088757,
+    99206542,
+    99080865,
+    99077916,
+    5440222909,
+    99241209,
+    13025268344,
+    7509400257,
+    12533535156,
+    99241207
+  ],
+  "geometry": [
+    { "lat": 25.8101954, "lon": -80.2034772 },
+    { "lat": 25.8101001, "lon": -80.2035252 },
+    { "lat": 25.8092732, "lon": -80.2034969 },
+    { "lat": 25.8083321, "lon": -80.2034646 },
+    { "lat": 25.8074199, "lon": -80.2034333 },
+    { "lat": 25.8069632, "lon": -80.2034176 },
+    { "lat": 25.8064920, "lon": -80.2034014 },
+    { "lat": 25.8064322, "lon": -80.2033994 },
+    { "lat": 25.8061994, "lon": -80.2033914 },
+    { "lat": 25.8056398, "lon": -80.2033723 },
+    { "lat": 25.8055977, "lon": -80.2033707 }
+  ],
+  "tags": {
+    "HFCS": "Urban Collector",
+    "highway": "tertiary",
+    "lanes": "2",
+    "name": "Northwest 5th Avenue",
+    "oneway": "yes",
+    "sidewalk:left": "no",
+    "sidewalk:right": "separate",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "5th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 105108001,
+  "bounds": {
+    "minlat": 25.7954206,
+    "minlon": -80.1984869,
+    "maxlat": 25.7955090,
+    "maxlon": -80.1957863
+  },
+  "nodes": [
+    99378319,
+    9042147132,
+    5834114475,
+    9042147131,
+    14020653006,
+    99181260,
+    7287092588,
+    13095835088,
+    13095835086,
+    99165651,
+    6849307527,
+    9749081060,
+    99319152
+  ],
+  "geometry": [
+    { "lat": 25.7955090, "lon": -80.1957863 },
+    { "lat": 25.7954995, "lon": -80.1960736 },
+    { "lat": 25.7954933, "lon": -80.1962560 },
+    { "lat": 25.7954817, "lon": -80.1965870 },
+    { "lat": 25.7954796, "lon": -80.1966587 },
+    { "lat": 25.7954769, "lon": -80.1967488 },
+    { "lat": 25.7954608, "lon": -80.1972237 },
+    { "lat": 25.7954568, "lon": -80.1973523 },
+    { "lat": 25.7954514, "lon": -80.1975282 },
+    { "lat": 25.7954458, "lon": -80.1977078 },
+    { "lat": 25.7954327, "lon": -80.1981425 },
+    { "lat": 25.7954234, "lon": -80.1984073 },
+    { "lat": 25.7954206, "lon": -80.1984869 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway": "shared_lane",
+    "highway": "secondary",
+    "lanes": "4",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 190525147,
+  "bounds": {
+    "minlat": 25.7954272,
+    "minlon": -80.1992358,
+    "maxlat": 25.7954387,
+    "maxlon": -80.1988777
+  },
+  "nodes": [
+    99296088,
+    9328596261,
+    9042147127,
+    9042147128,
+    6860091566
+  ],
+  "geometry": [
+    { "lat": 25.7954272, "lon": -80.1988777 },
+    { "lat": 25.7954302, "lon": -80.1989696 },
+    { "lat": 25.7954342, "lon": -80.1990936 },
+    { "lat": 25.7954361, "lon": -80.1991547 },
+    { "lat": 25.7954387, "lon": -80.1992358 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway": "shared_lane",
+    "highway": "secondary",
+    "lanes": "5",
+    "lanes:backward": "3",
+    "lanes:forward": "2",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "no",
+    "surface": "asphalt",
+    "turn:lanes:backward": "left|none|none"
+  }
+},
+{
+  "type": "way",
+  "id": 190525148,
+  "bounds": {
+    "minlat": 25.7951590,
+    "minlon": -80.2097468,
+    "maxlat": 25.7952261,
+    "maxlon": -80.2074057
+  },
+  "nodes": [
+    12953804392,
+    10881878560,
+    4260935952,
+    99150111,
+    9042181418,
+    7081813244,
+    9042181419
+  ],
+  "geometry": [
+    { "lat": 25.7951590, "lon": -80.2097468 },
+    { "lat": 25.7951682, "lon": -80.2094313 },
+    { "lat": 25.7951696, "lon": -80.2093816 },
+    { "lat": 25.7951800, "lon": -80.2090550 },
+    { "lat": 25.7951828, "lon": -80.2089528 },
+    { "lat": 25.7952121, "lon": -80.2079014 },
+    { "lat": 25.7952261, "lon": -80.2074057 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway": "shared_lane",
+    "highway": "secondary",
+    "lanes": "4",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 190532705,
+  "bounds": {
+    "minlat": 25.7920007,
+    "minlon": -80.2003772,
+    "maxlat": 25.7953575,
+    "maxlon": -80.2000803
+  },
+  "nodes": [
+    99378326,
+    7212779402,
+    9328550461,
+    3585948704,
+    3585948701,
+    6860091570,
+    3585948699,
+    99222107,
+    10913202950,
+    9328550464,
+    9328550463,
+    9328550465,
+    9328550462,
+    9328550466,
+    4603805607,
+    6860120348,
+    8313789506,
+    13206532737
+  ],
+  "geometry": [
+    { "lat": 25.7953575, "lon": -80.2003772 },
+    { "lat": 25.7950329, "lon": -80.2003685 },
+    { "lat": 25.7948423, "lon": -80.2003606 },
+    { "lat": 25.7947163, "lon": -80.2003553 },
+    { "lat": 25.7941226, "lon": -80.2003368 },
+    { "lat": 25.7938167, "lon": -80.2003269 },
+    { "lat": 25.7935712, "lon": -80.2003189 },
+    { "lat": 25.7934955, "lon": -80.2003164 },
+    { "lat": 25.7934373, "lon": -80.2003135 },
+    { "lat": 25.7933782, "lon": -80.2003106 },
+    { "lat": 25.7933210, "lon": -80.2003046 },
+    { "lat": 25.7932610, "lon": -80.2002959 },
+    { "lat": 25.7931844, "lon": -80.2002822 },
+    { "lat": 25.7931186, "lon": -80.2002704 },
+    { "lat": 25.7929079, "lon": -80.2002241 },
+    { "lat": 25.7926736, "lon": -80.2001799 },
+    { "lat": 25.7925613, "lon": -80.2001636 },
+    { "lat": 25.7920007, "lon": -80.2000803 }
+  ],
+  "tags": {
+    "HFCS": "Urban Collector",
+    "highway": "tertiary",
+    "lanes": "2",
+    "name": "Northwest 3rd Avenue",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "3rd",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 190867804,
+  "bounds": {
+    "minlat": 25.7952979,
+    "minlon": -80.2024694,
+    "maxlat": 25.7953387,
+    "maxlon": -80.2009974
+  },
+  "nodes": [
+    99344185,
+    9042147120,
+    3585948705,
+    7633845642
+  ],
+  "geometry": [
+    { "lat": 25.7952979, "lon": -80.2024694 },
+    { "lat": 25.7953063, "lon": -80.2021266 },
+    { "lat": 25.7953236, "lon": -80.2014218 },
+    { "lat": 25.7953387, "lon": -80.2009974 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway:right": "shared_lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 190867826,
+  "bounds": {
+    "minlat": 25.7952979,
+    "minlon": -80.2025271,
+    "maxlat": 25.7964296,
+    "maxlon": -80.2024694
+  },
+  "nodes": [
+    99344185,
+    8023844010,
+    10767878377,
+    6318197562,
+    99344187
+  ],
+  "geometry": [
+    { "lat": 25.7952979, "lon": -80.2024694 },
+    { "lat": 25.7954046, "lon": -80.2024719 },
+    { "lat": 25.7954658, "lon": -80.2024741 },
+    { "lat": 25.7959294, "lon": -80.2024908 },
+    { "lat": 25.7964296, "lon": -80.2025271 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 4th Court",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "4th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ct",
+    "tiger:reviewed": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 190867827,
+  "bounds": {
+    "minlat": 25.7934810,
+    "minlon": -80.2024694,
+    "maxlat": 25.7952979,
+    "maxlon": -80.2024200
+  },
+  "nodes": [
+    99222115,
+    7212779405,
+    5854258461,
+    3585948702,
+    6739112412,
+    99344182,
+    6739112409,
+    7212779403,
+    10767878378,
+    99344185
+  ],
+  "geometry": [
+    { "lat": 25.7934810, "lon": -80.2024200 },
+    { "lat": 25.7938147, "lon": -80.2024296 },
+    { "lat": 25.7940309, "lon": -80.2024358 },
+    { "lat": 25.7941304, "lon": -80.2024387 },
+    { "lat": 25.7943549, "lon": -80.2024414 },
+    { "lat": 25.7946529, "lon": -80.2024538 },
+    { "lat": 25.7948581, "lon": -80.2024615 },
+    { "lat": 25.7949746, "lon": -80.2024641 },
+    { "lat": 25.7952261, "lon": -80.2024682 },
+    { "lat": 25.7952979, "lon": -80.2024694 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 4th Court",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "4th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ct",
+    "tiger:reviewed": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 190867843,
+  "bounds": {
+    "minlat": 25.8007782,
+    "minlon": -80.2072481,
+    "maxlat": 25.8018529,
+    "maxlon": -80.2072098
+  },
+  "nodes": [
+    99034564,
+    8531715581,
+    99161165,
+    9045683986,
+    9045683985,
+    99381418
+  ],
+  "geometry": [
+    { "lat": 25.8018529, "lon": -80.2072481 },
+    { "lat": 25.8013155, "lon": -80.2072330 },
+    { "lat": 25.8011710, "lon": -80.2072259 },
+    { "lat": 25.8009456, "lon": -80.2072159 },
+    { "lat": 25.8008832, "lon": -80.2072136 },
+    { "lat": 25.8007782, "lon": -80.2072098 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "2",
+    "lanes:both_ways": "1",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:both_ways": "left",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 310456751,
+  "bounds": {
+    "minlat": 25.8047056,
+    "minlon": -80.2014418,
+    "maxlat": 25.8102576,
+    "maxlon": -80.2012399
+  },
+  "nodes": [
+    99146282,
+    13024984671,
+    13025627197,
+    99342605,
+    13025627193,
+    13025627191,
+    99308018,
+    13025627187,
+    13025621133,
+    99077910,
+    13025621130,
+    8828372248,
+    13025621124,
+    99080861,
+    13025621122,
+    8828372266,
+    99206486,
+    1785618987,
+    13025632055,
+    99341677
+  ],
+  "geometry": [
+    { "lat": 25.8047056, "lon": -80.2012399 },
+    { "lat": 25.8047574, "lon": -80.2012420 },
+    { "lat": 25.8055728, "lon": -80.2012756 },
+    { "lat": 25.8056300, "lon": -80.2012780 },
+    { "lat": 25.8056830, "lon": -80.2012798 },
+    { "lat": 25.8064959, "lon": -80.2013074 },
+    { "lat": 25.8065517, "lon": -80.2013093 },
+    { "lat": 25.8066059, "lon": -80.2013111 },
+    { "lat": 25.8074234, "lon": -80.2013390 },
+    { "lat": 25.8074773, "lon": -80.2013408 },
+    { "lat": 25.8075319, "lon": -80.2013427 },
+    { "lat": 25.8078249, "lon": -80.2013526 },
+    { "lat": 25.8083476, "lon": -80.2013703 },
+    { "lat": 25.8084011, "lon": -80.2013721 },
+    { "lat": 25.8084566, "lon": -80.2013733 },
+    { "lat": 25.8091488, "lon": -80.2013890 },
+    { "lat": 25.8093270, "lon": -80.2013930 },
+    { "lat": 25.8094543, "lon": -80.2013982 },
+    { "lat": 25.8101722, "lon": -80.2014371 },
+    { "lat": 25.8102576, "lon": -80.2014418 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 3rd Avenue",
+    "sidewalk:both": "separate"
+  }
+},
+{
+  "type": "way",
+  "id": 314353432,
+  "bounds": {
+    "minlat": 25.8006066,
+    "minlon": -80.2030810,
+    "maxlat": 25.8006800,
+    "maxlon": -80.2010950
+  },
+  "nodes": [
+    99399228,
+    7069038032,
+    8310958395,
+    5834114503,
+    5834114504,
+    5756089701
+  ],
+  "geometry": [
+    { "lat": 25.8006800, "lon": -80.2010950 },
+    { "lat": 25.8006398, "lon": -80.2021789 },
+    { "lat": 25.8006347, "lon": -80.2023167 },
+    { "lat": 25.8006108, "lon": -80.2029621 },
+    { "lat": 25.8006096, "lon": -80.2029971 },
+    { "lat": 25.8006066, "lon": -80.2030810 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "maxspeed": "25 mph",
+    "name": "Northwest 25th Street",
+    "oneway": "yes",
+    "sidewalk:both": "separate"
+  }
+},
+{
+  "type": "way",
+  "id": 314459409,
+  "bounds": {
+    "minlat": 25.7999150,
+    "minlon": -80.2051252,
+    "maxlat": 25.7999921,
+    "maxlon": -80.2031851
+  },
+  "nodes": [
+    99241194,
+    13050896103,
+    7672322316,
+    7896793977,
+    7672322308,
+    99203564
+  ],
+  "geometry": [
+    { "lat": 25.7999921, "lon": -80.2031851 },
+    { "lat": 25.7999872, "lon": -80.2032928 },
+    { "lat": 25.7999351, "lon": -80.2044435 },
+    { "lat": 25.7999326, "lon": -80.2045296 },
+    { "lat": 25.7999225, "lon": -80.2048703 },
+    { "lat": 25.7999150, "lon": -80.2051252 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "maxspeed": "25 mph",
+    "name": "Northwest 24th Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "24th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 314459410,
+  "bounds": {
+    "minlat": 25.7999921,
+    "minlon": -80.2033061,
+    "maxlat": 25.8037149,
+    "maxlon": -80.2031851
+  },
+  "nodes": [
+    99241205,
+    9533453283,
+    99241204,
+    99241202,
+    99241200,
+    99161053,
+    99161059,
+    99241197,
+    99241194
+  ],
+  "geometry": [
+    { "lat": 25.8037149, "lon": -80.2033061 },
+    { "lat": 25.8036257, "lon": -80.2033030 },
+    { "lat": 25.8027567, "lon": -80.2032723 },
+    { "lat": 25.8020443, "lon": -80.2032409 },
+    { "lat": 25.8018448, "lon": -80.2032382 },
+    { "lat": 25.8013328, "lon": -80.2032141 },
+    { "lat": 25.8009583, "lon": -80.2032041 },
+    { "lat": 25.8006021, "lon": -80.2031963 },
+    { "lat": 25.7999921, "lon": -80.2031851 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "lanes": "2",
+    "name": "Northwest 5th Avenue",
+    "oneway": "yes",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "5th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 424766006,
+  "bounds": {
+    "minlat": 25.7978798,
+    "minlon": -80.2111820,
+    "maxlat": 25.7979379,
+    "maxlon": -80.2091452
+  },
+  "nodes": [
+    99133331,
+    7686694385,
+    99133332
+  ],
+  "geometry": [
+    { "lat": 25.7979379, "lon": -80.2091452 },
+    { "lat": 25.7979000, "lon": -80.2104728 },
+    { "lat": 25.7978798, "lon": -80.2111820 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 22nd Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "22nd",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33142",
+    "tiger:zip_right": "33142"
+  }
+},
+{
+  "type": "way",
+  "id": 468396381,
+  "bounds": {
+    "minlat": 25.8006800,
+    "minlon": -80.2010950,
+    "maxlat": 25.8007369,
+    "maxlon": -80.1991730
+  },
+  "nodes": [
+    4629300922,
+    10127566531,
+    10110798704,
+    7698456063,
+    6849307544,
+    99399228
+  ],
+  "geometry": [
+    { "lat": 25.8007369, "lon": -80.1991730 },
+    { "lat": 25.8007096, "lon": -80.2000926 },
+    { "lat": 25.8006930, "lon": -80.2006509 },
+    { "lat": 25.8006926, "lon": -80.2006647 },
+    { "lat": 25.8006910, "lon": -80.2007185 },
+    { "lat": 25.8006800, "lon": -80.2010950 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "maxspeed": "25 mph",
+    "name": "Northwest 25th Street",
+    "oneway": "yes",
+    "sidewalk:both": "separate"
+  }
+},
+{
+  "type": "way",
+  "id": 535432546,
+  "bounds": {
+    "minlat": 25.7990703,
+    "minlon": -80.2031851,
+    "maxlat": 25.7999921,
+    "maxlon": -80.2030869
+  },
+  "nodes": [
+    99241194,
+    99241193,
+    5756084677,
+    99241192
+  ],
+  "geometry": [
+    { "lat": 25.7999921, "lon": -80.2031851 },
+    { "lat": 25.7993801, "lon": -80.2031643 },
+    { "lat": 25.7991885, "lon": -80.2031524 },
+    { "lat": 25.7990703, "lon": -80.2030869 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "lanes": "2",
+    "name": "Northwest 5th Avenue",
+    "oneway": "yes",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "5th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127",
+    "turn:lanes": "|right"
+  }
+},
+{
+  "type": "way",
+  "id": 588343501,
+  "bounds": {
+    "minlat": 25.7984396,
+    "minlon": -80.1998561,
+    "maxlat": 25.7984640,
+    "maxlon": -80.1990125
+  },
+  "nodes": [
+    5619348399,
+    9328596280,
+    13050896114,
+    5619348375,
+    5619348387
+  ],
+  "geometry": [
+    { "lat": 25.7984640, "lon": -80.1990125 },
+    { "lat": 25.7984620, "lon": -80.1990821 },
+    { "lat": 25.7984611, "lon": -80.1991141 },
+    { "lat": 25.7984478, "lon": -80.1995732 },
+    { "lat": 25.7984396, "lon": -80.1998561 }
+  ],
+  "tags": {
+    "highway": "service",
+    "name": "Northwest 22nd Terrace"
+  }
+},
+{
+  "type": "way",
+  "id": 607359235,
+  "bounds": {
+    "minlat": 25.7990703,
+    "minlon": -80.2030869,
+    "maxlat": 25.7999982,
+    "maxlon": -80.2030299
+  },
+  "nodes": [
+    99241192,
+    5756088756,
+    5756084676,
+    5756088755
+  ],
+  "geometry": [
+    { "lat": 25.7990703, "lon": -80.2030869 },
+    { "lat": 25.7991922, "lon": -80.2030299 },
+    { "lat": 25.7993835, "lon": -80.2030368 },
+    { "lat": 25.7999982, "lon": -80.2030615 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "lanes": "2",
+    "name": "Northwest 5th Avenue",
+    "oneway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 607359239,
+  "bounds": {
+    "minlat": 25.8037174,
+    "minlon": -80.2034772,
+    "maxlat": 25.8101954,
+    "maxlon": -80.2031933
+  },
+  "nodes": [
+    5756089699,
+    9533453282,
+    5756088752,
+    5756089698,
+    12533535154,
+    5756088751,
+    13025268343,
+    5756089696,
+    5756089042,
+    5756089695,
+    5756089692,
+    5756089041,
+    5756089694,
+    99241212
+  ],
+  "geometry": [
+    { "lat": 25.8037174, "lon": -80.2031933 },
+    { "lat": 25.8038275, "lon": -80.2031971 },
+    { "lat": 25.8046500, "lon": -80.2032256 },
+    { "lat": 25.8055991, "lon": -80.2032586 },
+    { "lat": 25.8056344, "lon": -80.2032601 },
+    { "lat": 25.8059588, "lon": -80.2032710 },
+    { "lat": 25.8064350, "lon": -80.2032875 },
+    { "lat": 25.8064952, "lon": -80.2032896 },
+    { "lat": 25.8074229, "lon": -80.2033218 },
+    { "lat": 25.8083366, "lon": -80.2033534 },
+    { "lat": 25.8089999, "lon": -80.2033764 },
+    { "lat": 25.8092760, "lon": -80.2033860 },
+    { "lat": 25.8101043, "lon": -80.2034147 },
+    { "lat": 25.8101954, "lon": -80.2034772 }
+  ],
+  "tags": {
+    "highway": "tertiary",
+    "lanes": "2",
+    "name": "Northwest 5th Avenue",
+    "oneway": "yes",
+    "sidewalk:left": "no",
+    "sidewalk:right": "separate"
+  }
+},
+{
+  "type": "way",
+  "id": 607359243,
+  "bounds": {
+    "minlat": 25.7981468,
+    "minlon": -80.2030869,
+    "maxlat": 25.7990703,
+    "maxlon": -80.2030470
+  },
+  "nodes": [
+    99133377,
+    8630809760,
+    5834114507,
+    99241192
+  ],
+  "geometry": [
+    { "lat": 25.7981468, "lon": -80.2030470 },
+    { "lat": 25.7985923, "lon": -80.2030551 },
+    { "lat": 25.7987897, "lon": -80.2030587 },
+    { "lat": 25.7990703, "lon": -80.2030869 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "lanes:backward": "1",
+    "lanes:forward": "2",
+    "name": "Northwest 5th Avenue",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "5th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 617152597,
+  "bounds": {
+    "minlat": 25.7976152,
+    "minlon": -80.2030470,
+    "maxlat": 25.7981468,
+    "maxlon": -80.2030343
+  },
+  "nodes": [
+    99133395,
+    99133377
+  ],
+  "geometry": [
+    { "lat": 25.7976152, "lon": -80.2030343 },
+    { "lat": 25.7981468, "lon": -80.2030470 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "lanes:backward": "1",
+    "lanes:forward": "2",
+    "name": "Northwest 5th Avenue",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "5th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 622174936,
+  "bounds": {
+    "minlat": 25.7984335,
+    "minlon": -80.2003254,
+    "maxlat": 25.7984396,
+    "maxlon": -80.1998561
+  },
+  "nodes": [
+    5619348387,
+    5619348397
+  ],
+  "geometry": [
+    { "lat": 25.7984396, "lon": -80.1998561 },
+    { "lat": 25.7984335, "lon": -80.2003254 }
+  ],
+  "tags": {
+    "highway": "service",
+    "name": "Northwest 22nd Terrace",
+    "oneway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 802786514,
+  "bounds": {
+    "minlat": 25.8037149,
+    "minlon": -80.2033707,
+    "maxlat": 25.8055977,
+    "maxlon": -80.2033061
+  },
+  "nodes": [
+    99241207,
+    99146285,
+    9533453284,
+    99241205
+  ],
+  "geometry": [
+    { "lat": 25.8055977, "lon": -80.2033707 },
+    { "lat": 25.8046468, "lon": -80.2033381 },
+    { "lat": 25.8038254, "lon": -80.2033099 },
+    { "lat": 25.8037149, "lon": -80.2033061 }
+  ],
+  "tags": {
+    "HFCS": "Urban Collector",
+    "highway": "tertiary",
+    "lanes": "2",
+    "name": "Northwest 5th Avenue",
+    "oneway": "yes",
+    "sidewalk:left": "no",
+    "sidewalk:right": "separate",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "5th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 856193611,
+  "bounds": {
+    "minlat": 25.7948914,
+    "minlon": -80.2070182,
+    "maxlat": 25.7952395,
+    "maxlon": -80.2070099
+  },
+  "nodes": [
+    99378358,
+    9045385963,
+    13057894605
+  ],
+  "geometry": [
+    { "lat": 25.7952395, "lon": -80.2070182 },
+    { "lat": 25.7951345, "lon": -80.2070126 },
+    { "lat": 25.7948914, "lon": -80.2070099 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "4",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 856193612,
+  "bounds": {
+    "minlat": 25.7952395,
+    "minlon": -80.2070182,
+    "maxlat": 25.7952839,
+    "maxlon": -80.2056986
+  },
+  "nodes": [
+    99378358,
+    9810515290,
+    13057894607,
+    99347106,
+    3708052824,
+    9042124614
+  ],
+  "geometry": [
+    { "lat": 25.7952395, "lon": -80.2070182 },
+    { "lat": 25.7952426, "lon": -80.2069227 },
+    { "lat": 25.7952551, "lon": -80.2065441 },
+    { "lat": 25.7952690, "lon": -80.2061220 },
+    { "lat": 25.7952791, "lon": -80.2058811 },
+    { "lat": 25.7952839, "lon": -80.2056986 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway": "shared_lane",
+    "highway": "secondary",
+    "lanes": "4",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 856193614,
+  "bounds": {
+    "minlat": 25.7924203,
+    "minlon": -80.2089876,
+    "maxlat": 25.7938641,
+    "maxlon": -80.2089504
+  },
+  "nodes": [
+    99098880,
+    5199724620,
+    99066570,
+    10175100345,
+    8531224093,
+    8531224102,
+    1389116284,
+    99150125
+  ],
+  "geometry": [
+    { "lat": 25.7924203, "lon": -80.2089504 },
+    { "lat": 25.7927085, "lon": -80.2089593 },
+    { "lat": 25.7930826, "lon": -80.2089702 },
+    { "lat": 25.7931514, "lon": -80.2089718 },
+    { "lat": 25.7935022, "lon": -80.2089801 },
+    { "lat": 25.7937074, "lon": -80.2089850 },
+    { "lat": 25.7938177, "lon": -80.2089876 },
+    { "lat": 25.7938641, "lon": -80.2089681 }
+  ],
+  "tags": {
+    "highway": "unclassified",
+    "name": "Northwest 8th Avenue",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 860909984,
+  "bounds": {
+    "minlat": 25.7953575,
+    "minlon": -80.2003772,
+    "maxlat": 25.7954400,
+    "maxlon": -80.1993921
+  },
+  "nodes": [
+    99378326,
+    9042147126,
+    8023844005,
+    99137031
+  ],
+  "geometry": [
+    { "lat": 25.7953575, "lon": -80.2003772 },
+    { "lat": 25.7953720, "lon": -80.1999157 },
+    { "lat": 25.7953848, "lon": -80.1995114 },
+    { "lat": 25.7954400, "lon": -80.1993921 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway:right": "shared_lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 860909985,
+  "bounds": {
+    "minlat": 25.7953664,
+    "minlon": -80.2044620,
+    "maxlat": 25.7976170,
+    "maxlon": -80.2043644
+  },
+  "nodes": [
+    99213252,
+    13050896133,
+    99037547,
+    8630809757,
+    99213258,
+    99213271,
+    99213272
+  ],
+  "geometry": [
+    { "lat": 25.7953664, "lon": -80.2043644 },
+    { "lat": 25.7954566, "lon": -80.2043705 },
+    { "lat": 25.7955813, "lon": -80.2043790 },
+    { "lat": 25.7970254, "lon": -80.2044292 },
+    { "lat": 25.7970480, "lon": -80.2044300 },
+    { "lat": 25.7971736, "lon": -80.2044421 },
+    { "lat": 25.7976170, "lon": -80.2044620 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 5th Place",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "5th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Pl",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33136"
+  }
+},
+{
+  "type": "way",
+  "id": 860909986,
+  "bounds": {
+    "minlat": 25.7952576,
+    "minlon": -80.2043642,
+    "maxlat": 25.7952882,
+    "maxlon": -80.2029498
+  },
+  "nodes": [
+    9042124611,
+    8023844008,
+    9042124615,
+    9042147117,
+    9042147121,
+    8023844015
+  ],
+  "geometry": [
+    { "lat": 25.7952576, "lon": -80.2043642 },
+    { "lat": 25.7952605, "lon": -80.2042394 },
+    { "lat": 25.7952629, "lon": -80.2041284 },
+    { "lat": 25.7952743, "lon": -80.2036011 },
+    { "lat": 25.7952761, "lon": -80.2034629 },
+    { "lat": 25.7952882, "lon": -80.2029498 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway:right": "shared_lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 860909987,
+  "bounds": {
+    "minlat": 25.7953767,
+    "minlon": -80.2038614,
+    "maxlat": 25.7954046,
+    "maxlon": -80.2024719
+  },
+  "nodes": [
+    8023844010,
+    9042147119,
+    8703475675,
+    9042147118,
+    9042124616,
+    8023844014
+  ],
+  "geometry": [
+    { "lat": 25.7954046, "lon": -80.2024719 },
+    { "lat": 25.7953991, "lon": -80.2027112 },
+    { "lat": 25.7953941, "lon": -80.2029325 },
+    { "lat": 25.7953877, "lon": -80.2033214 },
+    { "lat": 25.7953849, "lon": -80.2034632 },
+    { "lat": 25.7953767, "lon": -80.2038614 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway:right": "shared_lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 860909988,
+  "bounds": {
+    "minlat": 25.7954046,
+    "minlon": -80.2024719,
+    "maxlat": 25.7954129,
+    "maxlon": -80.2021923
+  },
+  "nodes": [
+    9692872247,
+    8023844010
+  ],
+  "geometry": [
+    { "lat": 25.7954129, "lon": -80.2021923 },
+    { "lat": 25.7954046, "lon": -80.2024719 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway:right": "shared_lane",
+    "highway": "secondary",
+    "lanes": "3",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "yes",
+    "placement": "right_of:2",
+    "surface": "asphalt",
+    "turn:lanes": "left|none|none"
+  }
+},
+{
+  "type": "way",
+  "id": 860909989,
+  "bounds": {
+    "minlat": 25.7954400,
+    "minlon": -80.2000896,
+    "maxlat": 25.7954841,
+    "maxlon": -80.1993921
+  },
+  "nodes": [
+    99137031,
+    8023844013,
+    8023844018
+  ],
+  "geometry": [
+    { "lat": 25.7954400, "lon": -80.1993921 },
+    { "lat": 25.7954841, "lon": -80.1995149 },
+    { "lat": 25.7954659, "lon": -80.2000896 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway:right": "shared_lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 860909990,
+  "bounds": {
+    "minlat": 25.7952959,
+    "minlon": -80.2050971,
+    "maxlat": 25.7953664,
+    "maxlon": -80.2043644
+  },
+  "nodes": [
+    99213252,
+    9042124606,
+    9042124605,
+    9042124604,
+    9042124603,
+    9042124613
+  ],
+  "geometry": [
+    { "lat": 25.7953664, "lon": -80.2043644 },
+    { "lat": 25.7953621, "lon": -80.2046806 },
+    { "lat": 25.7953560, "lon": -80.2048201 },
+    { "lat": 25.7953476, "lon": -80.2049093 },
+    { "lat": 25.7953427, "lon": -80.2050072 },
+    { "lat": 25.7952959, "lon": -80.2050971 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway:right": "shared_lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 860909991,
+  "bounds": {
+    "minlat": 25.7952882,
+    "minlon": -80.2029498,
+    "maxlat": 25.7952979,
+    "maxlon": -80.2024694
+  },
+  "nodes": [
+    8023844015,
+    99344185
+  ],
+  "geometry": [
+    { "lat": 25.7952882, "lon": -80.2029498 },
+    { "lat": 25.7952979, "lon": -80.2024694 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway:right": "shared_lane",
+    "highway": "secondary",
+    "lanes": "3",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "yes",
+    "placement": "right_of:2",
+    "surface": "asphalt",
+    "turn:lanes": "left|through|through;right"
+  }
+},
+{
+  "type": "way",
+  "id": 860909992,
+  "bounds": {
+    "minlat": 25.7954206,
+    "minlon": -80.2019346,
+    "maxlat": 25.7954638,
+    "maxlon": -80.2004004
+  },
+  "nodes": [
+    8023844012,
+    9042147124,
+    9042147122,
+    8023844006,
+    8023844016
+  ],
+  "geometry": [
+    { "lat": 25.7954638, "lon": -80.2004004 },
+    { "lat": 25.7954631, "lon": -80.2004756 },
+    { "lat": 25.7954527, "lon": -80.2008028 },
+    { "lat": 25.7954447, "lon": -80.2010540 },
+    { "lat": 25.7954206, "lon": -80.2019346 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway:right": "shared_lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 860909993,
+  "bounds": {
+    "minlat": 25.7953387,
+    "minlon": -80.2009974,
+    "maxlat": 25.7953575,
+    "maxlon": -80.2003772
+  },
+  "nodes": [
+    7633845642,
+    9042147125,
+    99378326
+  ],
+  "geometry": [
+    { "lat": 25.7953387, "lon": -80.2009974 },
+    { "lat": 25.7953498, "lon": -80.2006299 },
+    { "lat": 25.7953575, "lon": -80.2003772 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway:right": "shared_lane",
+    "highway": "secondary",
+    "lanes": "3",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "yes",
+    "placement": "right_of:2",
+    "surface": "asphalt",
+    "turn:lanes": "left|through|through;right"
+  }
+},
+{
+  "type": "way",
+  "id": 860909994,
+  "bounds": {
+    "minlat": 25.7954638,
+    "minlon": -80.2004004,
+    "maxlat": 25.7954659,
+    "maxlon": -80.2000896
+  },
+  "nodes": [
+    8023844018,
+    9042147123,
+    8023844012
+  ],
+  "geometry": [
+    { "lat": 25.7954659, "lon": -80.2000896 },
+    { "lat": 25.7954641, "lon": -80.2002718 },
+    { "lat": 25.7954638, "lon": -80.2004004 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway:right": "shared_lane",
+    "highway": "secondary",
+    "lanes": "3",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "yes",
+    "placement": "right_of:2",
+    "surface": "asphalt",
+    "turn:lanes": "left|through|through;right"
+  }
+},
+{
+  "type": "way",
+  "id": 860909995,
+  "bounds": {
+    "minlat": 25.7954638,
+    "minlon": -80.2004970,
+    "maxlat": 25.7976864,
+    "maxlon": -80.2004004
+  },
+  "nodes": [
+    8023844012,
+    4629300906,
+    7186945493,
+    99310307,
+    7186945496,
+    99162258,
+    6849307534,
+    6849307537,
+    99133387
+  ],
+  "geometry": [
+    { "lat": 25.7954638, "lon": -80.2004004 },
+    { "lat": 25.7955112, "lon": -80.2004119 },
+    { "lat": 25.7958780, "lon": -80.2004266 },
+    { "lat": 25.7959315, "lon": -80.2004287 },
+    { "lat": 25.7963690, "lon": -80.2004456 },
+    { "lat": 25.7967853, "lon": -80.2004617 },
+    { "lat": 25.7970595, "lon": -80.2004724 },
+    { "lat": 25.7973229, "lon": -80.2004828 },
+    { "lat": 25.7976864, "lon": -80.2004970 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 3rd Avenue",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "3rd",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 894232766,
+  "bounds": {
+    "minlat": 25.7938641,
+    "minlon": -80.2090079,
+    "maxlat": 25.7942939,
+    "maxlon": -80.2089681
+  },
+  "nodes": [
+    8311302783,
+    8311302784,
+    8311302785,
+    12550092218,
+    99150125
+  ],
+  "geometry": [
+    { "lat": 25.7942939, "lon": -80.2090079 },
+    { "lat": 25.7940686, "lon": -80.2090006 },
+    { "lat": 25.7939505, "lon": -80.2089897 },
+    { "lat": 25.7939230, "lon": -80.2089828 },
+    { "lat": 25.7938641, "lon": -80.2089681 }
+  ],
+  "tags": {
+    "highway": "service",
+    "name": "Northwest 8th Avenue"
+  }
+},
+{
+  "type": "way",
+  "id": 966449543,
+  "bounds": {
+    "minlat": 25.7999982,
+    "minlon": -80.2031933,
+    "maxlat": 25.8037174,
+    "maxlon": -80.2030615
+  },
+  "nodes": [
+    5756088755,
+    5756089701,
+    5756089040,
+    5756088754,
+    5756089693,
+    5756089700,
+    5756088753,
+    6521599716,
+    5756089699
+  ],
+  "geometry": [
+    { "lat": 25.7999982, "lon": -80.2030615 },
+    { "lat": 25.8006066, "lon": -80.2030810 },
+    { "lat": 25.8009686, "lon": -80.2030940 },
+    { "lat": 25.8013360, "lon": -80.2031073 },
+    { "lat": 25.8018535, "lon": -80.2031260 },
+    { "lat": 25.8020475, "lon": -80.2031330 },
+    { "lat": 25.8027624, "lon": -80.2031588 },
+    { "lat": 25.8036278, "lon": -80.2031901 },
+    { "lat": 25.8037174, "lon": -80.2031933 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "lanes": "2",
+    "name": "Northwest 5th Avenue",
+    "oneway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 966449544,
+  "bounds": {
+    "minlat": 25.7999982,
+    "minlon": -80.2030615,
+    "maxlat": 25.8001218,
+    "maxlon": -80.1990684
+  },
+  "nodes": [
+    5756088755,
+    7069038037,
+    8310958398,
+    7698456068,
+    10127566530,
+    5834114489,
+    5834114490,
+    99296101
+  ],
+  "geometry": [
+    { "lat": 25.7999982, "lon": -80.2030615 },
+    { "lat": 25.8000169, "lon": -80.2024001 },
+    { "lat": 25.8000182, "lon": -80.2023063 },
+    { "lat": 25.8000721, "lon": -80.2006246 },
+    { "lat": 25.8000856, "lon": -80.2000677 },
+    { "lat": 25.8001176, "lon": -80.1991827 },
+    { "lat": 25.8001191, "lon": -80.1991451 },
+    { "lat": 25.8001218, "lon": -80.1990684 }
+  ],
+  "tags": {
+    "cycleway:right": "shared_lane",
+    "highway": "residential",
+    "lanes": "4",
+    "maxspeed": "25 mph",
+    "name": "Northwest 24th Street",
+    "oneway": "yes",
+    "parking:left": "lane",
+    "parking:left:orientation": "parallel",
+    "parking:right": "lane",
+    "parking:right:orientation": "parallel",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 977105632,
+  "bounds": {
+    "minlat": 25.7952558,
+    "minlon": -80.2049046,
+    "maxlat": 25.7952576,
+    "maxlon": -80.2043642
+  },
+  "nodes": [
+    9042124608,
+    9042124609,
+    9042124610,
+    9042124611
+  ],
+  "geometry": [
+    { "lat": 25.7952576, "lon": -80.2049046 },
+    { "lat": 25.7952558, "lon": -80.2047604 },
+    { "lat": 25.7952564, "lon": -80.2046270 },
+    { "lat": 25.7952576, "lon": -80.2043642 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway:right": "shared_lane",
+    "highway": "secondary",
+    "lanes": "3",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "yes",
+    "placement": "right_of:2",
+    "surface": "asphalt",
+    "turn:lanes": "left|through|through;right"
+  }
+},
+{
+  "type": "way",
+  "id": 977105633,
+  "bounds": {
+    "minlat": 25.7952576,
+    "minlon": -80.2050971,
+    "maxlat": 25.7952959,
+    "maxlon": -80.2049046
+  },
+  "nodes": [
+    9042124613,
+    9042124607,
+    9042124608
+  ],
+  "geometry": [
+    { "lat": 25.7952959, "lon": -80.2050971 },
+    { "lat": 25.7952576, "lon": -80.2050025 },
+    { "lat": 25.7952576, "lon": -80.2049046 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway:right": "shared_lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "yes",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 977105634,
+  "bounds": {
+    "minlat": 25.7953664,
+    "minlon": -80.2043644,
+    "maxlat": 25.7953721,
+    "maxlon": -80.2040915
+  },
+  "nodes": [
+    9662655274,
+    8023844009,
+    99213252
+  ],
+  "geometry": [
+    { "lat": 25.7953721, "lon": -80.2040915 },
+    { "lat": 25.7953690, "lon": -80.2042452 },
+    { "lat": 25.7953664, "lon": -80.2043644 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway:right": "shared_lane",
+    "highway": "secondary",
+    "lanes": "3",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "yes",
+    "placement": "right_of:2",
+    "surface": "asphalt",
+    "turn:lanes": "left|through|through;right"
+  }
+},
+{
+  "type": "way",
+  "id": 977558401,
+  "bounds": {
+    "minlat": 25.7952395,
+    "minlon": -80.2070340,
+    "maxlat": 25.7955659,
+    "maxlon": -80.2070182
+  },
+  "nodes": [
+    10669064431,
+    9045385962,
+    99378358
+  ],
+  "geometry": [
+    { "lat": 25.7955659, "lon": -80.2070340 },
+    { "lat": 25.7953486, "lon": -80.2070267 },
+    { "lat": 25.7952395, "lon": -80.2070182 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "2",
+    "lanes:forward": "3",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:forward": "left||",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1007999947,
+  "bounds": {
+    "minlat": 25.7954392,
+    "minlon": -80.1993921,
+    "maxlat": 25.7954400,
+    "maxlon": -80.1992959
+  },
+  "nodes": [
+    12753325836,
+    99137031
+  ],
+  "geometry": [
+    { "lat": 25.7954392, "lon": -80.1992959 },
+    { "lat": 25.7954400, "lon": -80.1993921 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway": "shared_lane",
+    "highway": "secondary",
+    "lanes": "4",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1051472552,
+  "bounds": {
+    "minlat": 25.7953721,
+    "minlon": -80.2040915,
+    "maxlat": 25.7953767,
+    "maxlon": -80.2038614
+  },
+  "nodes": [
+    8023844014,
+    9662655274
+  ],
+  "geometry": [
+    { "lat": 25.7953767, "lon": -80.2038614 },
+    { "lat": 25.7953721, "lon": -80.2040915 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway:right": "shared_lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "yes",
+    "placement": "right_of:2",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1054813178,
+  "bounds": {
+    "minlat": 25.7954129,
+    "minlon": -80.2021923,
+    "maxlat": 25.7954206,
+    "maxlon": -80.2019346
+  },
+  "nodes": [
+    8023844016,
+    9692872247
+  ],
+  "geometry": [
+    { "lat": 25.7954206, "lon": -80.2019346 },
+    { "lat": 25.7954129, "lon": -80.2021923 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway:right": "shared_lane",
+    "highway": "secondary",
+    "lanes": "2",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "yes",
+    "placement": "right_of:2",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1123338339,
+  "bounds": {
+    "minlat": 25.7954182,
+    "minlon": -80.1988777,
+    "maxlat": 25.7954272,
+    "maxlon": -80.1984869
+  },
+  "nodes": [
+    99319152,
+    9042147130,
+    9042147129,
+    99296088
+  ],
+  "geometry": [
+    { "lat": 25.7954206, "lon": -80.1984869 },
+    { "lat": 25.7954182, "lon": -80.1986074 },
+    { "lat": 25.7954200, "lon": -80.1987268 },
+    { "lat": 25.7954272, "lon": -80.1988777 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway": "shared_lane",
+    "highway": "secondary",
+    "lanes": "4",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1146411221,
+  "bounds": {
+    "minlat": 25.7957831,
+    "minlon": -80.2070529,
+    "maxlat": 25.7961611,
+    "maxlon": -80.2070412
+  },
+  "nodes": [
+    99162146,
+    9045385961
+  ],
+  "geometry": [
+    { "lat": 25.7961611, "lon": -80.2070529 },
+    { "lat": 25.7957831, "lon": -80.2070412 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "2",
+    "lanes:both_ways": "1",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:both_ways": "left",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1146411222,
+  "bounds": {
+    "minlat": 25.7955659,
+    "minlon": -80.2070412,
+    "maxlat": 25.7957831,
+    "maxlon": -80.2070340
+  },
+  "nodes": [
+    9045385961,
+    10669064431
+  ],
+  "geometry": [
+    { "lat": 25.7957831, "lon": -80.2070412 },
+    { "lat": 25.7955659, "lon": -80.2070340 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "4",
+    "lanes:backward": "2",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1170890210,
+  "bounds": {
+    "minlat": 25.7952261,
+    "minlon": -80.2074057,
+    "maxlat": 25.7952395,
+    "maxlon": -80.2070182
+  },
+  "nodes": [
+    9042181419,
+    9810515287,
+    99378358
+  ],
+  "geometry": [
+    { "lat": 25.7952261, "lon": -80.2074057 },
+    { "lat": 25.7952357, "lon": -80.2071269 },
+    { "lat": 25.7952395, "lon": -80.2070182 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway": "shared_lane",
+    "highway": "secondary",
+    "lanes": "4",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+},
+{
+  "type": "way",
+  "id": 1305038344,
+  "bounds": {
+    "minlat": 25.7961611,
+    "minlon": -80.2070742,
+    "maxlat": 25.7968344,
+    "maxlon": -80.2070529
+  },
+  "nodes": [
+    12506939508,
+    99162146
+  ],
+  "geometry": [
+    { "lat": 25.7968344, "lon": -80.2070742 },
+    { "lat": 25.7961611, "lon": -80.2070529 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "2",
+    "lanes:both_ways": "1",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:both_ways": "left",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1305038345,
+  "bounds": {
+    "minlat": 25.7989341,
+    "minlon": -80.2071465,
+    "maxlat": 25.7989680,
+    "maxlon": -80.2058820
+  },
+  "nodes": [
+    99304196,
+    7161939896,
+    7161939893,
+    7212296358,
+    9810515313,
+    99304201
+  ],
+  "geometry": [
+    { "lat": 25.7989680, "lon": -80.2058820 },
+    { "lat": 25.7989674, "lon": -80.2059041 },
+    { "lat": 25.7989620, "lon": -80.2061082 },
+    { "lat": 25.7989496, "lon": -80.2065716 },
+    { "lat": 25.7989368, "lon": -80.2070476 },
+    { "lat": 25.7989341, "lon": -80.2071465 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 23rd Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "23rd",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 1305038346,
+  "bounds": {
+    "minlat": 25.7989341,
+    "minlon": -80.2071607,
+    "maxlat": 25.7993490,
+    "maxlon": -80.2071465
+  },
+  "nodes": [
+    12087095537,
+    9810515316,
+    99304201
+  ],
+  "geometry": [
+    { "lat": 25.7993490, "lon": -80.2071607 },
+    { "lat": 25.7989924, "lon": -80.2071485 },
+    { "lat": 25.7989341, "lon": -80.2071465 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "2",
+    "lanes:forward": "3",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:forward": "left||",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1305510286,
+  "bounds": {
+    "minlat": 25.7996202,
+    "minlon": -80.2071779,
+    "maxlat": 25.7998558,
+    "maxlon": -80.2071677
+  },
+  "nodes": [
+    99308695,
+    12091443256
+  ],
+  "geometry": [
+    { "lat": 25.7998558, "lon": -80.2071779 },
+    { "lat": 25.7996202, "lon": -80.2071677 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "3",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:backward": "left||",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1305510287,
+  "bounds": {
+    "minlat": 25.7998558,
+    "minlon": -80.2071779,
+    "maxlat": 25.7998730,
+    "maxlon": -80.2062570
+  },
+  "nodes": [
+    99308693,
+    8359396989,
+    9810542529,
+    99308695
+  ],
+  "geometry": [
+    { "lat": 25.7998730, "lon": -80.2062570 },
+    { "lat": 25.7998696, "lon": -80.2064379 },
+    { "lat": 25.7998576, "lon": -80.2070816 },
+    { "lat": 25.7998558, "lon": -80.2071779 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 24th Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "24th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 1305510288,
+  "bounds": {
+    "minlat": 25.7998558,
+    "minlon": -80.2071885,
+    "maxlat": 25.8001614,
+    "maxlon": -80.2071779
+  },
+  "nodes": [
+    12091443255,
+    99308695
+  ],
+  "geometry": [
+    { "lat": 25.8001614, "lon": -80.2071885 },
+    { "lat": 25.7998558, "lon": -80.2071779 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "2",
+    "lanes:forward": "3",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:forward": "left||",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1305510289,
+  "bounds": {
+    "minlat": 25.7993490,
+    "minlon": -80.2071677,
+    "maxlat": 25.7996202,
+    "maxlon": -80.2071607
+  },
+  "nodes": [
+    12091443256,
+    7212250746,
+    12087095537
+  ],
+  "geometry": [
+    { "lat": 25.7996202, "lon": -80.2071677 },
+    { "lat": 25.7994563, "lon": -80.2071644 },
+    { "lat": 25.7993490, "lon": -80.2071607 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "2",
+    "lanes:both_ways": "1",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:both_ways": "left",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1321779315,
+  "bounds": {
+    "minlat": 25.8032871,
+    "minlon": -80.2073049,
+    "maxlat": 25.8036163,
+    "maxlon": -80.2072948
+  },
+  "nodes": [
+    4241493845,
+    9810542556,
+    4241495193,
+    9045683981,
+    7287559077,
+    12231229305
+  ],
+  "geometry": [
+    { "lat": 25.8036163, "lon": -80.2073049 },
+    { "lat": 25.8035166, "lon": -80.2073022 },
+    { "lat": 25.8034865, "lon": -80.2073014 },
+    { "lat": 25.8034319, "lon": -80.2072992 },
+    { "lat": 25.8033742, "lon": -80.2072968 },
+    { "lat": 25.8032871, "lon": -80.2072948 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "3",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:backward": "left||",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1321791684,
+  "bounds": {
+    "minlat": 25.8036163,
+    "minlon": -80.2073142,
+    "maxlat": 25.8038827,
+    "maxlon": -80.2073049
+  },
+  "nodes": [
+    12231355937,
+    4241493863,
+    9810542550,
+    4241493845
+  ],
+  "geometry": [
+    { "lat": 25.8038827, "lon": -80.2073142 },
+    { "lat": 25.8037492, "lon": -80.2073095 },
+    { "lat": 25.8037141, "lon": -80.2073083 },
+    { "lat": 25.8036163, "lon": -80.2073049 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "2",
+    "lanes:forward": "3",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:forward": "left||",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1322070423,
+  "bounds": {
+    "minlat": 25.8026211,
+    "minlon": -80.2072948,
+    "maxlat": 25.8032871,
+    "maxlon": -80.2072689
+  },
+  "nodes": [
+    12231229305,
+    9045683980,
+    7287559074,
+    11909604837,
+    99269419
+  ],
+  "geometry": [
+    { "lat": 25.8032871, "lon": -80.2072948 },
+    { "lat": 25.8032194, "lon": -80.2072933 },
+    { "lat": 25.8032047, "lon": -80.2072929 },
+    { "lat": 25.8028575, "lon": -80.2072786 },
+    { "lat": 25.8026211, "lon": -80.2072689 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "2",
+    "lanes:both_ways": "1",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:both_ways": "left",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1322070424,
+  "bounds": {
+    "minlat": 25.8023721,
+    "minlon": -80.2072689,
+    "maxlat": 25.8026211,
+    "maxlon": -80.2072622
+  },
+  "nodes": [
+    99269419,
+    12234385952
+  ],
+  "geometry": [
+    { "lat": 25.8026211, "lon": -80.2072689 },
+    { "lat": 25.8023721, "lon": -80.2072622 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "3",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:backward": "left|none|none",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1322073141,
+  "bounds": {
+    "minlat": 25.8020965,
+    "minlon": -80.2072622,
+    "maxlat": 25.8023721,
+    "maxlon": -80.2072547
+  },
+  "nodes": [
+    12234385952,
+    7895704761,
+    12234407420
+  ],
+  "geometry": [
+    { "lat": 25.8023721, "lon": -80.2072622 },
+    { "lat": 25.8022354, "lon": -80.2072585 },
+    { "lat": 25.8020965, "lon": -80.2072547 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "4",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1322073142,
+  "bounds": {
+    "minlat": 25.8018529,
+    "minlon": -80.2072547,
+    "maxlat": 25.8020965,
+    "maxlon": -80.2072481
+  },
+  "nodes": [
+    12234407420,
+    99034564
+  ],
+  "geometry": [
+    { "lat": 25.8020965, "lon": -80.2072547 },
+    { "lat": 25.8018529, "lon": -80.2072481 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "2",
+    "lanes:forward": "3",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:forward": "left|none|none",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1322089567,
+  "bounds": {
+    "minlat": 25.7986581,
+    "minlon": -80.2071465,
+    "maxlat": 25.7989341,
+    "maxlon": -80.2071384
+  },
+  "nodes": [
+    99304201,
+    9810542522,
+    9045683987,
+    12234549844
+  ],
+  "geometry": [
+    { "lat": 25.7989341, "lon": -80.2071465 },
+    { "lat": 25.7988572, "lon": -80.2071443 },
+    { "lat": 25.7987731, "lon": -80.2071418 },
+    { "lat": 25.7986581, "lon": -80.2071384 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "3",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:backward": "left|none|none",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1322095660,
+  "bounds": {
+    "minlat": 25.8001614,
+    "minlon": -80.2071992,
+    "maxlat": 25.8004698,
+    "maxlon": -80.2071885
+  },
+  "nodes": [
+    12234609701,
+    12091443255
+  ],
+  "geometry": [
+    { "lat": 25.8004698, "lon": -80.2071992 },
+    { "lat": 25.8001614, "lon": -80.2071885 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "2",
+    "lanes:both_ways": "1",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:both_ways": "left",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1322095661,
+  "bounds": {
+    "minlat": 25.8004698,
+    "minlon": -80.2072098,
+    "maxlat": 25.8007782,
+    "maxlon": -80.2071992
+  },
+  "nodes": [
+    99381418,
+    12234609701
+  ],
+  "geometry": [
+    { "lat": 25.8007782, "lon": -80.2072098 },
+    { "lat": 25.8004698, "lon": -80.2071992 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "3",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:backward": "left|none|none",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1322100280,
+  "bounds": {
+    "minlat": 25.7980098,
+    "minlon": -80.2071157,
+    "maxlat": 25.7980400,
+    "maxlon": -80.2058490
+  },
+  "nodes": [
+    99133323,
+    7212296357,
+    9810515310,
+    99133328
+  ],
+  "geometry": [
+    { "lat": 25.7980400, "lon": -80.2058490 },
+    { "lat": 25.7980237, "lon": -80.2065325 },
+    { "lat": 25.7980121, "lon": -80.2070180 },
+    { "lat": 25.7980098, "lon": -80.2071157 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 22nd Street",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "22nd",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "St",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33142",
+    "tiger:zip_right": "33142"
+  }
+},
+{
+  "type": "way",
+  "id": 1322100281,
+  "bounds": {
+    "minlat": 25.7980098,
+    "minlon": -80.2071384,
+    "maxlat": 25.7986581,
+    "maxlon": -80.2071157
+  },
+  "nodes": [
+    12234549844,
+    8628459150,
+    99133328
+  ],
+  "geometry": [
+    { "lat": 25.7986581, "lon": -80.2071384 },
+    { "lat": 25.7983779, "lon": -80.2071301 },
+    { "lat": 25.7980098, "lon": -80.2071157 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "2",
+    "lanes:both_ways": "1",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:both_ways": "left",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1322100282,
+  "bounds": {
+    "minlat": 25.7976969,
+    "minlon": -80.2071157,
+    "maxlat": 25.7980098,
+    "maxlon": -80.2071043
+  },
+  "nodes": [
+    99133328,
+    12234646247
+  ],
+  "geometry": [
+    { "lat": 25.7980098, "lon": -80.2071157 },
+    { "lat": 25.7976969, "lon": -80.2071043 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "3",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:backward": "left||",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1322465875,
+  "bounds": {
+    "minlat": 25.8038827,
+    "minlon": -80.2073944,
+    "maxlat": 25.8060222,
+    "maxlon": -80.2073142
+  },
+  "nodes": [
+    12237397382,
+    99203670,
+    99342683,
+    99146294,
+    2081273513,
+    99146308,
+    12231355937
+  ],
+  "geometry": [
+    { "lat": 25.8060222, "lon": -80.2073944 },
+    { "lat": 25.8058983, "lon": -80.2073898 },
+    { "lat": 25.8054524, "lon": -80.2073720 },
+    { "lat": 25.8049244, "lon": -80.2073525 },
+    { "lat": 25.8045256, "lon": -80.2073376 },
+    { "lat": 25.8044450, "lon": -80.2073341 },
+    { "lat": 25.8038827, "lon": -80.2073142 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "2",
+    "lanes:both_ways": "1",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:both_ways": "left",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1324350199,
+  "bounds": {
+    "minlat": 25.7973951,
+    "minlon": -80.2071043,
+    "maxlat": 25.7976969,
+    "maxlon": -80.2070934
+  },
+  "nodes": [
+    12234646247,
+    12254938360
+  ],
+  "geometry": [
+    { "lat": 25.7976969, "lon": -80.2071043 },
+    { "lat": 25.7973951, "lon": -80.2070934 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "2",
+    "lanes:both_ways": "1",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:both_ways": "left",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1324350200,
+  "bounds": {
+    "minlat": 25.7970932,
+    "minlon": -80.2070824,
+    "maxlat": 25.7971340,
+    "maxlon": -80.2059040
+  },
+  "nodes": [
+    99227044,
+    99200979,
+    9045683989,
+    99227046
+  ],
+  "geometry": [
+    { "lat": 25.7971340, "lon": -80.2059040 },
+    { "lat": 25.7971270, "lon": -80.2061830 },
+    { "lat": 25.7971035, "lon": -80.2069824 },
+    { "lat": 25.7970932, "lon": -80.2070824 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 21st Terrace",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "21st",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ter",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 1324350201,
+  "bounds": {
+    "minlat": 25.7970932,
+    "minlon": -80.2070934,
+    "maxlat": 25.7973951,
+    "maxlon": -80.2070824
+  },
+  "nodes": [
+    12254938360,
+    99227046
+  ],
+  "geometry": [
+    { "lat": 25.7973951, "lon": -80.2070934 },
+    { "lat": 25.7970932, "lon": -80.2070824 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "2",
+    "lanes:forward": "3",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:forward": "left|none|none",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1351812237,
+  "bounds": {
+    "minlat": 25.7968344,
+    "minlon": -80.2070824,
+    "maxlat": 25.7970932,
+    "maxlon": -80.2070742
+  },
+  "nodes": [
+    99227046,
+    9045683988,
+    12506939508
+  ],
+  "geometry": [
+    { "lat": 25.7970932, "lon": -80.2070824 },
+    { "lat": 25.7968599, "lon": -80.2070750 },
+    { "lat": 25.7968344, "lon": -80.2070742 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "3",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:backward": "left|none|none",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1377339925,
+  "bounds": {
+    "minlat": 25.7954387,
+    "minlon": -80.1992959,
+    "maxlat": 25.7954392,
+    "maxlon": -80.1992358
+  },
+  "nodes": [
+    6860091566,
+    12753325836
+  ],
+  "geometry": [
+    { "lat": 25.7954387, "lon": -80.1992358 },
+    { "lat": 25.7954392, "lon": -80.1992959 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway": "shared_lane",
+    "highway": "secondary",
+    "lanes": "5",
+    "lanes:backward": "3",
+    "lanes:forward": "2",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "no",
+    "surface": "asphalt",
+    "turn:lanes:backward": "left|none|none"
+  }
+},
+{
+  "type": "way",
+  "id": 1409723217,
+  "bounds": {
+    "minlat": 25.7951205,
+    "minlon": -80.2110785,
+    "maxlat": 25.7951590,
+    "maxlon": -80.2097468
+  },
+  "nodes": [
+    99205037,
+    12550092247,
+    9042151116,
+    12953804392
+  ],
+  "geometry": [
+    { "lat": 25.7951205, "lon": -80.2110785 },
+    { "lat": 25.7951243, "lon": -80.2109472 },
+    { "lat": 25.7951323, "lon": -80.2106660 },
+    { "lat": 25.7951590, "lon": -80.2097468 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway": "shared_lane",
+    "highway": "secondary",
+    "lanes": "5",
+    "lanes:backward": "3",
+    "lanes:forward": "2",
+    "lit": "yes",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "no",
+    "surface": "asphalt",
+    "turn:lanes:backward": "left|none|none"
+  }
+},
+{
+  "type": "way",
+  "id": 1417405298,
+  "bounds": {
+    "minlat": 25.8036532,
+    "minlon": -80.2054250,
+    "maxlat": 25.8092128,
+    "maxlon": -80.2052808
+  },
+  "nodes": [
+    99203570,
+    11146675635,
+    99146287,
+    99203572,
+    10905189411,
+    5440222919,
+    13025370806,
+    99203574,
+    13025370809,
+    99077919,
+    99080868,
+    13025580746,
+    99203576
+  ],
+  "geometry": [
+    { "lat": 25.8036532, "lon": -80.2052808 },
+    { "lat": 25.8037735, "lon": -80.2052838 },
+    { "lat": 25.8045862, "lon": -80.2053054 },
+    { "lat": 25.8054280, "lon": -80.2053380 },
+    { "lat": 25.8054386, "lon": -80.2053384 },
+    { "lat": 25.8060899, "lon": -80.2053604 },
+    { "lat": 25.8063646, "lon": -80.2053696 },
+    { "lat": 25.8064310, "lon": -80.2053720 },
+    { "lat": 25.8065103, "lon": -80.2053749 },
+    { "lat": 25.8073760, "lon": -80.2054070 },
+    { "lat": 25.8082840, "lon": -80.2054250 },
+    { "lat": 25.8091407, "lon": -80.2054111 },
+    { "lat": 25.8092128, "lon": -80.2054100 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "lanes": "2",
+    "name": "Northwest 6th Avenue",
+    "sidewalk:left": "no",
+    "sidewalk:right": "separate",
+    "surface": "asphalt",
+    "tiger:cfcc": "A41",
+    "tiger:county": "Miami-Dade, FL",
+    "tiger:name_base": "6th",
+    "tiger:name_direction_prefix": "NW",
+    "tiger:name_type": "Ave",
+    "tiger:reviewed": "no",
+    "tiger:zip_left": "33127",
+    "tiger:zip_right": "33127"
+  }
+},
+{
+  "type": "way",
+  "id": 1446500918,
+  "bounds": {
+    "minlat": 25.7923441,
+    "minlon": -80.2070099,
+    "maxlat": 25.7948914,
+    "maxlon": -80.2069792
+  },
+  "nodes": [
+    13057894605,
+    9045385964,
+    10881878563,
+    99222095,
+    4494705011,
+    10881878561,
+    99066568,
+    9045385966,
+    9045385967,
+    99098910
+  ],
+  "geometry": [
+    { "lat": 25.7948914, "lon": -80.2070099 },
+    { "lat": 25.7947399, "lon": -80.2070097 },
+    { "lat": 25.7941044, "lon": -80.2070014 },
+    { "lat": 25.7939402, "lon": -80.2069992 },
+    { "lat": 25.7935379, "lon": -80.2069934 },
+    { "lat": 25.7933069, "lon": -80.2069909 },
+    { "lat": 25.7931438, "lon": -80.2069891 },
+    { "lat": 25.7930721, "lon": -80.2069882 },
+    { "lat": 25.7929187, "lon": -80.2069863 },
+    { "lat": 25.7923441, "lon": -80.2069792 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "hgv": "yes",
+    "highway": "primary",
+    "lanes": "5",
+    "lanes:backward": "2",
+    "lanes:both_ways": "1",
+    "lanes:forward": "2",
+    "maxspeed": "30 mph",
+    "name": "Northwest 7th Avenue",
+    "ref": "US 441",
+    "sidewalk": "both",
+    "source:maxspeed": "FDOT \"Maximum Speed Limits\" GIS data, updated August 27, 2011: http://www.dot.state.fl.us/planning/statistics/gis/roaddata.shtm",
+    "surface": "asphalt",
+    "turn:lanes:both_ways": "left",
+    "unsigned_ref": "SR 7"
+  }
+},
+{
+  "type": "way",
+  "id": 1456415043,
+  "bounds": {
+    "minlat": 25.8006021,
+    "minlon": -80.2031963,
+    "maxlat": 25.8006066,
+    "maxlon": -80.2030810
+  },
+  "nodes": [
+    5756089701,
+    99241197
+  ],
+  "geometry": [
+    { "lat": 25.8006066, "lon": -80.2030810 },
+    { "lat": 25.8006021, "lon": -80.2031963 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "maxspeed": "25 mph",
+    "name": "Northwest 25th Street",
+    "oneway": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1456415058,
+  "bounds": {
+    "minlat": 25.8013328,
+    "minlon": -80.2032141,
+    "maxlat": 25.8013360,
+    "maxlon": -80.2031073
+  },
+  "nodes": [
+    5756088754,
+    99161053
+  ],
+  "geometry": [
+    { "lat": 25.8013360, "lon": -80.2031073 },
+    { "lat": 25.8013328, "lon": -80.2032141 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "name": "Northwest 26th Street"
+  }
+},
+{
+  "type": "way",
+  "id": 1456415059,
+  "bounds": {
+    "minlat": 25.8020443,
+    "minlon": -80.2032409,
+    "maxlat": 25.8020475,
+    "maxlon": -80.2031330
+  },
+  "nodes": [
+    5756089700,
+    99241202
+  ],
+  "geometry": [
+    { "lat": 25.8020475, "lon": -80.2031330 },
+    { "lat": 25.8020443, "lon": -80.2032409 }
+  ],
+  "tags": {
+    "highway": "residential",
+    "maxspeed": "25 mph",
+    "name": "Northwest 27th Street"
+  }
+},
+{
+  "type": "way",
+  "id": 1483297161,
+  "bounds": {
+    "minlat": 25.7952839,
+    "minlon": -80.2056986,
+    "maxlat": 25.7952959,
+    "maxlon": -80.2050971
+  },
+  "nodes": [
+    9042124614,
+    9042124613
+  ],
+  "geometry": [
+    { "lat": 25.7952839, "lon": -80.2056986 },
+    { "lat": 25.7952959, "lon": -80.2050971 }
+  ],
+  "tags": {
+    "HFCS": "Urban Minor Arterial",
+    "bicycle": "yes",
+    "cycleway": "shared_lane",
+    "highway": "secondary",
+    "lanes": "4",
+    "lit": "yes",
+    "maxheight": "15'3\"",
+    "maxspeed": "35 mph",
+    "name": "Northwest 20th Street",
+    "oneway": "no",
+    "surface": "asphalt"
+  }
+}
+
+  ]
+}
