@@ -28,10 +28,8 @@ from icons import ICONS  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FONTS = os.path.join(ROOT, "app", "assets", "fonts")
-K, S = 0.2586, 0.044                               # oblique grid: ground (u, w) -> picture (u - K*w, S*u + w)
-STREET_ANGLE = -math.degrees(math.atan2(1, K))     # cross streets, about -75.5 degrees
-AVENUE_ANGLE = math.degrees(math.atan(S))          # avenues, about 2.5 degrees
-VIEW = (60, 115, 1450, 1520)                      # x, y, w, h of the map area (tight to the venue)
+from proj import MODE, K, S, STREET_ANGLE, AVENUE_ANGLE, P, from_pic  # noqa: E402
+VIEW = (60, 115, 1450, 1520) if MODE == "oblique" else (360, 60, 1400, 1540)   # x, y, w, h (tight to the venue)
 WALL = (7, 56)                                     # extrusion of the raised city blocks
 DETAIL = 1                                         # level of ops only shown when zoomed in
 
@@ -50,10 +48,6 @@ def text_width(text, font, size):
     if key not in _fonts:
         _fonts[key] = ImageFont.truetype(os.path.join(FONTS, FONT_FILES[font]), size=size * 4)
     return _fonts[key].getlength(text) / 4.0
-
-
-def P(u, w):
-    return (round(u - K * w, 1), round(S * u + w, 1))
 
 
 def UV(x, y):
@@ -129,11 +123,12 @@ NORTH_S3 = [P(695, 648), P(868, 648), P(868, 840), P(695, 840)]     # S3QUENC3 l
 NORTH_E = [P(868, 402), P(1490, 402), P(1490, 840), P(868, 840)]    # Players Club / Mind Melt block
 VIP_LOUNGE = [P(1062, 122), P(1282, 122), P(1282, 402), P(1062, 402)]
 CHECK_SHAPES = ["SOUTH", "ISO", "NORTH_S3", "NORTH_E", "VIP_LOUNGE"]
-# the festival footprint's outer edge (outside of the avenues): one thin line
-for shape in (SOUTH, ISO, NORTH_S3, NORTH_E, VIP_LOUNGE):
+# the outer edge of the avenues (festival perimeter): one thin line. Blocks that front a street
+# directly get no plate, so no line ever runs right beside a block outline.
+for shape in (SOUTH, [P(868, 408), P(1484, 408), P(1484, 840), P(868, 840)]):
     poly(shape, fill="w", stroke=W_EDGE)
-# short street stubs leaving the site (open ends), drawn over the edge line to open the mouths
-STREETS = [(403, 451, 770, 1112), (647, 694, 590, 843), (868, 911, 150, 405), (1020, 1062, 150, 405)]
+# short street stubs leaving the site (open ends); their inner side is the block edge
+STREETS = [(410, 458, 770, 1106), (654, 701, 590, 843), (868, 911, 150, 410), (1026, 1068, 150, 410)]
 for u0, u1, w0, w1 in STREETS:
     poly(rect_uv(u0 + 1, w0, u1 - 1, w1), fill="w")
     line([P(u0, w0), P(u0, w1)], stroke=W_EDGE)
@@ -213,9 +208,11 @@ for d in detected:
         continue
     glyph, style, cat = STYLE[t]
     CHECK_POINTS.append((d["x"], d["y"]))
-    op({"o": "icon", "k": glyph, "x": d["x"], "y": d["y"], "r": ICON_R, "st": style, "cat": cat}, DETAIL)
+    ix, iy = from_pic(d["x"], d["y"])
+    op({"o": "icon", "k": glyph, "x": ix, "y": iy, "r": ICON_R, "st": style, "cat": cat}, DETAIL)
 # Access Center (a pill on the original)
-op({"o": "icon", "k": "accessible", "x": 790, "y": 1217, "r": ICON_R, "st": "ga", "cat": "access"}, DETAIL)
+ACCESS = from_pic(790, 1217)
+op({"o": "icon", "k": "accessible", "x": ACCESS[0], "y": ACCESS[1], "r": ICON_R, "st": "ga", "cat": "access"}, DETAIL)
 
 # --------------------------------------------------------------------------------------------
 # Labels: data only. The app draws them (Mudita-style), the SVG doesn't.
@@ -241,14 +238,14 @@ STAGES = [  # id, name, official tag centre
 for sid, name, tx, ty in STAGES:
     c = centroid(sid) or (tx, ty)
     lx, ly = P(*LABEL_AT[sid])
-    LABELS.append({"kind": "stage", "id": sid, "t": name, "x": c[0], "y": c[1], "lx": lx, "ly": ly, "tag": [tx, ty]})
-for name, x, y in [("Mokiworld", *P(1246, 570)), ("Skate Space", 1238, 794), ("Fortune Row", *P(880, 1095)),
+    LABELS.append({"kind": "stage", "id": sid, "t": name, "x": c[0], "y": c[1], "lx": lx, "ly": ly})
+for name, x, y in [("Mokiworld", *P(1246, 570)), ("Skate Space", *from_pic(1238, 794)), ("Fortune Row", *P(880, 1095)),
                    ("Digital Gallery", *P(1300, 760)), ("VIP+ Lounge", *P(1172, 170))]:
     LABELS.append({"kind": "attraction", "id": name.lower().replace(" ", "-"), "t": name, "x": x, "y": y})
-for eid, name, (x, y), ang in [("main", "Entrance", P(1106, 1428), -75.5), ("vip", "VIP Entrance", P(612, 1300), AVENUE_ANGLE),
+for eid, name, (x, y), ang in [("main", "Entrance", P(1106, 1428), STREET_ANGLE), ("vip", "VIP Entrance", P(612, 1300), AVENUE_ANGLE),
                                ("vipplus", "VIP+ Entrance", P(1062, 365), AVENUE_ANGLE)]:
     LABELS.append({"kind": "entrance", "id": eid, "t": name, "x": x, "y": y, "dir": ang})
-LABELS.append({"kind": "place", "id": "access-center", "t": "Access Center", "x": 790, "y": 1217})
+LABELS.append({"kind": "place", "id": "access-center", "t": "Access Center", "x": ACCESS[0], "y": ACCESS[1]})
 for zid, _, spot in ZONES:
     if spot is None:
         continue
@@ -295,7 +292,7 @@ def svg_text(x, y, t, font, size, color, anchor="middle", rot=0, fit=None):
 
 # Fill patterns, shared with the app (MapView reads PATTERNS from map.json)
 PATTERNS = {
-    "h": {"kind": "lines", "gap": 8, "width": 2.0, "angle": 90 + 14.5},     # dense, along the cross streets
+    "h": {"kind": "lines", "gap": 8, "width": 2.0, "angle": 180 + STREET_ANGLE},  # dense, along the cross streets
     "h2": {"kind": "lines", "gap": 10, "width": 1.4, "angle": AVENUE_ANGLE},  # light, along the avenues
     "dots": {"kind": "dots", "gap": 5, "r": 1.05},                             # background screen
     "lawn": {"kind": "dots", "gap": 14, "r": 0.8, "stagger": True},            # blocks: fine texture
@@ -427,19 +424,23 @@ def svg_labels(labels):
 
 
 def main():
+    """diagram mode writes the app assets and mockup/map*.svg; oblique mode only mockup/map-oblique*.svg."""
     assets = os.path.join(ROOT, "app", "assets")
-    doc = {"view": VIEW, "ops": ops, "labels": LABELS, "patterns": PATTERNS, "fonts": FONT_FILES}
-    with open(os.path.join(assets, "map.json"), "w") as f:
-        json.dump(doc, f, separators=(",", ":"))
-    with open(os.path.join(assets, "icons.json"), "w") as f:
-        json.dump(ICONS, f, separators=(",", ":"))
     os.makedirs(os.path.join(ROOT, "mockup"), exist_ok=True)
     svg = to_svg(ops)
-    with open(os.path.join(ROOT, "mockup", "map.svg"), "w") as f:
+    labeled = svg.replace("</svg>", svg_labels(LABELS) + "\n</svg>")
+    suffix = "" if MODE == "diagram" else "-oblique"
+    with open(os.path.join(ROOT, "mockup", f"map{suffix}.svg"), "w") as f:
         f.write(svg)
-    with open(os.path.join(ROOT, "mockup", "map-labeled.svg"), "w") as f:
-        f.write(svg.replace("</svg>", svg_labels(LABELS) + "\n</svg>"))
-    print(f"{len(ops)} ops, {len(LABELS)} labels")
+    with open(os.path.join(ROOT, "mockup", f"map{suffix}-labeled.svg"), "w") as f:
+        f.write(labeled)
+    if MODE == "diagram":
+        doc = {"view": VIEW, "ops": ops, "labels": LABELS, "patterns": PATTERNS, "fonts": FONT_FILES}
+        with open(os.path.join(assets, "map.json"), "w") as f:
+            json.dump(doc, f, separators=(",", ":"))
+        with open(os.path.join(assets, "icons.json"), "w") as f:
+            json.dump(ICONS, f, separators=(",", ":"))
+    print(f"{MODE}: {len(ops)} ops, {len(LABELS)} labels")
 
 
 if __name__ == "__main__":

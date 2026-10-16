@@ -13,11 +13,11 @@ LABEL_AT gives each stage a label spot (inside its dance floor or in clear space
 """
 import math
 
-K, S = 0.2586, 0.044
+import os
+import sys
 
-
-def P(u, w):
-    return (round(u - K * w, 1), round(S * u + w, 1))
+sys.path.insert(0, os.path.dirname(__file__))
+from proj import P, from_pic  # noqa: E402
 
 
 def rect(u0, w0, u1, w1):
@@ -89,9 +89,9 @@ def smooth(pts, rounds=3):
 
 
 # Sector 3 field as drawn on the original (picture coordinates), smoothed
-SEC3_FIELD = smooth([(858, 1122), (856, 1060), (856, 985), (862, 958), (876, 942), (898, 934), (925, 934), (952, 940),
+SEC3_FIELD = smooth([from_pic(x, y) for x, y in [(858, 1122), (856, 1060), (856, 985), (862, 958), (876, 942), (898, 934), (925, 934), (952, 940),
                      (975, 956), (996, 982), (1012, 1012), (1028, 1040), (1040, 1062), (1040, 1082), (1030, 1100),
-                     (990, 1112), (940, 1118)])
+                     (990, 1112), (940, 1118)]])
 
 
 # Bird's-eye footprints: where each structure meets the ground. Heights in the original art are
@@ -100,10 +100,10 @@ SEC3_FIELD = smooth([(858, 1122), (856, 1060), (856, 985), (862, 958), (876, 942
 PARTS = [
     # Mind Melt (main stage): stage deck, open floor in front
     ("mind-melt", "floor", "floor", rect(1045, 462, 1285, 560)),
-    ("mind-melt", "stage", "stage", rrect(1168, 418, 248, 62, -3)),
+    ("mind-melt", "stage", "stage", rrect(1168, 418, 248, 62, 0)),
     # Player's Club: building (base), stage at its east end; scaffold tower base
-    ("players-club", "building", "bldg", rrect(977, 612, 140, 46, 3.8)),
-    ("players-club", "stage", "stage", turn([(40, -21), (68, -21), (68, 21), (40, 21)], 977, 612, 3.8)),
+    ("players-club", "building", "bldg", rrect(977, 612, 140, 46, 0)),
+    ("players-club", "stage", "stage", turn([(40, -21), (68, -21), (68, 21), (40, 21)], 977, 612, 0)),
     ("players-club", "scaffold", "bldg", rect(1054, 590, 1098, 630)),
     # Digital Gallery building holding ::444:: (north room) and Unforeseen (south room)
     ("digital-gallery", "building", "bldg", [P(1320, 545), P(1478, 545), P(1478, 822), P(1232, 822),
@@ -123,12 +123,12 @@ PARTS = [
     ("s3qu3nce", "stage", "stage", rect(700, 774, 782, 790)),
     # Isotropic: paved floor and the stage deck
     ("isotropic", "floor", "floor", rect(507, 872, 612, 968)),
-    ("isotropic", "stage", "stage", rrect(536, 1008, 129, 36, -1.6)),
+    ("isotropic", "stage", "stage", rrect(536, 1008, 129, 36, 0)),
     # Halo 88 (indoor, stage along the west wall), Fortune Row next to it, III Points Radio booth
     # Halo 88 is one wide building across the block; Fortune Row is the open courtyard in its east end
-    ("halo-88", "building", "bldg", rrect(807, 1095, 290, 138, -4)),
-    ("halo-88", "stage", "stage", turn([(-142, -66), (-120, -66), (-120, 66), (-142, 66)], 807, 1095, -4)),
-    ("fortune-row", "courtyard", "court", turn([(-2, -58), (134, -58), (134, 56), (-2, 56)], 807, 1095, -4)),
+    ("halo-88", "building", "bldg", rrect(807, 1095, 290, 138, 0)),
+    ("halo-88", "stage", "stage", turn([(-142, -66), (-120, -66), (-120, 66), (-142, 66)], 807, 1095, 0)),
+    ("fortune-row", "courtyard", "court", turn([(-2, -58), (134, -58), (134, 56), (-2, 56)], 807, 1095, 0)),
     ("iii-points-radio", "stage", "stage", rrect(940, 905, 50, 16, 25)),
     # VIP area west of RC95: bar tent, viewing platform; RC95 floor and booth
     ("vip-area", "tent", "bldg", rect(652, 1216, 848, 1258)),
