@@ -165,11 +165,11 @@ for (u, w, t) in [(1002, 1290, "NW 23rd St"), (1341, 1300, "NW 22nd St"), (636, 
 # --------------------------------------------------------------------------------------------
 # Stages and structures: one language on the street grid (tools/plan.py)
 # --------------------------------------------------------------------------------------------
-from plan import shapes, LABEL_AT  # noqa: E402
+from plan import shapes, LABEL_AT, ZONES  # noqa: E402
 
 PART_STYLE = {  # style -> (fill, stroke width, dash)
     "floor": ("w", W_FLOOR, [11, 7]), "stage": ("h", W_STRUCT, None),
-    "bldg": ("w", W_STRUCT * 0.8, None), "detail": (None, W_DETAIL, None),
+    "bldg": ("w", W_STRUCT * 0.8, None), "detail": (None, W_DETAIL, None), "zone": ("vipz", 1.6, [5, 4]),
 }
 FOOTPRINTS = {}
 for stage, part, style, shape in shapes():
@@ -180,6 +180,8 @@ for stage, part, style, shape in shapes():
     elif dash:
         poly(shape, fill=fill)
         line(list(shape) + [shape[0]], stroke=sw, dash=dash)
+        if style == "zone":
+            FOOTPRINTS.pop(f"{stage}/{part}")
     else:
         poly(shape, fill=fill, stroke=sw)
 
@@ -247,6 +249,11 @@ for eid, name, (x, y), ang in [("main", "Entrance", P(1106, 1428), -75.5), ("vip
                                ("vipplus", "VIP+ Entrance", P(1062, 365), AVENUE_ANGLE)]:
     LABELS.append({"kind": "entrance", "id": eid, "t": name, "x": x, "y": y, "dir": ang})
 LABELS.append({"kind": "place", "id": "access-center", "t": "Access Center", "x": 790, "y": 1217})
+for zid, _, spot in ZONES:
+    if spot is None:
+        continue
+    x, y = P(*spot)
+    LABELS.append({"kind": "zone", "id": zid, "t": "VIP", "x": x, "y": y})
 
 # --------------------------------------------------------------------------------------------
 # SVG output
@@ -292,6 +299,7 @@ PATTERNS = {
     "h2": {"kind": "lines", "gap": 10, "width": 1.4, "angle": AVENUE_ANGLE},  # light, along the avenues
     "dots": {"kind": "dots", "gap": 5, "r": 1.05},                             # background screen
     "lawn": {"kind": "dots", "gap": 14, "r": 0.8, "stagger": True},            # blocks: fine texture
+    "vipz": {"kind": "lines", "gap": 12, "width": 0.9, "angle": 45},            # VIP-only areas
 }
 
 
@@ -318,7 +326,7 @@ def svg_defs():
 
 def to_svg(ops_list, show_vip=False):
     col = {"b": "#000", "w": "#fff", "n": "none", "h": "url(#hatch)", "h2": "url(#hatch2)",
-           "dots": "url(#dots)", "lawn": "url(#lawn)"}
+           "dots": "url(#dots)", "lawn": "url(#lawn)", "vipz": "url(#vipz)"}
     vx, vy, vw, vh = VIEW
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vx} {vy} {vw} {vh}" width="{vw}" height="{vh}">', "<style>"]
     for key, f in FONT_FILES.items():
@@ -402,6 +410,10 @@ def svg_labels(labels):
         else:
             x, y = lb["x"], lb["y"]
             anchor = "middle"
+            if k == "zone":
+                out.append(svg_text(round(x, 1), round(y + 6, 1), "VIP", "b7", 17, "#000").replace(
+                    "<text ", '<text letter-spacing="1.5" stroke="#fff" stroke-width="6" paint-order="stroke" '))
+                continue
             if k == "place":  # beside its icon
                 x, anchor = x + 27, "start"
             out.append(svg_text(x, y + 6, lb["t"], "b6", 18, "#000", anchor).replace(
