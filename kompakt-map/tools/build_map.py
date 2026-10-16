@@ -112,7 +112,7 @@ def rect(x, y, w, h, fill="w", stroke=0, color="b", rx=0, rot=0, lvl=0):
 
 
 # Line weights: blocks heavy, stages/buildings medium, details thin
-W_BLOCK, W_EDGE, W_STRUCT, W_DETAIL, W_FLOOR = 4.5, 1.5, 2.5, 1.5, 2.2
+W_BLOCK, W_EDGE, W_STRUCT, W_DETAIL, W_FLOOR = 5, 2.5, 3, 1.6, 2.6
 
 # --------------------------------------------------------------------------------------------
 # Ground (flat): white paper, streets are the gaps between the blocks, blocks carry a fine texture
@@ -151,11 +151,11 @@ for pts in BLOCKS.values():
 # --------------------------------------------------------------------------------------------
 for (u, w, t) in [(1152, 861, "NW 5th Ave"), (745, 1404, "NW 6th Ave")]:
     x, y = P(u, w)
-    text(x, y + 8, t, font="b6", size=22, color="b", rot=AVENUE_ANGLE)
+    text(x, y + 10, t, font="b7", size=28, color="b", rot=AVENUE_ANGLE)
 for (u, w, t) in [(1002, 1290, "NW 23rd St"), (1341, 1300, "NW 22nd St"), (636, 1000, "NW 24th St"),
                   (427, 960, "NW 25th St"), (670, 645, "NW 24th St"), (889, 260, "NW 23rd St"), (1041, 260, "NW 22nd Ln")]:
     x, y = P(u, w)
-    text(x + 8, y, t, font="b6", size=22, color="b", rot=STREET_ANGLE)
+    text(x + 10, y, t, font="b7", size=26, color="b", rot=STREET_ANGLE)
 
 # --------------------------------------------------------------------------------------------
 # Stages and structures: one language on the street grid (tools/plan.py)
@@ -165,12 +165,16 @@ from plan import shapes, LABEL_AT, ZONES  # noqa: E402
 PART_STYLE = {  # style -> (fill, stroke width, dash)
     "floor": ("w", W_FLOOR, [11, 7]), "court": ("w", W_FLOOR, [11, 7]), "stage": ("h", W_STRUCT, None),
     "bldg": ("w", W_STRUCT * 0.8, None), "detail": (None, W_DETAIL, None), "zone": ("vipz", 1.6, [5, 4]),
+    "park": ("grass", 0, None),
 }
 FOOTPRINTS = {}
 for stage, part, style, shape in shapes():
     fill, sw, dash = PART_STYLE[style]
     FOOTPRINTS[f"{stage}/{part}"] = shape
-    if fill is None:
+    if style == "park":
+        poly(shape, fill=fill)
+        FOOTPRINTS.pop(f"{stage}/{part}")
+    elif fill is None:
         line(shape, stroke=sw)
     elif dash:
         poly(shape, fill=fill)
@@ -200,7 +204,7 @@ FIX = {  # (x, y) of a detection -> corrected type (None drops it)
     (1244.0, 708.0): None, (973.3, 563.3): "vipexit", (484.0, 1326.7): "vipconcierge",
 }
 detected = json.load(open(os.path.join(ROOT, "source", "map", "icons_detected.json")))
-ICON_R = 15
+ICON_R = 20
 CHECK_POINTS = []
 for d in detected:
     t = FIX.get((d["x"], d["y"]), d["type"])
@@ -292,10 +296,11 @@ def svg_text(x, y, t, font, size, color, anchor="middle", rot=0, fit=None):
 
 # Fill patterns, shared with the app (MapView reads PATTERNS from map.json)
 PATTERNS = {
-    "h": {"kind": "lines", "gap": 8, "width": 2.0, "angle": 180 + STREET_ANGLE},  # dense, along the cross streets
+    "h": {"kind": "lines", "gap": 7, "width": 2.4, "angle": 180 + STREET_ANGLE},  # dense, along the cross streets
     "h2": {"kind": "lines", "gap": 10, "width": 1.4, "angle": AVENUE_ANGLE},  # light, along the avenues
     "dots": {"kind": "dots", "gap": 5, "r": 1.05},                             # background screen
-    "lawn": {"kind": "dots", "gap": 14, "r": 0.8, "stagger": True},            # blocks: fine texture
+    "lawn": {"kind": "dots", "gap": 10, "r": 0.95, "stagger": True},           # blocks: fine texture
+    "grass": {"kind": "tufts", "gap": 16},                                     # wooded / lawn areas
     "vipz": {"kind": "lines", "gap": 12, "width": 0.9, "angle": 45},            # VIP-only areas
 }
 
@@ -305,7 +310,13 @@ def svg_defs():
     for key, p in PATTERNS.items():
         pid = {"h": "hatch", "h2": "hatch2"}.get(key, key)
         g = p["gap"]
-        if p["kind"] == "lines":
+        if p["kind"] == "tufts":
+            # small grass tufts on a staggered grid, over the lawn dots
+            tuft = lambda x, y: (f'<path d="M{x - 3} {y + 3}l2 -5M{x} {y + 3}v-6M{x + 3} {y + 3}l-2 -5" '  # noqa: E731
+                                 f'stroke="#000" stroke-width="1.1" fill="none" stroke-linecap="round"/>')
+            out.append(f'<pattern id="{pid}" width="{g}" height="{g * 2}" patternUnits="userSpaceOnUse">'
+                       f'<rect width="{g}" height="{g * 2}" fill="#fff"/>{tuft(g / 2, g / 2)}{tuft(0, g * 1.5)}{tuft(g, g * 1.5)}</pattern>')
+        elif p["kind"] == "lines":
             # vertical stripe rotated to the requested angle (0 deg = horizontal lines)
             out.append(f'<pattern id="{pid}" width="{g}" height="{g}" patternUnits="userSpaceOnUse" '
                        f'patternTransform="rotate({p["angle"] - 90})"><rect width="{g}" height="{g}" fill="#fff"/>'
@@ -323,7 +334,7 @@ def svg_defs():
 
 def to_svg(ops_list, show_vip=False):
     col = {"b": "#000", "w": "#fff", "n": "none", "h": "url(#hatch)", "h2": "url(#hatch2)",
-           "dots": "url(#dots)", "lawn": "url(#lawn)", "vipz": "url(#vipz)"}
+           "dots": "url(#dots)", "lawn": "url(#lawn)", "vipz": "url(#vipz)", "grass": "url(#grass)"}
     vx, vy, vw, vh = VIEW
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vx} {vy} {vw} {vh}" width="{vw}" height="{vh}">', "<style>"]
     for key, f in FONT_FILES.items():
@@ -385,14 +396,39 @@ def to_svg(ops_list, show_vip=False):
     return "\n".join(out)
 
 
+PREVIEW_DAY, PREVIEW_T = "fri", 21 * 60 + 42   # preview: Friday 9:42 PM
+
+
+def now_playing(stage_id):
+    doc = json.load(open(os.path.join(ROOT, "app", "assets", "lineup.json")))
+    for st in doc["stages"]:
+        if st["id"] == stage_id:
+            for a, b, name, *_ in st["sets"][PREVIEW_DAY]:
+                ta, tb = [int(v[:2]) * 60 + int(v[3:]) for v in (a, b)]
+                if ta <= PREVIEW_T < tb:
+                    return " ".join(w if w in ("B2B", "DJ", "MD", "II", "III") else w.capitalize() for w in name.split())
+    return None
+
+
 def svg_labels(labels):
-    """Preview of the app's Mudita-style labels: white pill, thin black outline, Barlow."""
+    """Preview of the app's Mudita-style labels: white pill, thin black outline, Barlow.
+    Stage labels carry a second line with the act playing now (as the app will)."""
     out = []
     for lb in labels:
         k = lb["kind"]
         if k == "stage":
             x, y = lb["lx"], lb["ly"]
-            size, font, h = 24, "b7", 38
+            act = now_playing(lb["id"])
+            if act:
+                act = act.replace("B2B", "b2b")
+                w = max(text_width(lb["t"], "b7", 27), text_width(act, "b6", 18)) + 34
+                h = 60
+                out.append(f'<rect x="{x - w / 2:.1f}" y="{y - h / 2:.1f}" width="{w:.1f}" height="{h}" rx="16" '
+                           f'fill="#fff" stroke="#000" stroke-width="2.4"/>')
+                out.append(svg_text(round(x, 1), round(y - 3, 1), lb["t"], "b7", 27, "#000"))
+                out.append(svg_text(round(x, 1), round(y + 20, 1), act, "b6", 18, "#000"))
+                continue
+            size, font, h = 27, "b7", 44
         elif k == "entrance":
             a = math.radians(lb["dir"])
             tx, ty = lb["x"], lb["y"]

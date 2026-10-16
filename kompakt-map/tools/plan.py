@@ -150,6 +150,14 @@ PARTS = [
     ("grand-central", "stage", "stage", rrect(1434, 1180, 80, 38, 31)),
 ]
 
+# Lawns with trees on the original (drawn as grass texture, no trees)
+PARKS = [
+    rect(1385, 1235, 1696, 1379),      # Grand Central: south lawn
+    rect(1367, 1010, 1415, 1235),      # Grand Central: west edge
+    rect(1236, 1150, 1315, 1379),      # Sector 3 block: east edge
+    rect(664, 885, 700, 990),          # Halo 88 block: northwest corner (palms)
+]
+
 # VIP-only areas (purple on the original), measured from the hi-res map: (id, ground polygon, label spot)
 ZONES = [
     ("vip-isotropic", [P(458, 846), P(505, 846), P(505, 1035), P(612, 1035), P(612, 1106), P(458, 1106)], (481, 940)),
@@ -170,6 +178,7 @@ LABEL_AT = {
 
 
 def shapes():
-    order = {"zone": -1, "floor": 0, "bldg": 1, "court": 1.5, "stage": 2, "detail": 3}
-    parts = PARTS + [(zid, "zone", "zone", pts) for zid, pts, _ in ZONES]
+    order = {"park": -2, "zone": -1, "floor": 0, "bldg": 1, "court": 1.5, "stage": 2, "detail": 3}
+    parts = PARTS + [(zid, "zone", "zone", pts) for zid, pts, _ in ZONES] + \
+        [(f"park{i}", "park", "park", pts) for i, pts in enumerate(PARKS)]
     return sorted(parts, key=lambda p: order[p[2]])
