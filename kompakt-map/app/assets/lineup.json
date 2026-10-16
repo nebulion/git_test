@@ -1,0 +1,1326 @@
+{
+ "name": "III Points 2026",
+ "venue": "Mana Wynwood, Miami",
+ "timezone": "America/New_York",
+ "source": "Official set times, iiipoints.com/set-times (snapshot 2026-10-16)",
+ "days": [
+  {
+   "id": "fri",
+   "label": "Fri",
+   "long": "Friday, Oct 16",
+   "date": "2026-10-16"
+  },
+  {
+   "id": "sat",
+   "label": "Sat",
+   "long": "Saturday, Oct 17",
+   "date": "2026-10-17"
+  }
+ ],
+ "stages": [
+  {
+   "id": "mind-melt",
+   "name": "Mind Melt",
+   "host": "MAIN STAGE",
+   "sets": {
+    "fri": [
+     [
+      "16:00",
+      "17:00",
+      "ACKDADDY"
+     ],
+     [
+      "17:05",
+      "17:35",
+      "VANIA JUNCO"
+     ],
+     [
+      "18:00",
+      "19:00",
+      "CONNAN MOCKASIN"
+     ],
+     [
+      "19:25",
+      "20:15",
+      "MEN I TRUST"
+     ],
+     [
+      "20:45",
+      "22:00",
+      "PARCELS"
+     ],
+     [
+      "22:30",
+      "23:15",
+      "TOKISCHA"
+     ],
+     [
+      "23:30",
+      "25:00",
+      "CLOONEE"
+     ],
+     [
+      "25:00",
+      "26:30",
+      "BELTRAN B2B BEN STERLING"
+     ],
+     [
+      "26:30",
+      "28:00",
+      "PAWSA"
+     ]
+    ],
+    "sat": [
+     [
+      "16:00",
+      "17:00",
+      "CARTER JACKSON BROWN"
+     ],
+     [
+      "17:15",
+      "18:05",
+      "LOUKEMAN"
+     ],
+     [
+      "18:20",
+      "19:00",
+      "EAR"
+     ],
+     [
+      "19:25",
+      "20:10",
+      "NETTSPEND"
+     ],
+     [
+      "20:40",
+      "21:50",
+      "BLOOD ORANGE"
+     ],
+     [
+      "22:15",
+      "23:30",
+      "ADAM PORT"
+     ],
+     [
+      "24:00",
+      "25:00",
+      "UNDERWORLD"
+     ],
+     [
+      "25:30",
+      "26:45",
+      "FOUR TET"
+     ],
+     [
+      "26:45",
+      "28:00",
+      "KETTAMA"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "sec3",
+   "name": "Sector 3",
+   "host": "SECTOR 3",
+   "sets": {
+    "fri": [
+     [
+      "16:00",
+      "17:00",
+      "KUMI"
+     ],
+     [
+      "17:05",
+      "17:45",
+      "CUMBIAMBA"
+     ],
+     [
+      "18:10",
+      "18:40",
+      "AMAR"
+     ],
+     [
+      "19:00",
+      "19:55",
+      "GHOSTFACE KILLAH",
+      "PRESENTS SUPREME CLIENTELE"
+     ],
+     [
+      "20:15",
+      "21:00",
+      "BONE THUGS-N-HARMONY"
+     ],
+     [
+      "21:15",
+      "22:00",
+      "LIL’ KIM"
+     ],
+     [
+      "22:20",
+      "23:10",
+      "MIND ENTERPRISES"
+     ],
+     [
+      "23:35",
+      "24:25",
+      "PURITY RING"
+     ],
+     [
+      "24:45",
+      "25:30",
+      "DANNY BROWN"
+     ],
+     [
+      "25:50",
+      "26:35",
+      "JANE REMOVER"
+     ],
+     [
+      "27:00",
+      "28:00",
+      "FLYING LOTUS"
+     ]
+    ],
+    "sat": [
+     [
+      "16:15",
+      "16:45",
+      "NIKOLE"
+     ],
+     [
+      "17:00",
+      "17:30",
+      "DORIS DANA",
+      "LIVE"
+     ],
+     [
+      "17:45",
+      "18:30",
+      "RES_",
+      "LIVE"
+     ],
+     [
+      "18:45",
+      "19:30",
+      "ML BUCH"
+     ],
+     [
+      "19:55",
+      "20:45",
+      "TRICKY"
+     ],
+     [
+      "21:10",
+      "21:55",
+      "RUSOWSKY"
+     ],
+     [
+      "22:20",
+      "23:05",
+      "KELELA"
+     ],
+     [
+      "23:30",
+      "24:20",
+      "HORSEGIIRL"
+     ],
+     [
+      "24:40",
+      "25:25",
+      "BASSVICTIM"
+     ],
+     [
+      "25:45",
+      "26:35",
+      "MACHINE GIRL"
+     ],
+     [
+      "27:00",
+      "28:00",
+      "SUNN O)))"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "isotropic",
+   "name": "Isotropic",
+   "host": "ISOTROPIC",
+   "sets": {
+    "fri": [
+     [
+      "16:00",
+      "17:15",
+      "FIIN"
+     ],
+     [
+      "17:15",
+      "18:30",
+      "DAIZY"
+     ],
+     [
+      "18:30",
+      "20:00",
+      "MAHER DANIEL B2B MAI IACHETTI"
+     ],
+     [
+      "20:00",
+      "21:30",
+      "MALÓNE MOREZ B2B MILUHSKA"
+     ],
+     [
+      "21:30",
+      "23:00",
+      "MIGUELLE & TONS"
+     ],
+     [
+      "23:00",
+      "24:30",
+      "BRUNELLO B2B RAFAEL"
+     ],
+     [
+      "24:30",
+      "26:00",
+      "AHMED SPINS B2B OMRI."
+     ],
+     [
+      "26:00",
+      "28:00",
+      "VINTAGE CULTURE B2B MAX STYLER"
+     ]
+    ],
+    "sat": [
+     [
+      "16:00",
+      "17:15",
+      "LA BB"
+     ],
+     [
+      "17:15",
+      "18:30",
+      "GODBLESSJAI"
+     ],
+     [
+      "18:30",
+      "20:00",
+      "SILVIE LOTO B2B MS. MADA"
+     ],
+     [
+      "20:00",
+      "21:15",
+      "MARSOLO"
+     ],
+     [
+      "21:15",
+      "22:30",
+      "OMAR+"
+     ],
+     [
+      "22:30",
+      "23:45",
+      "CHASEWEST"
+     ],
+     [
+      "23:45",
+      "25:00",
+      "SOSA"
+     ],
+     [
+      "25:00",
+      "26:30",
+      "MAX DEAN B2B LUKE DEAN"
+     ],
+     [
+      "26:30",
+      "28:00",
+      "MARCO CAROLA B2B FRANKY RIZARDO"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "rc95",
+   "name": "RC95",
+   "host": "BASS & HARD DANCE",
+   "sets": {
+    "fri": [
+     [
+      "16:00",
+      "17:15",
+      "MASON NORRIS B2B MIA VENDETTA"
+     ],
+     [
+      "17:15",
+      "18:15",
+      "PROLETAR B2B ZAMURAI"
+     ],
+     [
+      "18:15",
+      "19:15",
+      "V1FRO"
+     ],
+     [
+      "19:15",
+      "20:15",
+      "ITBSP"
+     ],
+     [
+      "20:15",
+      "21:15",
+      "JIGITZ"
+     ],
+     [
+      "21:15",
+      "22:15",
+      "MARY DROPPINZ"
+     ],
+     [
+      "22:15",
+      "23:15",
+      "IVY LAB"
+     ],
+     [
+      "23:15",
+      "24:15",
+      "HAMDI"
+     ],
+     [
+      "24:15",
+      "25:30",
+      "LEVITY B2B TAIKI NULIGHT"
+     ],
+     [
+      "25:30",
+      "26:45",
+      "ODD MOB"
+     ],
+     [
+      "26:45",
+      "28:00",
+      "DISCO LINES"
+     ]
+    ],
+    "sat": [
+     [
+      "16:00",
+      "17:00",
+      "DOMNROB"
+     ],
+     [
+      "17:00",
+      "18:15",
+      "GENEROUS B B2B HAKUNA"
+     ],
+     [
+      "18:15",
+      "19:30",
+      "COLE KNIGHT B2B DREYA V"
+     ],
+     [
+      "19:30",
+      "20:45",
+      "COFFINTEXTS B2B DJ FUCKOFF"
+     ],
+     [
+      "20:45",
+      "22:00",
+      "NICK LEÓN"
+     ],
+     [
+      "22:00",
+      "23:15",
+      "KI/KI"
+     ],
+     [
+      "23:15",
+      "24:30",
+      "¥ØU$UK€ ¥UK1MAT$U"
+     ],
+     [
+      "24:30",
+      "25:30",
+      "VTSS"
+     ],
+     [
+      "25:30",
+      "26:45",
+      "999999999"
+     ],
+     [
+      "26:45",
+      "28:00",
+      "CHARLOTTE DE WITTE"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "444",
+   "name": "::444::",
+   "host": "4-HOUR EXTENDED SETS · L-ACOUSTICS DJ & APPLE MUSIC",
+   "sets": {
+    "fri": [
+     [
+      "16:00",
+      "20:00",
+      "HEIDI LAWDEN"
+     ],
+     [
+      "20:00",
+      "24:00",
+      "DJ HARVEY"
+     ],
+     [
+      "24:00",
+      "28:00",
+      "FLOATING POINTS"
+     ]
+    ],
+    "sat": [
+     [
+      "16:00",
+      "20:00",
+      "WILLIKENS & IVKOVIC"
+     ],
+     [
+      "20:00",
+      "24:00",
+      "RED AXES"
+     ],
+     [
+      "24:00",
+      "28:00",
+      "SETH TROXLER"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "s3qu3nce",
+   "name": "S3QUENC3",
+   "host": "HOUSE & TECHNO",
+   "sets": {
+    "fri": [
+     [
+      "16:00",
+      "18:00",
+      "DUUN B2B SLEEPY C"
+     ],
+     [
+      "18:00",
+      "19:15",
+      "R/V CALYPSO"
+     ],
+     [
+      "19:15",
+      "20:45",
+      "JUMP SOURCE",
+      "LIVE"
+     ],
+     [
+      "20:45",
+      "22:00",
+      "JACQUES GREENE"
+     ],
+     [
+      "22:00",
+      "23:30",
+      "ELI ESCOBAR B2B JUBILEE"
+     ],
+     [
+      "23:30",
+      "25:00",
+      "DANNY DAZE B2B DJ GODFATHER"
+     ],
+     [
+      "25:00",
+      "26:30",
+      "SHANTI CELESTE B2B PEACH"
+     ],
+     [
+      "26:30",
+      "28:00",
+      "HONEY DIJON"
+     ]
+    ],
+    "sat": [
+     [
+      "16:00",
+      "17:45",
+      "GRANT SABADASH B2B SHIR MIYA"
+     ],
+     [
+      "17:45",
+      "19:15",
+      "NATALIA ROTH B2B MAX STERN"
+     ],
+     [
+      "19:15",
+      "20:30",
+      "REBOLLEDO"
+     ],
+     [
+      "20:30",
+      "21:45",
+      "WHITESQUARE"
+     ],
+     [
+      "21:45",
+      "23:00",
+      "ROMAN FLÜGEL"
+     ],
+     [
+      "23:00",
+      "24:15",
+      "DAPHNI"
+     ],
+     [
+      "24:15",
+      "25:30",
+      "INTERPLANETARY CRIMINAL"
+     ],
+     [
+      "25:30",
+      "26:45",
+      "HAAi"
+     ],
+     [
+      "26:45",
+      "28:00",
+      "TIGA"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "grand-central",
+   "name": "Grand Central",
+   "host": "WITH POPLIFE & MIAMI COMMUNITY RADIO",
+   "sets": {
+    "fri": [
+     [
+      "16:30",
+      "17:00",
+      "LYLAC"
+     ],
+     [
+      "17:25",
+      "17:55",
+      "IIRY?"
+     ],
+     [
+      "18:15",
+      "19:00",
+      "BLIND FISH"
+     ],
+     [
+      "19:15",
+      "20:00",
+      "NICHOLAS G. PADILLA"
+     ],
+     [
+      "20:15",
+      "21:00",
+      "RENTAL SNAKES"
+     ],
+     [
+      "21:15",
+      "21:55",
+      "CORRIDOS KETAMINA"
+     ],
+     [
+      "22:10",
+      "22:55",
+      "PATCH +"
+     ],
+     [
+      "23:15",
+      "24:00",
+      "NATE SIB"
+     ],
+     [
+      "24:20",
+      "24:50",
+      "B0YG1RL"
+     ],
+     [
+      "25:10",
+      "25:55",
+      "MGNA CRRRTA"
+     ],
+     [
+      "26:15",
+      "27:00",
+      "ZEP"
+     ]
+    ],
+    "sat": [
+     [
+      "16:15",
+      "16:45",
+      "HURACÁN"
+     ],
+     [
+      "17:10",
+      "17:40",
+      "VVILHELM"
+     ],
+     [
+      "18:05",
+      "18:35",
+      "CAMP BLU"
+     ],
+     [
+      "19:00",
+      "19:30",
+      "HOMICIDE JENNY"
+     ],
+     [
+      "19:55",
+      "20:25",
+      "LADYBOY"
+     ],
+     [
+      "20:50",
+      "21:20",
+      "EMILY AFRE"
+     ],
+     [
+      "21:45",
+      "22:30",
+      "FINE"
+     ],
+     [
+      "22:55",
+      "23:40",
+      "CHANEL BEADS"
+     ],
+     [
+      "24:05",
+      "24:35",
+      "VELORA"
+     ],
+     [
+      "25:00",
+      "25:45",
+      "YHWH NAILGUN"
+     ],
+     [
+      "26:00",
+      "27:00",
+      "CRESPI DRUM SYNDICATE",
+      "LIVE"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "vertex",
+   "name": "Vertex",
+   "host": "WITH 1-800 BANKROLL",
+   "sets": {
+    "fri": [
+     [
+      "16:00",
+      "17:30",
+      "MEGUSTA B2B MIGS"
+     ],
+     [
+      "17:30",
+      "19:00",
+      "GRACE ARRIBAS B2B MARTE"
+     ],
+     [
+      "19:00",
+      "20:15",
+      "RELLO"
+     ],
+     [
+      "20:15",
+      "21:30",
+      "DAN MOLINARI"
+     ],
+     [
+      "21:30",
+      "23:00",
+      "SLUGG B2B RAJE"
+     ],
+     [
+      "23:00",
+      "24:15",
+      "RODDY LIMA"
+     ],
+     [
+      "24:15",
+      "25:30",
+      "DISCIP"
+     ],
+     [
+      "25:30",
+      "26:45",
+      "RAGIE BAN"
+     ],
+     [
+      "26:45",
+      "28:00",
+      "INVT"
+     ]
+    ],
+    "sat": [
+     [
+      "16:00",
+      "17:30",
+      "ALLNIGHTKEV B2B LO-G"
+     ],
+     [
+      "17:30",
+      "19:00",
+      "ALEZSANDRO B2B DALVA"
+     ],
+     [
+      "19:00",
+      "20:30",
+      "IDRISS D B2B DANYELINO"
+     ],
+     [
+      "20:30",
+      "21:45",
+      "JOSS DEAN"
+     ],
+     [
+      "21:45",
+      "23:00",
+      "KINAHAU"
+     ],
+     [
+      "23:00",
+      "24:15",
+      "DEAN TURNLEY"
+     ],
+     [
+      "24:15",
+      "25:30",
+      "SAM ALFRED"
+     ],
+     [
+      "25:30",
+      "26:45",
+      "MPH"
+     ],
+     [
+      "26:45",
+      "28:00",
+      "2UP!"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "door-iv",
+   "name": "Door IV",
+   "host": "DOOR IV",
+   "sets": {
+    "fri": [
+     [
+      "16:00",
+      "18:00",
+      "FEPH B2B MR. TRON"
+     ],
+     [
+      "18:00",
+      "19:15",
+      "ADAM AT THE DOOR"
+     ],
+     [
+      "19:15",
+      "20:30",
+      "UCHI"
+     ],
+     [
+      "20:30",
+      "22:00",
+      "JULIA SATURNO B2B LOTUSOPH"
+     ],
+     [
+      "22:00",
+      "23:30",
+      "GIO ELIA B2B MEGHAN LEE"
+     ],
+     [
+      "23:30",
+      "25:00",
+      "BILL PATRICK B2B BORT"
+     ],
+     [
+      "25:00",
+      "26:45",
+      "OMA TOTEM B2B TRUE VINE"
+     ],
+     [
+      "26:45",
+      "28:00",
+      "ECO-SISTEMA"
+     ]
+    ],
+    "sat": [
+     [
+      "16:00",
+      "17:15",
+      "VSYANA"
+     ],
+     [
+      "17:15",
+      "18:45",
+      "SERAFITZ B2B SOL DISCOS"
+     ],
+     [
+      "18:45",
+      "20:15",
+      "DJ RAY B2B EZ DEE"
+     ],
+     [
+      "20:15",
+      "21:45",
+      "MYSTIC BILL B2B ARTIME"
+     ],
+     [
+      "21:45",
+      "23:45",
+      "DAVID VUNK"
+     ],
+     [
+      "23:45",
+      "25:00",
+      "TERENCE TABEAU"
+     ],
+     [
+      "25:00",
+      "26:30",
+      "DJ THREE B2B SISTER SYSTEM"
+     ],
+     [
+      "26:30",
+      "28:00",
+      "ASHLEY VENOM B2B SOULS DEPARTED"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "halo-88",
+   "name": "Halo 88",
+   "host": "FRI WITH OTHERWORLD · SAT WITH MASISI",
+   "sets": {
+    "fri": [
+     [
+      "16:00",
+      "17:30",
+      "APHEX TWINK B2B FORESEER"
+     ],
+     [
+      "17:30",
+      "19:00",
+      "DJ SABI B2B GRUE5OME"
+     ],
+     [
+      "19:00",
+      "20:00",
+      "ALEJO"
+     ],
+     [
+      "20:00",
+      "21:15",
+      "MIGUEL CLARK B2B NAIM ZARZOUR"
+     ],
+     [
+      "21:15",
+      "22:30",
+      "FIUZA B2B MADISON KAY"
+     ],
+     [
+      "22:30",
+      "24:00",
+      "ELIAS GARCIA B2B MILA GAMA"
+     ],
+     [
+      "24:00",
+      "25:30",
+      "DR. RUBINSTEIN B2B ULTRATHEM"
+     ],
+     [
+      "25:30",
+      "27:00",
+      "JOANNA KUCHTA B2B ROBYN SIN LOVE"
+     ],
+     [
+      "27:00",
+      "28:00",
+      "TECH G1RLS"
+     ]
+    ],
+    "sat": [
+     [
+      "16:00",
+      "17:00",
+      "KHAMI"
+     ],
+     [
+      "17:00",
+      "18:00",
+      "DENNIS BAKER B2B D. LUXE"
+     ],
+     [
+      "18:00",
+      "19:15",
+      "BRICOLAGE B2B DAY/DEM"
+     ],
+     [
+      "19:15",
+      "20:30",
+      "LUPREME B2B SANTO"
+     ],
+     [
+      "20:30",
+      "21:45",
+      "BONITA APPLEBUMZ B2B TONI SHARDAI"
+     ],
+     [
+      "21:45",
+      "23:00",
+      "PLAYSHADO B2B SEL.6"
+     ],
+     [
+      "23:00",
+      "24:00",
+      "MR. BITCH"
+     ],
+     [
+      "24:00",
+      "25:15",
+      "BERRAKKA B2B PRESSURE POINT"
+     ],
+     [
+      "25:15",
+      "25:45",
+      "FAITH LEAZAE"
+     ],
+     [
+      "25:45",
+      "27:00",
+      "LADY NARCISSE B2B RACCI"
+     ],
+     [
+      "27:00",
+      "28:00",
+      "DUALITY B2B GUMTHEWRAPPER"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "unforeseen",
+   "name": "Unforeseen",
+   "host": "RED BULL UNFORESEEN · SAT WITH PERREO DEL FUTURO",
+   "sets": {
+    "fri": [
+     [
+      "16:00",
+      "18:00",
+      "KATIE OX B2B NAT SIRIANI"
+     ],
+     [
+      "18:00",
+      "19:30",
+      "THUNDERPONY B2B TIFFY VERA"
+     ],
+     [
+      "19:30",
+      "21:00",
+      "AABEL B2B SIEGEL"
+     ],
+     [
+      "21:00",
+      "22:30",
+      "MACCABIII B2B PEZLO MD"
+     ],
+     [
+      "22:30",
+      "23:45",
+      "MOSCOMAN"
+     ],
+     [
+      "23:45",
+      "25:15",
+      "EVEAVA B2B JOVIGIBS"
+     ],
+     [
+      "25:15",
+      "26:30",
+      "BAKKE"
+     ],
+     [
+      "26:30",
+      "28:00",
+      "LOUSY LOVER B2B LUCAZ"
+     ]
+    ],
+    "sat": [
+     [
+      "16:00",
+      "17:30",
+      "P1NO B2B TRIPPIE HIPPIE"
+     ],
+     [
+      "17:30",
+      "18:45",
+      "BOZITO B2B GABO ESCALONA"
+     ],
+     [
+      "18:45",
+      "20:00",
+      "SPICE CRIME B2B VIOLETA"
+     ],
+     [
+      "20:00",
+      "21:15",
+      "ALE ACOSTA B2B HAZÓN"
+     ],
+     [
+      "21:15",
+      "22:15",
+      "JINN_PR"
+     ],
+     [
+      "22:15",
+      "23:30",
+      "619!"
+     ],
+     [
+      "23:30",
+      "24:45",
+      "1-800-305"
+     ],
+     [
+      "24:45",
+      "26:15",
+      "SATURNSARII B2B SUZ"
+     ],
+     [
+      "26:15",
+      "26:45",
+      "LIQUID DINOSAURS"
+     ],
+     [
+      "26:45",
+      "28:00",
+      "KUJO B2B RARA"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "iii-points-radio",
+   "name": "III Points Radio",
+   "host": "WITH WVUM 90.5",
+   "sets": {
+    "fri": [
+     [
+      "16:00",
+      "18:00",
+      "SPORTSWAX"
+     ],
+     [
+      "18:00",
+      "19:30",
+      "EXTRA ANDREW B2B MUTANT PETE"
+     ],
+     [
+      "19:30",
+      "21:00",
+      "NICOLE GALLAMINI B2B NIKITA GREEN"
+     ],
+     [
+      "21:00",
+      "22:30",
+      "INBAL B2B RIMAYE"
+     ],
+     [
+      "22:30",
+      "23:45",
+      "WILL RENUART"
+     ],
+     [
+      "23:45",
+      "25:15",
+      "TAIMUR B2B WILL BUCK"
+     ],
+     [
+      "25:15",
+      "26:30",
+      "GODISOUND"
+     ],
+     [
+      "26:30",
+      "28:00",
+      "ALEXX IN CHAINSS B2B SOLTEK"
+     ]
+    ],
+    "sat": [
+     [
+      "16:00",
+      "17:00",
+      "NXTEL"
+     ],
+     [
+      "17:00",
+      "18:00",
+      "SHINOBI"
+     ],
+     [
+      "18:00",
+      "19:30",
+      "JINKS B2B ROMULO DEL CASTILLO"
+     ],
+     [
+      "19:30",
+      "21:00",
+      "MILO ZIRO B2B XILLA"
+     ],
+     [
+      "21:00",
+      "22:30",
+      "MARIE QRIE B2B VIVA VIDAL"
+     ],
+     [
+      "22:30",
+      "24:00",
+      "RUDE BOY B2B SDRV"
+     ],
+     [
+      "24:00",
+      "25:30",
+      "PHIPHI B2B WINTER WRONG"
+     ],
+     [
+      "25:30",
+      "26:30",
+      "LIZZIE_MCGUIRE"
+     ],
+     [
+      "26:30",
+      "28:00",
+      "MANGO B2B MISTER LO"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "players-club",
+   "name": "Players Club",
+   "host": "PLAYERS CLUB",
+   "sets": {
+    "fri": [
+     [
+      "16:00",
+      "17:30",
+      "SCOTTY SOBEK"
+     ],
+     [
+      "17:30",
+      "18:45",
+      "LAUREN PALMA"
+     ],
+     [
+      "18:45",
+      "20:00",
+      "LAGRIMAS DE ORO"
+     ],
+     [
+      "20:00",
+      "21:15",
+      "DEEP CLEANSING"
+     ],
+     [
+      "21:15",
+      "22:45",
+      "BABY JESUS B2B CHAOS!"
+     ],
+     [
+      "22:45",
+      "24:00",
+      "PUMA"
+     ],
+     [
+      "24:00",
+      "25:15",
+      "CAMI DI MARZO"
+     ],
+     [
+      "25:15",
+      "26:45",
+      "DUDE SKYWALKER"
+     ],
+     [
+      "26:45",
+      "28:00",
+      "DIFFER"
+     ]
+    ],
+    "sat": [
+     [
+      "16:00",
+      "17:30",
+      "DJ AHAMED"
+     ],
+     [
+      "17:30",
+      "18:30",
+      "JBZ"
+     ],
+     [
+      "18:30",
+      "19:45",
+      "VILLU"
+     ],
+     [
+      "19:45",
+      "20:45",
+      "CANELA"
+     ],
+     [
+      "20:45",
+      "22:00",
+      "ELLYNORA"
+     ],
+     [
+      "22:00",
+      "23:00",
+      "SAINT & ROMERO",
+      "HYBRID"
+     ],
+     [
+      "23:00",
+      "24:15",
+      "JEREMY ISMAEL"
+     ],
+     [
+      "24:15",
+      "25:30",
+      "JASON RAULT"
+     ],
+     [
+      "25:30",
+      "26:45",
+      "NII TEI"
+     ],
+     [
+      "26:45",
+      "28:00",
+      "MONOKY"
+     ]
+    ]
+   }
+  }
+ ]
+}
