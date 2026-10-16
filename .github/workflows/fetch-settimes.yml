@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches: [ccr-84c56106-kllwcz]
-    paths: [.github/workflows/fetch-settimes.yml]
+    paths: [.github/workflows/fetch-settimes.yml, kompakt-map/source/.refetch]
 
 permissions:
   contents: write
@@ -23,7 +23,27 @@ jobs:
             timeout 90 google-chrome --headless=new --no-sandbox --disable-gpu --virtual-time-budget=15000 \
               --user-agent="$UA" --dump-dom "https://www.iiipoints.com/$p/" > "kompakt-map/source/$p.dom.html" 2>/dev/null || true
           done
-          ls -la kompakt-map/source
+          # JS bundles behind the set-times island (Saturday data lives there) and their imports
+          for js in $(grep -ohE '/_astro/[A-Za-z0-9_.-]+\.js' kompakt-map/source/set-times.raw.html | sort -u); do
+            curl -sSL -A "$UA" "https://www.iiipoints.com$js" -o "kompakt-map/source/$(basename $js)" || true
+          done
+          for f in kompakt-map/source/*.js; do
+            for js in $(grep -ohE '\./[A-Za-z0-9_.-]+\.js' "$f" | sort -u); do
+              [ -f "kompakt-map/source/$(basename $js)" ] || curl -sSL -A "$UA" "https://www.iiipoints.com/_astro/$(basename $js)" -o "kompakt-map/source/$(basename $js)" || true
+            done
+          done
+          # Festival map images (try larger variants too; keep only real images)
+          mkdir -p kompakt-map/source/map
+          for n in festival-map-2026-1080.webp festival-map-2026-600.webp festival-map-2026-1600.webp festival-map-2026-1920.webp \
+                   festival-map-2026-2160.webp festival-map-2026-2400.webp festival-map-2026-3000.webp festival-map-2026.webp \
+                   festival-map-2026.png festival-map-2026.jpg festival-map-2026.pdf festival-map-2026-1080.png festival-map-2026-1080.jpg; do
+            curl -sSL -A "$UA" "https://www.iiipoints.com/assets/campaign/$n" -o "kompakt-map/source/map/$n" || true
+            if ! file "kompakt-map/source/map/$n" | grep -qiE 'image|pdf|RIFF'; then rm -f "kompakt-map/source/map/$n"; fi
+          done
+          for p in guide venue-travel music-map mokiworld; do
+            curl -sSL -A "$UA" "https://www.iiipoints.com/$p/" -o "kompakt-map/source/$p.raw.html" || true
+          done
+          ls -laR kompakt-map/source
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
