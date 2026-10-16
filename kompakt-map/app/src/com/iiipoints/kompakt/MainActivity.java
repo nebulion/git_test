@@ -193,6 +193,7 @@ public class MainActivity extends Activity {
                     }
                 }
                 final FrameLayout area = new FrameLayout(c);
+                if (map.getParent() != null) ((ViewGroup) map.getParent()).removeView(map);
                 area.addView(map, new FrameLayout.LayoutParams(-1, -1));
                 final FrameLayout callout = new FrameLayout(c);
                 area.addView(callout, Ui.frame(-1, -2, Gravity.BOTTOM));

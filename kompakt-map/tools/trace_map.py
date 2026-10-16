@@ -24,9 +24,9 @@ import cv2
 import numpy as np
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC = os.path.join(ROOT, "source", "map", "screenshots-stitched.png")
+SRC = os.path.join(ROOT, "source", "map", "hires.png")   # stitched zoom tiles, already cropped to VIEW
 VIEW = (61, 19, 1516, 1895)       # same space as build_map.py
-UP = 2                            # classify at 2x for smoother curves
+UP = 3                            # hires.png is 3x the reference resolution
 
 # Tag boxes (picture space, x0, y0, x1, y1): fills turn white, ink stays black.
 TAGS = []
@@ -55,6 +55,20 @@ for (x0, y0, x1, y1) in [(318, 42, 495, 75), (60, 48, 140, 76), (160, 186, 250, 
     TAGS.append((a[0], a[1], b[0], b[1]))
 
 
+def street_mask(shape):
+    """Street areas (255) from the grid geometry in build_map.py: block plates minus the blocks."""
+    import runpy
+    g = runpy.run_path(os.path.join(os.path.dirname(__file__), "build_map.py"), run_name="geometry")
+    ox, oy = VIEW[0], VIEW[1]
+    to = lambda pts: np.int32([[(px - ox) * UP, (py - oy) * UP] for px, py in pts])  # noqa: E731
+    m = np.zeros(shape, np.uint8)
+    for plate in ("SOUTH", "ISO", "NORTH_S3", "NORTH_E", "VIP_LOUNGE", "VIP_PLUS_PATH"):
+        cv2.fillPoly(m, [to(g[plate])], 255)
+    for pts in g["BLOCKS"].values():
+        cv2.fillPoly(m, [to(pts)], 0)
+    return cv2.dilate(m, np.ones((5 * UP, 5 * UP), np.uint8))
+
+
 def classify(img):
     """Return a uint8 mask, 255 = black ink."""
     f = img.astype(np.float32)
@@ -71,6 +85,12 @@ def classify(img):
     light = (s < 0.16) & (lum > 150)
     colourful = ~(dark | grey_wall | yellow | pink | green | light) & (s > 0.16)
 
+    off = yellow & ~(street_mask(yellow.shape) > 0)  # yellow is a street only on the street grid ...
+    n, lab, st, _ = cv2.connectedComponentsWithStats(off.astype(np.uint8), 8)
+    keep = np.zeros(n, bool)
+    keep[1:] = (st[1:, cv2.CC_STAT_AREA] < 5200 * UP * UP) & (st[1:, cv2.CC_STAT_AREA] > 900 * UP * UP) \
+        & (np.abs(st[1:, cv2.CC_STAT_WIDTH] - st[1:, cv2.CC_STAT_HEIGHT]) < 0.25 * st[1:, cv2.CC_STAT_WIDTH])
+    yellow = (yellow & ~off) | (keep[lab] & off)     # ... or a round icon disc (Lost & Found)
     ink = dark | grey_wall | yellow
 
     # colourful: small blobs are icon discs (black); big ones are zones/buildings (white, outlined)
@@ -121,14 +141,12 @@ def potrace(mask):
 
 def main():
     debug = sys.argv[sys.argv.index("--debug") + 1] if "--debug" in sys.argv else None
-    src = cv2.imread(SRC)
+    big = cv2.imread(SRC)
     x, y, w, hgt = VIEW
-    crop = src[y:y + hgt, x:x + w]
-    flat = cv2.pyrMeanShiftFiltering(crop, 6, 18)
-    flat = cv2.medianBlur(flat, 3)
-    big = cv2.resize(flat, (w * UP, hgt * UP), interpolation=cv2.INTER_CUBIC)
+    big = cv2.medianBlur(big, 5)                      # kill the print grain
+    big = cv2.pyrMeanShiftFiltering(big, 8, 20)       # flatten colour fields
     ink = clean(classify(big))
-    ink = cv2.GaussianBlur(ink, (0, 0), 0.9)
+    ink = cv2.GaussianBlur(ink, (0, 0), 1.2)
     ink = (ink > 127).astype(np.uint8) * 255
     if debug:
         cv2.imwrite(os.path.join(debug, "trace_mask.png"), 255 - ink)
