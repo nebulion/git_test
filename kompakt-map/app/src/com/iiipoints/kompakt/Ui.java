@@ -19,9 +19,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 /**
- * Mudita-style building blocks: black on white, large type, hairline dividers, outlined pill
- * buttons, inverted pressed/selected states, no ripples, shadows or animation.
- * Sizes are given in "design px" of the 480 x 800 Kompakt screen and scaled to the real width.
+ * All app styling lives here, kept deliberately simple so it can be aligned with Mudita Mindful Design
+ * (MMD, docs on zeroheight; Android library com.mudita:MMD). Current choices:
+ *   colour   pure black on white, no greys (MMD's E Ink colour scheme is black/white only)
+ *   type     system sans-serif; sizes in "design px" of the 480 x 800 screen (MMD scale: 14-28 sp)
+ *   shapes   9 px corners on buttons and segmented controls, 12-14 px on cards (MMD: 12 / 9 / 6 dp)
+ *   states   pressed = inverted; no ripples, shadows or animation
  */
 final class Ui {
     static final int INK = 0xff000000, PAPER = 0xffffffff;
@@ -30,12 +33,13 @@ final class Ui {
 
     static void init(Activity a) {
         k = a.getResources().getDisplayMetrics().widthPixels / 480f;
-        regular = Typeface.createFromAsset(a.getAssets(), "fonts/Barlow-400.ttf");
-        medium = Typeface.createFromAsset(a.getAssets(), "fonts/Barlow-500.ttf");
-        semibold = Typeface.createFromAsset(a.getAssets(), "fonts/Barlow-600.ttf");
-        bold = Typeface.createFromAsset(a.getAssets(), "fonts/Barlow-700.ttf");
-        cond = Typeface.createFromAsset(a.getAssets(), "fonts/BarlowCondensed-700.ttf");
-        condBold = Typeface.createFromAsset(a.getAssets(), "fonts/BarlowCondensed-800.ttf");
+        // system font
+        regular = Typeface.create("sans-serif", Typeface.NORMAL);
+        medium = Typeface.create("sans-serif-medium", Typeface.NORMAL);
+        semibold = medium;
+        bold = Typeface.create("sans-serif", Typeface.BOLD);
+        cond = bold;
+        condBold = bold;
     }
 
     static int px(float design) {
@@ -147,8 +151,8 @@ final class Ui {
         final TextView b = text(c, label, bold, textSize);
         b.setGravity(Gravity.CENTER);
         StateListDrawable d = new StateListDrawable();
-        d.addState(new int[]{android.R.attr.state_pressed}, outline(26, INK, 2));
-        d.addState(new int[]{}, outline(26, PAPER, 2));
+        d.addState(new int[]{android.R.attr.state_pressed}, outline(9, INK, 2));
+        d.addState(new int[]{}, outline(9, PAPER, 2));
         d.setEnterFadeDuration(0);
         d.setExitFadeDuration(0);
         b.setBackground(d);
@@ -239,6 +243,78 @@ final class Ui {
             }
         });
         return r;
+    }
+
+    /** Star toggle drawn as a path: outline when off, filled when on. */
+    static final class Star extends View {
+        boolean on;
+        private final Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+        Star(Context c, boolean on) {
+            super(c);
+            this.on = on;
+            p.setColor(INK);
+            p.setStrokeJoin(Paint.Join.ROUND);
+        }
+
+        @Override
+        protected void onDraw(Canvas c) {
+            float cx = getWidth() / 2f, cy = getHeight() / 2f + px(1), R = Math.min(getWidth(), getHeight()) * 0.36f, r = R * 0.45f;
+            Path path = new Path();
+            for (int i = 0; i < 10; i++) {
+                double a = -Math.PI / 2 + i * Math.PI / 5;
+                float rr = i % 2 == 0 ? R : r;
+                float x = (float) (cx + rr * Math.cos(a)), y = (float) (cy + rr * Math.sin(a));
+                if (i == 0) path.moveTo(x, y);
+                else path.lineTo(x, y);
+            }
+            path.close();
+            p.setStyle(on ? Paint.Style.FILL_AND_STROKE : Paint.Style.STROKE);
+            p.setStrokeWidth(px(2.2f));
+            c.drawPath(path, p);
+        }
+    }
+
+    /** Segmented control (Mudita pill toggle). Calls back with the chosen index. */
+    interface OnPick {
+        void pick(int i);
+    }
+
+    static LinearLayout segmented(Context c, String[] items, int sel, final OnPick cb) {
+        final LinearLayout seg = row(c);
+        seg.setBackground(outline(9, PAPER, 2));
+        final TextView[] tabs = new TextView[items.length];
+        for (int i = 0; i < items.length; i++) {
+            final int idx = i;
+            TextView t = text(c, items[i], bold, 20);
+            t.setGravity(Gravity.CENTER);
+            t.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    styleSeg(tabs, idx);
+                    cb.pick(idx);
+                }
+            });
+            tabs[i] = t;
+            seg.addView(t, new LinearLayout.LayoutParams(0, -1, 1));
+        }
+        styleSeg(tabs, sel);
+        return seg;
+    }
+
+    static void styleSeg(TextView[] tabs, int on) {
+        float r = px(8);
+        for (int i = 0; i < tabs.length; i++) {
+            GradientDrawable g = new GradientDrawable();
+            boolean sel = i == on;
+            g.setColor(sel ? INK : PAPER);
+            float[] radii = new float[8];
+            if (i == 0) radii = new float[]{r, r, 0, 0, 0, 0, r, r};
+            if (i == tabs.length - 1) radii = new float[]{0, 0, r, r, r, r, 0, 0};
+            if (tabs.length == 1) radii = new float[]{r, r, r, r, r, r, r, r};
+            g.setCornerRadii(radii);
+            tabs[i].setBackground(g);
+            tabs[i].setTextColor(sel ? PAPER : INK);
+        }
     }
 
     static FrameLayout.LayoutParams frame(int w, int h, int gravity) {

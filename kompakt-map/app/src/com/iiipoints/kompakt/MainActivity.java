@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,21 +15,38 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
- * III Points 2026 for the Mudita Kompakt. One activity, a stack of plain screens, no transitions:
- * every navigation is a single full redraw, which is what an E Ink panel likes best.
+ * III Points 2026 for the Mudita Kompakt. Three tabs: Map, Lineup, Favorites. Everything links up:
+ * a stage on the map opens its lineup, any set in a list jumps to its stage on the map, and starred
+ * artists show on the map and in Favorites. Screens are rebuilt in one go with no transitions, so each
+ * navigation is a single clean E Ink redraw.
  */
 public class MainActivity extends Activity {
     private interface Screen {
         View build();
     }
 
-    private final List<Screen> stack = new ArrayList<>();
+    private static final int TAB_MAP = 0, TAB_LINEUP = 1, TAB_FAVS = 2;
+
     private Festival fest;
-    private MapView map;           // kept so the map keeps its pan/zoom between visits
-    private int stageDay = -1;     // day shown on stage screens (follows the festival clock by default)
+    private Favorites favs;
+    private MapView map;
+    private int tab = TAB_MAP;
+    private final List<Screen> stack = new ArrayList<>();   // screens pushed over the tabs
+    private int day = -1;                                    // day shown in lists (follows the clock by default)
+    private int lineupMode = 0;                              // 0 = by stage, 1 = A-Z
+    private String mapStage;                                 // stage selected on the map
+    private final Handler tick = new Handler();
+    private final Runnable minute = new Runnable() {
+        public void run() {
+            if (map != null && tab == TAB_MAP && stack.isEmpty()) map.invalidate();   // refresh "now" once a minute
+            tick.postDelayed(this, 60_000);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle state) {
@@ -39,32 +58,63 @@ public class MainActivity extends Activity {
         } catch (Exception e) {
             throw new RuntimeException("lineup.json", e);
         }
-        // Test/preview hooks: adb shell am start -n com.iiipoints.kompakt/.MainActivity
-        //   --es now "2026-10-16 21:42" --es screen map|now|stages|legend|info|stage:<id>|map:<id>
+        favs = new Favorites(this);
+        testHooks();
+        show();
+    }
+
+    /**
+     * Preview/test hooks (adb shell am start -n com.iiipoints.kompakt/.MainActivity ...):
+     * --es now "2026-10-16 21:42"  --es favs "Parcels,Four Tet"  --es screen map|lineup|az|favs|filter|info|stage:ID|mapstage:ID
+     */
+    private void testHooks() {
         Festival.fakeNow = getIntent().getStringExtra("now");
-        push(home());
-        String screen = getIntent().getStringExtra("screen");
-        if (screen != null) {
-            if (screen.equals("map")) push(mapScreen(null));
-            else if (screen.equals("now")) push(nowScreen());
-            else if (screen.equals("stages")) push(stagesScreen());
-            else if (screen.equals("legend")) push(legendScreen());
-            else if (screen.equals("info")) push(infoScreen());
-            else if (screen.startsWith("stage:")) push(stageScreen(screen.substring(6)));
-            else if (screen.startsWith("map:")) push(mapScreen("stage:" + screen.substring(4)));
+        String seed = getIntent().getStringExtra("favs");
+        if (seed != null) {
+            for (String name : seed.split(",")) {
+                for (int d = 0; d < 2; d++) {
+                    for (Festival.Set s : fest.sets(d)) {
+                        if (s.artist.equalsIgnoreCase(name.trim()) && !favs.has(s)) favs.toggle(s);
+                    }
+                }
+            }
         }
+        String screen = getIntent().getStringExtra("screen");
+        if (screen == null) return;
+        if (screen.equals("lineup")) tab = TAB_LINEUP;
+        else if (screen.equals("az")) {
+            tab = TAB_LINEUP;
+            lineupMode = 1;
+        } else if (screen.equals("favs")) tab = TAB_FAVS;
+        else if (screen.equals("filter")) stack.add(filterScreen());
+        else if (screen.equals("info")) stack.add(infoScreen());
+        else if (screen.startsWith("stage:")) stack.add(stageScreen(screen.substring(6)));
+        else if (screen.startsWith("mapstage:")) mapStage = screen.substring(9);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (!stack.isEmpty()) show();   // refresh "now" information once when returning
+        show();
+        tick.postDelayed(minute, 60_000);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        tick.removeCallbacks(minute);
     }
 
     @Override
     public void onBackPressed() {
-        if (stack.size() > 1) {
+        if (!stack.isEmpty()) {
             stack.remove(stack.size() - 1);
+            show();
+        } else if (tab != TAB_MAP) {
+            tab = TAB_MAP;
+            show();
+        } else if (mapStage != null) {
+            mapStage = null;
             show();
         } else {
             super.onBackPressed();
@@ -77,8 +127,7 @@ public class MainActivity extends Activity {
     }
 
     private void show() {
-        View v = stack.get(stack.size() - 1).build();
-        if (v.getParent() != null) ((ViewGroup) v.getParent()).removeView(v);
+        View v = stack.isEmpty() ? tabs() : stack.get(stack.size() - 1).build();
         setContentView(v);
         overridePendingTransition(0, 0);
     }
@@ -90,496 +139,547 @@ public class MainActivity extends Activity {
     };
 
     private int currentDay() {
+        if (day >= 0) return day;
         Festival.Clock c = Festival.clock();
         if (c.day >= 0) return c.day;
         return c.before ? 0 : 1;
     }
 
-    private static String titleCase(String s) {
-        return s; // artist names keep the festival's own capitalisation
+    /** Jump to a stage on the map, with its card open. */
+    private void showOnMap(String stageId) {
+        stack.clear();
+        tab = TAB_MAP;
+        mapStage = stageId;
+        MapView m = map();
+        MapView.Label l = m.stageLabel(stageId);
+        if (l != null) m.focus(l.x, l.y, Math.max(0.75f * Ui.px(480) / 480f, MapView.ICON_ZOOM));
+        show();
     }
 
-    // ------------------------------------------------------------------------------------- home
+    // ------------------------------------------------------------------------------------ tabs
 
-    private Screen home() {
-        return new Screen() {
-            public View build() {
-                Context c = MainActivity.this;
-                LinearLayout root = Ui.column(c);
-                LinearLayout head = Ui.column(c);
-                head.setPadding(Ui.px(24), Ui.px(26), Ui.px(24), Ui.px(18));
-                head.addView(Ui.text(c, "III POINTS", Ui.condBold, 66));
-                TextView meta = Ui.text(c, "Mana Wynwood · Oct 16 & 17", Ui.semibold, 20);
-                meta.setPadding(0, Ui.px(8), 0, 0);
-                head.addView(meta);
-                root.addView(head);
-                root.addView(Ui.rule(c, 2));
+    private View tabs() {
+        Context c = this;
+        LinearLayout root = Ui.column(c);
+        View content = tab == TAB_MAP ? mapTab() : tab == TAB_LINEUP ? lineupTab() : favsTab();
+        root.addView(content, new LinearLayout.LayoutParams(-1, 0, 1));
+        root.addView(Ui.rule(c, 2));
+        LinearLayout bar = Ui.row(c);
+        String[] names = {"Map", "Lineup", "Favorites"};
+        for (int i = 0; i < 3; i++) {
+            final int idx = i;
+            LinearLayout item = Ui.column(c);
+            item.setGravity(Gravity.CENTER_HORIZONTAL);
+            item.setBackground(Ui.pressable(Ui.PAPER));
+            TextView t = Ui.text(c, names[i], i == tab ? Ui.bold : Ui.medium, 21);
+            t.setGravity(Gravity.CENTER);
+            item.addView(t, new LinearLayout.LayoutParams(-1, 0, 1));
+            View line = new View(c);
+            line.setBackgroundColor(i == tab ? Ui.INK : Ui.PAPER);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(Ui.px(64), Ui.px(4));
+            lp.bottomMargin = Ui.px(6);
+            item.addView(line, lp);
+            item.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    if (tab != idx) {
+                        tab = idx;
+                        show();
+                    }
+                }
+            });
+            bar.addView(item, new LinearLayout.LayoutParams(0, Ui.px(62), 1));
+        }
+        root.addView(bar);
+        return root;
+    }
 
-                TextView now = Ui.text(c, statusLine(), Ui.semibold, 20);
-                now.setPadding(Ui.px(24), Ui.px(14), Ui.px(24), Ui.px(14));
-                root.addView(now);
-                root.addView(Ui.rule(c, 2));
-
-                LinearLayout list = Ui.column(c);
-                addRow(list, "Map", null, new View.OnClickListener() {
-                    public void onClick(View v) {
-                        push(mapScreen(null));
-                    }
-                });
-                addRow(list, "Now playing", null, new View.OnClickListener() {
-                    public void onClick(View v) {
-                        push(nowScreen());
-                    }
-                });
-                addRow(list, "Stages", null, new View.OnClickListener() {
-                    public void onClick(View v) {
-                        push(stagesScreen());
-                    }
-                });
-                addRow(list, "Legend", null, new View.OnClickListener() {
-                    public void onClick(View v) {
-                        push(legendScreen());
-                    }
-                });
-                addRow(list, "Info", null, new View.OnClickListener() {
-                    public void onClick(View v) {
-                        push(infoScreen());
-                    }
-                });
-                root.addView(Ui.scroll(c, list), new LinearLayout.LayoutParams(-1, 0, 1));
-                return root;
+    private MapView map() {
+        if (map == null) {
+            try {
+                map = new MapView(this);
+            } catch (Exception e) {
+                throw new RuntimeException("map.json", e);
             }
-        };
+            map.fest = fest;
+            map.favs = favs;
+            map.hiddenCats = favs.hiddenCats;
+        }
+        if (map.getParent() != null) ((ViewGroup) map.getParent()).removeView(map);
+        return map;
+    }
+
+    private LinearLayout topBar(String title, String subtitle, String[] actions, View.OnClickListener[] handlers, boolean withBack) {
+        Context c = this;
+        LinearLayout bar = Ui.row(c);
+        bar.setPadding(withBack ? Ui.px(6) : Ui.px(22), Ui.px(6), Ui.px(12), Ui.px(6));
+        bar.setMinimumHeight(Ui.px(64));
+        if (withBack) {
+            Ui.Glyph chev = new Ui.Glyph(c, Ui.Glyph.BACK);
+            chev.setOnClickListener(back);
+            chev.setBackground(Ui.pressable(Ui.PAPER));
+            bar.addView(chev, new LinearLayout.LayoutParams(Ui.px(50), Ui.px(50)));
+        }
+        LinearLayout texts = Ui.column(c);
+        texts.setBackgroundColor(0);
+        TextView t = Ui.text(c, title, Ui.bold, 28);
+        t.setSingleLine(true);
+        t.setEllipsize(TextUtils.TruncateAt.END);
+        texts.addView(t);
+        if (subtitle != null) {
+            TextView s = Ui.text(c, subtitle, Ui.medium, 16);
+            s.setPadding(0, Ui.px(3), 0, 0);
+            texts.addView(s);
+        }
+        bar.addView(texts, new LinearLayout.LayoutParams(0, -2, 1));
+        for (int i = 0; actions != null && i < actions.length; i++) {
+            TextView a = Ui.button(c, actions[i], 18, handlers[i]);
+            a.setPadding(Ui.px(14), 0, Ui.px(14), 0);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(-2, Ui.px(42));
+            lp.leftMargin = Ui.px(8);
+            bar.addView(a, lp);
+        }
+        return bar;
     }
 
     private String statusLine() {
-        Festival.Clock clock = Festival.clock();
-        if (clock.day >= 0 && clock.live) {
-            int playing = 0;
-            for (Festival.Stage s : fest.stages) if (s.now(clock.day, clock.t) != null) playing++;
-            return Festival.DAY_LONG[clock.day].split(",")[0] + " · live now\n" + playing + " stages playing · until 4:00 AM";
-        }
-        if (clock.day >= 0 && clock.t < Festival.OPEN) {
-            return Festival.DAY_LONG[clock.day] + "\nDoors open 4:00 PM";
-        }
-        if (clock.before) return "Friday, Oct 16 & Saturday, Oct 17\nDoors 4:00 PM – 4:00 AM";
-        return "See you next year.\nSchedule stays available offline.";
-    }
-
-    private void addRow(LinearLayout list, String title, String sub, View.OnClickListener l) {
-        list.addView(Ui.listRow(this, title, sub, 30, l));
-        list.addView(Ui.rule(this, 1));
+        Festival.Clock k = Festival.clock();
+        if (k.day >= 0 && k.live) return Festival.DAY_LONG[k.day].split(",")[0] + " · live · " + Festival.time(k.t);
+        if (k.day >= 0 && k.t < Festival.OPEN) return Festival.DAY_LONG[k.day] + " · doors 4:00 PM";
+        if (k.before) return "Oct 16 & 17 · Mana Wynwood";
+        return "Mana Wynwood";
     }
 
     // -------------------------------------------------------------------------------------- map
 
-    private Screen mapScreen(final String focusId) {
-        return new Screen() {
-            public View build() {
-                final Context c = MainActivity.this;
-                LinearLayout root = Ui.column(c);
-                root.addView(Ui.bar(c, "Map", "Legend", back, new View.OnClickListener() {
-                    public void onClick(View v) {
-                        push(legendScreen());
-                    }
-                }));
-                root.addView(Ui.rule(c, 2));
+    private View mapTab() {
+        final Context c = this;
+        LinearLayout root = Ui.column(c);
+        root.addView(topBar("III Points", statusLine(), new String[]{"Filter", "Info"},
+                new View.OnClickListener[]{
+                        new View.OnClickListener() {
+                            public void onClick(View v) {
+                                push(filterScreen());
+                            }
+                        },
+                        new View.OnClickListener() {
+                            public void onClick(View v) {
+                                push(infoScreen());
+                            }
+                        }}, false));
+        root.addView(Ui.rule(c, 2));
 
-                if (map == null) {
-                    try {
-                        map = new MapView(c);
-                    } catch (Exception e) {
-                        throw new RuntimeException("map.json", e);
-                    }
-                }
-                final FrameLayout area = new FrameLayout(c);
-                if (map.getParent() != null) ((ViewGroup) map.getParent()).removeView(map);
-                area.addView(map, new FrameLayout.LayoutParams(-1, -1));
-                final FrameLayout callout = new FrameLayout(c);
-                area.addView(callout, Ui.frame(-1, -2, Gravity.BOTTOM));
-                map.setListener(new MapView.Listener() {
-                    public void onHit(String id) {
-                        map.select(id);
-                        showCallout(callout, id);
-                    }
-                });
-                if (focusId != null) {
-                    MapView.Hit h = map.hit(focusId);
-                    if (h != null) map.focus(h.r.centerX(), h.r.centerY() + 120, 0.95f * Ui.px(480) / 480f);
-                    map.select(focusId);
-                    showCallout(callout, focusId);
-                } else {
-                    map.select(null);
-                }
-                root.addView(area, new LinearLayout.LayoutParams(-1, 0, 1));
-                root.addView(Ui.rule(c, 2));
+        final FrameLayout area = new FrameLayout(c);
+        final MapView m = map();
+        area.addView(m, new FrameLayout.LayoutParams(-1, -1));
 
-                LinearLayout buttons = Ui.row(c);
-                buttons.setPadding(Ui.px(14), Ui.px(12), Ui.px(14), Ui.px(12));
-                buttons.addView(Ui.button(c, "−", 32, new View.OnClickListener() {
-                    public void onClick(View v) {
-                        map.zoomBy(1 / 1.6f, map.getWidth() / 2f, map.getHeight() / 2f);
-                    }
-                }), new LinearLayout.LayoutParams(Ui.px(70), Ui.px(50)));
-                buttons.addView(Ui.spacer(c, Ui.px(10)));
-                buttons.addView(Ui.button(c, "Fit", 22, new View.OnClickListener() {
-                    public void onClick(View v) {
-                        map.fit();
-                    }
-                }), new LinearLayout.LayoutParams(0, Ui.px(50), 1));
-                buttons.addView(Ui.spacer(c, Ui.px(10)));
-                buttons.addView(Ui.button(c, "+", 32, new View.OnClickListener() {
-                    public void onClick(View v) {
-                        map.zoomBy(1.6f, map.getWidth() / 2f, map.getHeight() / 2f);
-                    }
-                }), new LinearLayout.LayoutParams(Ui.px(70), Ui.px(50)));
-                buttons.addView(Ui.spacer(c, Ui.px(10)));
-                buttons.addView(Ui.button(c, "Now", 22, new View.OnClickListener() {
-                    public void onClick(View v) {
-                        push(nowScreen());
-                    }
-                }), new LinearLayout.LayoutParams(0, Ui.px(50), 1));
-                root.addView(buttons);
-                return root;
+        // zoom buttons, top right
+        LinearLayout zoom = Ui.column(c);
+        zoom.setBackgroundColor(0);
+        TextView plus = Ui.button(c, "+", 28, new View.OnClickListener() {
+            public void onClick(View v) {
+                m.zoomBy(1.6f, m.getWidth() / 2f, m.getHeight() / 2f);
             }
-        };
+        });
+        TextView minus = Ui.button(c, "−", 28, new View.OnClickListener() {
+            public void onClick(View v) {
+                m.zoomBy(1 / 1.6f, m.getWidth() / 2f, m.getHeight() / 2f);
+            }
+        });
+        zoom.addView(plus, new LinearLayout.LayoutParams(Ui.px(48), Ui.px(48)));
+        LinearLayout.LayoutParams mlp = new LinearLayout.LayoutParams(Ui.px(48), Ui.px(48));
+        mlp.topMargin = Ui.px(8);
+        zoom.addView(minus, mlp);
+        FrameLayout.LayoutParams zlp = Ui.frame(-2, -2, Gravity.TOP | Gravity.RIGHT);
+        zlp.setMargins(0, Ui.px(10), Ui.px(10), 0);
+        area.addView(zoom, zlp);
+
+        final FrameLayout card = new FrameLayout(c);
+        area.addView(card, Ui.frame(-1, -2, Gravity.BOTTOM));
+        m.setListener(new MapView.Listener() {
+            public void onStage(String id) {
+                mapStage = id;
+                m.select(id);
+                stageCard(card, id);
+            }
+
+            public void onEmpty() {
+                mapStage = null;
+                m.select(null);
+                card.removeAllViews();
+            }
+        });
+        m.select(mapStage);
+        if (mapStage != null) stageCard(card, mapStage);
+        root.addView(area, new LinearLayout.LayoutParams(-1, 0, 1));
+        return root;
     }
 
-    private void showCallout(FrameLayout holder, String id) {
+    /** Bottom card for a stage: now and next (with stars), and a way into its lineup. */
+    private void stageCard(FrameLayout holder, final String id) {
         holder.removeAllViews();
         Context c = this;
+        final Festival.Stage st = fest.stage(id);
+        if (st == null) return;
         LinearLayout card = Ui.column(c);
         card.setBackground(Ui.outline(14, Ui.PAPER, 2.5f));
-        card.setPadding(Ui.px(16), Ui.px(12), Ui.px(16), Ui.px(14));
+        card.setPadding(Ui.px(16), Ui.px(10), Ui.px(10), Ui.px(12));
         FrameLayout.LayoutParams lp = Ui.frame(-1, -2, Gravity.BOTTOM);
-        lp.setMargins(Ui.px(14), 0, Ui.px(14), Ui.px(14));
+        lp.setMargins(Ui.px(10), 0, Ui.px(10), Ui.px(10));
 
-        if (id.startsWith("stage:")) {
-            final Festival.Stage s = fest.stage(id.substring(6));
-            if (s == null) return;
-            TextView name = Ui.text(c, (s.name + (s.host.isEmpty() || s.host.equalsIgnoreCase(s.name) ? "" : " · " + s.host)).toUpperCase(), Ui.condBold, 22);
-            name.setSingleLine(true);
-            name.setEllipsize(android.text.TextUtils.TruncateAt.END);
-            card.addView(name);
-            Festival.Clock clock = Festival.clock();
-            int day = clock.day >= 0 ? clock.day : currentDay();
-            Festival.Set now = clock.day >= 0 && clock.live ? s.now(day, clock.t) : null;
-            Festival.Set next = s.next(day, clock.day >= 0 ? clock.t : 0);
-            TextView big = Ui.text(c, now != null ? now.artist : next != null ? next.artist : "Nothing scheduled", Ui.bold, 25);
-            big.setPadding(0, Ui.px(6), 0, 0);
-            card.addView(big);
-            String meta;
-            if (now != null) {
-                meta = "Now until " + Festival.time(now.end) + (next != null ? " · Next " + next.artist + " " + Festival.shortTime(next.start) : "");
-            } else if (next != null) {
-                meta = (clock.day >= 0 ? "Next · " : Festival.DAY_LABELS[day] + " · ") + Festival.time(next.start) + "–" + Festival.time(next.end);
-            } else {
-                meta = "Done for " + Festival.DAY_LONG[day].split(",")[0];
+        TextView name = Ui.text(c, st.name, Ui.bold, 24);
+        card.addView(name);
+        Festival.Clock k = Festival.clock();
+        int d = currentDay();
+        int t = k.day == d ? k.t : 0;
+        Festival.Set now = k.day == d && k.live ? st.now(d, t) : null;
+        Festival.Set next = st.next(d, now != null ? now.end : t);
+        if (now != null) card.addView(setRow(now, "Now · until " + Festival.time(now.end), false, false));
+        if (next != null) card.addView(setRow(next, (now != null || k.day == d ? "Next · " : Festival.DAY_LABELS[d] + " · ")
+                + Festival.time(next.start), false, false));
+        if (now == null && next == null) card.addView(Ui.text(c, "Done for " + Festival.DAY_LONG[d].split(",")[0], Ui.medium, 18));
+        TextView open = Ui.button(c, "Full lineup", 19, new View.OnClickListener() {
+            public void onClick(View v) {
+                push(stageScreen(id));
             }
-            card.addView(Ui.text(c, meta, Ui.medium, 17));
-            TextView open = Ui.button(c, "Full schedule", 19, new View.OnClickListener() {
-                public void onClick(View v) {
-                    push(stageScreen(s.id));
-                }
-            });
-            LinearLayout.LayoutParams blp = new LinearLayout.LayoutParams(-1, Ui.px(46));
-            blp.topMargin = Ui.px(10);
-            card.addView(open, blp);
-        } else if (id.equals("place:entrance")) {
-            card.addView(Ui.text(c, "MAIN ENTRANCE", Ui.condBold, 22));
-            card.addView(Ui.text(c, "NW 6th Ave at NW 23rd St. Box office, will call and ticket help are just inside.", Ui.medium, 18));
-        } else {
-            return;
-        }
+        });
+        LinearLayout.LayoutParams blp = new LinearLayout.LayoutParams(-1, Ui.px(46));
+        blp.topMargin = Ui.px(8);
+        blp.rightMargin = Ui.px(6);
+        card.addView(open, blp);
         holder.addView(card, lp);
     }
 
-    // ----------------------------------------------------------------------------------- stages
+    // ----------------------------------------------------------------------------------- rows
 
-    private Screen stagesScreen() {
-        return new Screen() {
-            public View build() {
-                Context c = MainActivity.this;
-                LinearLayout root = Ui.column(c);
-                root.addView(Ui.bar(c, "Stages", null, back, null));
-                root.addView(Ui.rule(c, 2));
-                LinearLayout list = Ui.column(c);
-                Festival.Clock clock = Festival.clock();
-                for (final Festival.Stage s : fest.stages) {
-                    String sub = hostLine(s);
-                    if (clock.day >= 0 && clock.live) {
-                        Festival.Set now = s.now(clock.day, clock.t);
-                        if (now != null) sub = "Now: " + now.artist;
-                    }
-                    list.addView(Ui.listRow(c, s.name, sub, 28, new View.OnClickListener() {
-                        public void onClick(View v) {
-                            push(stageScreen(s.id));
-                        }
-                    }));
-                    list.addView(Ui.rule(c, 1));
-                }
-                root.addView(Ui.scroll(c, list), new LinearLayout.LayoutParams(-1, 0, 1));
-                return root;
+    /**
+     * One set: artist (bold) over a detail line, star toggle on the right. Now playing is inverted,
+     * finished sets are struck through. Tapping the row jumps to the stage on the map (if mapLink).
+     */
+    private LinearLayout setRow(final Festival.Set s, String detail, boolean mapLink, boolean timeColumn) {
+        Context c = this;
+        Festival.Clock k = Festival.clock();
+        boolean now = k.day == s.day && k.live && s.start <= k.t && k.t < s.end;
+        boolean past = (k.day == s.day && s.end <= k.t) || k.day > s.day || (!k.before && k.day < 0);
+        int fg = now ? Ui.PAPER : Ui.INK;
+        final LinearLayout r = Ui.row(c);
+        r.setPadding(timeColumn ? Ui.px(18) : 0, Ui.px(9), Ui.px(4), Ui.px(9));
+        if (now) r.setBackgroundColor(Ui.INK);
+        if (timeColumn) {
+            TextView tm = Ui.text(c, Festival.time(s.start) + "\n–" + Festival.shortTime(s.end), Ui.semibold, 16);
+            tm.setTextColor(fg);
+            if (past) tm.setPaintFlags(tm.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            r.addView(tm, new LinearLayout.LayoutParams(Ui.px(92), -2));
+        }
+        LinearLayout texts = Ui.column(c);
+        texts.setBackgroundColor(0);
+        TextView a = Ui.text(c, s.artist, Ui.bold, 21);
+        a.setTextColor(fg);
+        if (past) a.setPaintFlags(a.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        texts.addView(a);
+        if (detail != null && !detail.isEmpty()) {
+            TextView d = Ui.text(c, detail, Ui.medium, 16);
+            d.setTextColor(fg);
+            d.setPadding(0, Ui.px(3), 0, 0);
+            texts.addView(d);
+        }
+        r.addView(texts, new LinearLayout.LayoutParams(0, -2, 1));
+        final Ui.Star star = new Ui.Star(c, favs.has(s));
+        final boolean inverted = now;
+        star.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                favs.toggle(s);
+                star.on = favs.has(s);
+                star.invalidate();
+                if (map != null) map.invalidate();
             }
-        };
+        });
+        if (inverted) star.setBackground(Ui.outline(25, Ui.PAPER, 0));   // white disc so the star reads on black
+        r.addView(star, new LinearLayout.LayoutParams(Ui.px(50), Ui.px(50)));
+        if (mapLink) {
+            r.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    showOnMap(s.stage.id);
+                }
+            });
+        }
+        return r;
     }
 
-    private static String hostLine(Festival.Stage s) {
-        String h = s.host;
-        if (h.isEmpty() || h.equalsIgnoreCase(s.name)) return "Stage";
-        h = h.charAt(0) + h.substring(1).toLowerCase();
-        return h.replace("dj", "DJ").replace("l-acoustics", "L-Acoustics").replace("apple music", "Apple Music")
-                .replace("wvum", "WVUM").replace("red bull", "Red Bull").replace("poplife", "Poplife")
-                .replace("miami community radio", "Miami Community Radio").replace("otherworld", "Otherworld")
-                .replace("masisi", "Masisi").replace("perreo del futuro", "Perreo del Futuro")
-                .replace("1-800 bankroll", "1-800 Bankroll").replace("unforeseen", "Unforeseen")
-                .replace(" fri ", " Fri ").replace(" sat ", " Sat ").replace("· sat", "· Sat");
+    private View dayToggle(final Runnable onChange) {
+        LinearLayout seg = Ui.segmented(this, Festival.DAY_LABELS, currentDay(), new Ui.OnPick() {
+            public void pick(int i) {
+                day = i;
+                onChange.run();
+            }
+        });
+        return seg;
+    }
+
+    private void addSeg(LinearLayout root, View seg) {
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(-1, Ui.px(44));
+        lp.setMargins(Ui.px(18), Ui.px(10), Ui.px(18), 0);
+        root.addView(seg, lp);
+    }
+
+    // ---------------------------------------------------------------------------------- lineup
+
+    private View lineupTab() {
+        Context c = this;
+        LinearLayout root = Ui.column(c);
+        root.addView(topBar("Lineup", "Tap a set to see its stage on the map", null, null, false));
+        root.addView(Ui.rule(c, 2));
+        final LinearLayout list = Ui.column(c);
+        final Runnable fill = new Runnable() {
+            public void run() {
+                fillLineup(list);
+            }
+        };
+        addSeg(root, dayToggle(fill));
+        LinearLayout modes = Ui.segmented(c, new String[]{"By stage", "A–Z"}, lineupMode, new Ui.OnPick() {
+            public void pick(int i) {
+                lineupMode = i;
+                fill.run();
+            }
+        });
+        addSeg(root, modes);
+        View sp = new View(c);
+        root.addView(sp, new LinearLayout.LayoutParams(1, Ui.px(10)));
+        root.addView(Ui.rule(c, 1));
+        fill.run();
+        root.addView(Ui.scroll(c, list), new LinearLayout.LayoutParams(-1, 0, 1));
+        return root;
+    }
+
+    private void fillLineup(LinearLayout list) {
+        Context c = this;
+        list.removeAllViews();
+        int d = currentDay();
+        Festival.Clock k = Festival.clock();
+        if (lineupMode == 0) {
+            for (final Festival.Stage st : fest.stages) {
+                String sub = null;
+                if (k.day == d && k.live) {
+                    Festival.Set now = st.now(d, k.t);
+                    if (now != null) sub = "Now: " + (favs.has(now) ? "★ " : "") + now.artist;
+                }
+                if (sub == null) {
+                    int n = st.sets(d).size();
+                    sub = n + " sets" + (st.sets(d).isEmpty() ? "" : " · from " + Festival.time(st.sets(d).get(0).start));
+                }
+                list.addView(Ui.listRow(c, st.name, sub, 25, new View.OnClickListener() {
+                    public void onClick(View v) {
+                        push(stageScreen(st.id));
+                    }
+                }));
+                list.addView(Ui.rule(c, 1));
+            }
+        } else {
+            List<Festival.Set> all = new ArrayList<>(fest.sets(d));
+            Collections.sort(all, new Comparator<Festival.Set>() {
+                public int compare(Festival.Set a, Festival.Set b) {
+                    return sortKey(a.artist).compareTo(sortKey(b.artist));
+                }
+            });
+            char letter = 0;
+            for (Festival.Set s : all) {
+                char l = sortKey(s.artist).isEmpty() ? '#' : sortKey(s.artist).charAt(0);
+                if (!Character.isLetter(l)) l = '#';
+                if (l != letter) {
+                    letter = l;
+                    TextView h = Ui.text(c, String.valueOf(l), Ui.condBold, 20);
+                    h.setPadding(Ui.px(18), Ui.px(10), 0, Ui.px(2));
+                    list.addView(h);
+                    list.addView(Ui.rule(c, 1));
+                }
+                LinearLayout r = setRow(s, s.stage.name + " · " + Festival.time(s.start) + "–" + Festival.shortTime(s.end), true, false);
+                r.setPadding(Ui.px(18), r.getPaddingTop(), r.getPaddingRight(), r.getPaddingBottom());
+                list.addView(r);
+                list.addView(Ui.rule(c, 1));
+            }
+        }
+    }
+
+    private static String sortKey(String artist) {
+        String s = artist.toUpperCase(java.util.Locale.US).replaceAll("^[^A-Z0-9]+", "");
+        return s.startsWith("THE ") ? s.substring(4) : s;
     }
 
     private Screen stageScreen(final String id) {
         return new Screen() {
             public View build() {
-                final Context c = MainActivity.this;
-                final Festival.Stage s = fest.stage(id);
+                Context c = MainActivity.this;
+                final Festival.Stage st = fest.stage(id);
                 LinearLayout root = Ui.column(c);
-                root.addView(Ui.bar(c, s.name, "Map", back, new View.OnClickListener() {
-                    public void onClick(View v) {
-                        push(mapScreen("stage:" + s.id));
-                    }
-                }));
+                String host = st.host.isEmpty() || st.host.equalsIgnoreCase(st.name) ? null : Festival.display(st.host);
+                root.addView(topBar(st.name, host, new String[]{"Map"}, new View.OnClickListener[]{
+                        new View.OnClickListener() {
+                            public void onClick(View v) {
+                                showOnMap(id);
+                            }
+                        }}, true));
                 root.addView(Ui.rule(c, 2));
-
-                final Festival.Clock clock = Festival.clock();
-                if (stageDay < 0) stageDay = currentDay();
                 final LinearLayout list = Ui.column(c);
-
-                // Fri / Sat segmented control
-                final LinearLayout seg = Ui.row(c);
-                seg.setBackground(Ui.outline(26, Ui.PAPER, 2));
-                LinearLayout.LayoutParams slp = new LinearLayout.LayoutParams(-1, Ui.px(48));
-                slp.setMargins(Ui.px(24), Ui.px(14), Ui.px(24), Ui.px(14));
-                final TextView[] tabs = new TextView[2];
-                for (int d = 0; d < 2; d++) {
-                    final int day = d;
-                    TextView t = Ui.text(c, Festival.DAY_LABELS[d], Ui.bold, 22);
-                    t.setGravity(Gravity.CENTER);
-                    t.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-                            stageDay = day;
-                            styleTabs(tabs, day);
-                            fillSets(list, s, day, clock);
+                final Runnable fill = new Runnable() {
+                    public void run() {
+                        list.removeAllViews();
+                        int d = currentDay();
+                        for (Festival.Set s : st.sets(d)) {
+                            list.addView(setRow(s, s.note, false, true));
+                            list.addView(Ui.rule(MainActivity.this, 1));
                         }
-                    });
-                    tabs[d] = t;
-                    seg.addView(t, new LinearLayout.LayoutParams(0, -1, 1));
-                }
-                styleTabs(tabs, stageDay);
-                root.addView(seg, slp);
+                    }
+                };
+                addSeg(root, dayToggle(fill));
+                root.addView(new View(c), new LinearLayout.LayoutParams(1, Ui.px(10)));
                 root.addView(Ui.rule(c, 1));
-                fillSets(list, s, stageDay, clock);
+                fill.run();
                 root.addView(Ui.scroll(c, list), new LinearLayout.LayoutParams(-1, 0, 1));
                 return root;
             }
         };
     }
 
-    private void styleTabs(TextView[] tabs, int on) {
-        for (int i = 0; i < tabs.length; i++) {
-            boolean sel = i == on;
-            android.graphics.drawable.GradientDrawable g = new android.graphics.drawable.GradientDrawable();
-            g.setColor(sel ? Ui.INK : Ui.PAPER);
-            float r = Ui.px(24);
-            g.setCornerRadii(i == 0 ? new float[]{r, r, 0, 0, 0, 0, r, r} : new float[]{0, 0, r, r, r, r, 0, 0});
-            tabs[i].setBackground(g);
-            tabs[i].setTextColor(sel ? Ui.PAPER : Ui.INK);
-        }
+    // ------------------------------------------------------------------------------- favorites
+
+    private View favsTab() {
+        Context c = this;
+        LinearLayout root = Ui.column(c);
+        root.addView(topBar("Favorites", "Your starred sets, in time order", null, null, false));
+        root.addView(Ui.rule(c, 2));
+        final LinearLayout list = Ui.column(c);
+        final Runnable fill = new Runnable() {
+            public void run() {
+                fillFavs(list);
+            }
+        };
+        addSeg(root, dayToggle(fill));
+        root.addView(new View(c), new LinearLayout.LayoutParams(1, Ui.px(10)));
+        root.addView(Ui.rule(c, 1));
+        fill.run();
+        root.addView(Ui.scroll(c, list), new LinearLayout.LayoutParams(-1, 0, 1));
+        return root;
     }
 
-    private void fillSets(LinearLayout list, Festival.Stage s, int day, Festival.Clock clock) {
+    private void fillFavs(LinearLayout list) {
         Context c = this;
         list.removeAllViews();
-        boolean today = clock.day == day;
-        for (Festival.Set set : s.sets(day)) {
-            boolean now = today && clock.live && set.start <= clock.t && clock.t < set.end;
-            boolean past = (today && set.end <= clock.t) || (!clock.before && clock.day < 0) || (clock.day > day);
-            LinearLayout r = Ui.row(c);
-            r.setGravity(Gravity.TOP);
-            r.setPadding(Ui.px(24), Ui.px(13), Ui.px(20), Ui.px(13));
-            if (now) r.setBackgroundColor(Ui.INK);
-            int col = now ? Ui.PAPER : Ui.INK;
-            TextView t = Ui.text(c, Festival.time(set.start) + "\n–" + Festival.shortTime(set.end), Ui.semibold, 18);
-            t.setTextColor(col);
-            r.addView(t, new LinearLayout.LayoutParams(Ui.px(104), -2));
-            LinearLayout right = Ui.column(c);
-            right.setBackgroundColor(0);
-            TextView a = Ui.text(c, set.artist + (now ? "  ◂ NOW" : ""), Ui.semibold, 23);
-            a.setTextColor(col);
-            right.addView(a);
-            if (!set.note.isEmpty()) {
-                TextView n = Ui.text(c, set.note, Ui.medium, 16);
-                n.setTextColor(col);
-                n.setPadding(0, Ui.px(4), 0, 0);
-                right.addView(n);
+        int d = currentDay();
+        List<Festival.Set> mine = new ArrayList<>();
+        for (Festival.Set s : fest.sets(d)) if (favs.has(s)) mine.add(s);
+        if (mine.isEmpty()) {
+            TextView t = Ui.text(c, favs.any()
+                    ? "Nothing starred on " + Festival.DAY_LONG[d].split(",")[0] + "."
+                    : "Tap the star next to any artist in the Lineup and they'll show up here, in time order.", Ui.medium, 19);
+            t.setPadding(Ui.px(22), Ui.px(24), Ui.px(22), Ui.px(24));
+            list.addView(t);
+            return;
+        }
+        for (Festival.Set s : mine) {
+            String clash = null;
+            for (Festival.Set o : mine) {
+                if (o != s && o.start < s.end && s.start < o.end) clash = o.artist;
             }
-            if (past) {
-                t.setPaintFlags(t.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                a.setPaintFlags(a.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            }
-            r.addView(right, new LinearLayout.LayoutParams(0, -2, 1));
-            list.addView(r);
+            String detail = s.stage.name + (clash != null ? "  ·  clashes with " + clash : "");
+            list.addView(setRow(s, detail, true, true));
             list.addView(Ui.rule(c, 1));
         }
-        if (s.sets(day).isEmpty()) {
-            TextView none = Ui.text(c, "No sets listed.", Ui.medium, 20);
-            none.setPadding(Ui.px(24), Ui.px(20), Ui.px(24), Ui.px(20));
-            list.addView(none);
-        }
     }
 
-    // -------------------------------------------------------------------------------------- now
+    // ---------------------------------------------------------------------------------- filter
 
-    private Screen nowScreen() {
-        return new Screen() {
-            public View build() {
-                final Context c = MainActivity.this;
-                final Festival.Clock clock = Festival.clock();
-                LinearLayout root = Ui.column(c);
-                String stamp = clock.day >= 0 ? Festival.time(clock.t) : "";
-                root.addView(Ui.bar(c, "Now playing", stamp.isEmpty() ? null : stamp, back, new View.OnClickListener() {
-                    public void onClick(View v) {
-                        show(); // manual refresh: one redraw, on demand
-                    }
-                }));
-                root.addView(Ui.rule(c, 2));
-                LinearLayout list = Ui.column(c);
-                boolean live = clock.day >= 0 && clock.live;
-                int day = clock.day >= 0 ? clock.day : currentDay();
-                int t = clock.day >= 0 ? clock.t : 0;
-                if (!live) {
-                    TextView note = Ui.text(c, clock.day >= 0 && clock.t < Festival.OPEN
-                            ? "Doors open at 4:00 PM. First sets:"
-                            : clock.before ? "The festival hasn't started. First sets on " + Festival.DAY_LONG[0] + ":"
-                            : clock.day >= 0 ? "That's a wrap for tonight." : "The festival is over.", Ui.semibold, 20);
-                    note.setPadding(Ui.px(24), Ui.px(16), Ui.px(24), Ui.px(16));
-                    list.addView(note);
-                    list.addView(Ui.rule(c, 1));
-                }
-                for (final Festival.Stage s : fest.stages) {
-                    Festival.Set now = live ? s.now(day, t) : null;
-                    Festival.Set next = s.next(day, t);
-                    if (now == null && next == null) continue;
-                    final LinearLayout r = Ui.column(c);
-                    r.setPadding(Ui.px(24), Ui.px(12), Ui.px(24), Ui.px(12));
-                    final TextView st = Ui.text(c, s.name.toUpperCase(), Ui.condBold, 18);
-                    st.setLetterSpacing(0.06f);
-                    r.addView(st);
-                    final TextView big = Ui.text(c, now != null ? now.artist : next.artist, Ui.bold, 25);
-                    big.setPadding(0, Ui.px(4), 0, Ui.px(2));
-                    r.addView(big);
-                    String meta = now != null
-                            ? "until " + Festival.time(now.end) + (next != null ? " · next " + next.artist + " " + Festival.shortTime(next.start) : "")
-                            : (live ? "next at " : "") + Festival.time(next.start) + "–" + Festival.time(next.end);
-                    final TextView m = Ui.text(c, meta, Ui.medium, 17);
-                    r.addView(m);
-                    r.setBackground(Ui.pressable(Ui.PAPER));
-                    r.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-                            push(stageScreen(s.id));
-                        }
-                    });
-                    r.setOnTouchListener(new View.OnTouchListener() {
-                        public boolean onTouch(View v, android.view.MotionEvent e) {
-                            int a = e.getActionMasked();
-                            int col = a == android.view.MotionEvent.ACTION_DOWN ? Ui.PAPER : Ui.INK;
-                            if (a == android.view.MotionEvent.ACTION_DOWN || a == android.view.MotionEvent.ACTION_UP
-                                    || a == android.view.MotionEvent.ACTION_CANCEL) {
-                                st.setTextColor(col);
-                                big.setTextColor(col);
-                                m.setTextColor(col);
-                            }
-                            return false;
-                        }
-                    });
-                    list.addView(r);
-                    list.addView(Ui.rule(c, 1));
-                }
-                root.addView(Ui.scroll(c, list), new LinearLayout.LayoutParams(-1, 0, 1));
-                return root;
-            }
-        };
-    }
-
-    // ----------------------------------------------------------------------------------- legend
-
-    private static final String[][] LEGEND = {
-            {"First aid", "firstaid", "ga"}, {"Accessible viewing", "accessible", "ga"}, {"Lockers", "lockers", "ga"},
-            {"Food", "food", "ga"}, {"Water stations", "water", "ga"}, {"VIP water stations", "water", "vip"},
-            {"VIP & VIP+ upgrade", "vip", "vip"}, {"VIP concierge", "vip", "vipring"}, {"VIP bar", "bar", "vip"},
-            {"VIP food", "food", "vip"}, {"Merch", "merch", "ga"}, {"Table service", "table", "ga"},
-            {"Info", "info", "ga"}, {"Ticket help", "tickets", "ga"}, {"Will call", "willcall", "ga"},
-            {"Box office", "boxoffice", "vip"}, {"Lost & found", "lostfound", "ga"}, {"Restrooms", "restroom", "ga"},
-            {"VIP restrooms", "restroom", "vip"}, {"GA+ restrooms", "restroom", "gaplus"}, {"Photo spot", "photo", "vip"},
+    private static final String[][] CATS = {
+            {"food", "Food", "food", "ga"}, {"water", "Water", "water", "ga"}, {"restroom", "Restrooms", "restroom", "ga"},
+            {"firstaid", "First aid", "firstaid", "ga"}, {"access", "Accessibility", "accessible", "ga"},
+            {"help", "Info, lockers & tickets", "info", "ga"}, {"merch", "Merch", "merch", "ga"},
+            {"photo", "Photo spots", "photo", "ga"}, {"gaplus", "GA+ restrooms", "restroom", "gaplus"},
+            {"vip", "VIP facilities", "bar", "vip"},
     };
 
-    private Screen legendScreen() {
+    private Screen filterScreen() {
         return new Screen() {
             public View build() {
                 Context c = MainActivity.this;
                 LinearLayout root = Ui.column(c);
-                root.addView(Ui.bar(c, "Legend", null, back, null));
+                root.addView(topBar("Show on map", "Icons appear when you zoom in", null, null, true));
                 root.addView(Ui.rule(c, 2));
                 LinearLayout list = Ui.column(c);
-                if (map == null) {
-                    try {
-                        map = new MapView(c);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                for (String[] item : LEGEND) {
-                    LinearLayout r = Ui.row(c);
-                    r.setPadding(Ui.px(24), Ui.px(10), Ui.px(24), Ui.px(10));
-                    r.addView(map.iconView(item[1], item[2], Ui.px(46)), new LinearLayout.LayoutParams(Ui.px(46), Ui.px(46)));
-                    TextView t = Ui.text(c, item[0], Ui.semibold, 23);
-                    t.setPadding(Ui.px(18), 0, 0, 0);
-                    r.addView(t);
+                for (final String[] cat : CATS) {
+                    final LinearLayout r = Ui.row(c);
+                    r.setPadding(Ui.px(18), Ui.px(8), Ui.px(18), Ui.px(8));
+                    r.addView(map().iconView(cat[2], cat[3], Ui.px(44)), new LinearLayout.LayoutParams(Ui.px(44), Ui.px(44)));
+                    TextView t = Ui.text(c, cat[1], Ui.semibold, 21);
+                    t.setPadding(Ui.px(14), 0, 0, 0);
+                    r.addView(t, new LinearLayout.LayoutParams(0, -2, 1));
+                    final TextView box = Ui.text(c, "", Ui.bold, 22);
+                    box.setGravity(Gravity.CENTER);
+                    final Runnable paint = new Runnable() {
+                        public void run() {
+                            boolean shown = !favs.hiddenCats.contains(cat[0]);
+                            box.setText(shown ? "✓" : "");
+                            box.setBackground(Ui.outline(6, Ui.PAPER, 2.5f));
+                        }
+                    };
+                    paint.run();
+                    r.addView(box, new LinearLayout.LayoutParams(Ui.px(36), Ui.px(36)));
+                    r.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v) {
+                            favs.setHidden(cat[0], !favs.hiddenCats.contains(cat[0]));
+                            paint.run();
+                        }
+                    });
                     list.addView(r);
                     list.addView(Ui.rule(c, 1));
                 }
-                TextView key = Ui.text(c, "Black discs are open to everyone. White discs with a ring are VIP. "
-                        + "Boxed names are stages: tap one on the map for who's playing.", Ui.medium, 18);
-                key.setPadding(Ui.px(24), Ui.px(16), Ui.px(24), Ui.px(24));
-                list.addView(key);
                 root.addView(Ui.scroll(c, list), new LinearLayout.LayoutParams(-1, 0, 1));
                 return root;
             }
         };
     }
 
-    // ------------------------------------------------------------------------------------- info
+    // ------------------------------------------------------------------------------------ info
+
+    private static final String[][] LEGEND = {
+            {"First aid", "firstaid", "ga"}, {"Water", "water", "ga"}, {"Restrooms", "restroom", "ga"},
+            {"GA+ restrooms", "restroom", "gaplus"}, {"Food", "food", "ga"}, {"Accessible viewing", "accessible", "ga"},
+            {"Lockers", "lockers", "ga"}, {"Info", "info", "ga"}, {"Lost & found", "lostfound", "ga"},
+            {"Ticket help", "tickets", "ga"}, {"Will call", "willcall", "ga"}, {"Box office", "boxoffice", "ga"},
+            {"Merch", "merch", "ga"}, {"Photo spot", "photo", "ga"}, {"VIP (dashed ring)", "bar", "vip"},
+    };
 
     private Screen infoScreen() {
         return new Screen() {
             public View build() {
                 Context c = MainActivity.this;
                 LinearLayout root = Ui.column(c);
-                root.addView(Ui.bar(c, "Info", null, back, null));
+                root.addView(topBar("Info", null, null, null, true));
                 root.addView(Ui.rule(c, 2));
                 LinearLayout body = Ui.column(c);
-                body.setPadding(Ui.px(24), Ui.px(16), Ui.px(24), Ui.px(24));
+                body.setPadding(Ui.px(20), Ui.px(8), Ui.px(20), Ui.px(24));
                 String[][] parts = {
-                        {"Hours", "Friday Oct 16 and Saturday Oct 17, 4:00 PM to 4:00 AM. Mana Wynwood, 2217 NW 5th Ave, Miami."},
-                        {"Works offline", "Map and set times are stored on the phone. No connection is needed."},
-                        {"Set times", fest.source + ". Times can change; check the official channels on the day."},
-                        {"Map", "Black and white redraw of the official 2026 festival map for E Ink. "
-                                + "Drag to pan, pinch or double tap to zoom, tap a stage name for its schedule."},
+                        {"Hours", "Fri Oct 16 & Sat Oct 17, 4:00 PM – 4:00 AM. Mana Wynwood, 2217 NW 5th Ave, Miami."},
+                        {"The map", "Stages are hatched, dance floors dashed, VIP-only areas lightly striped. "
+                                + "Stage labels show who's playing now; ★ marks your favorites. Tap a stage for now, next and its lineup."},
+                        {"Works offline", "Map and set times live on the phone; no connection needed."},
+                        {"Set times", fest.source + ". Times can change; check official channels on the day."},
                         {"Unofficial", "Fan-made companion app, not affiliated with III Points or Mudita."},
                 };
                 for (String[] p : parts) {
-                    TextView h = Ui.text(c, p[0], Ui.bold, 23);
-                    h.setPadding(0, Ui.px(10), 0, Ui.px(4));
+                    TextView h = Ui.text(c, p[0], Ui.bold, 22);
+                    h.setPadding(0, Ui.px(14), 0, Ui.px(4));
                     body.addView(h);
-                    body.addView(Ui.text(c, p[1], Ui.regular, 19));
+                    body.addView(Ui.text(c, p[1], Ui.regular, 18));
+                }
+                TextView lh = Ui.text(c, "Legend", Ui.bold, 22);
+                lh.setPadding(0, Ui.px(18), 0, Ui.px(6));
+                body.addView(lh);
+                for (String[] item : LEGEND) {
+                    LinearLayout r = Ui.row(c);
+                    r.setPadding(0, Ui.px(4), 0, Ui.px(4));
+                    r.addView(map().iconView(item[1], item[2], Ui.px(40)), new LinearLayout.LayoutParams(Ui.px(40), Ui.px(40)));
+                    TextView t = Ui.text(c, item[0], Ui.semibold, 19);
+                    t.setPadding(Ui.px(14), 0, 0, 0);
+                    r.addView(t);
+                    body.addView(r);
                 }
                 root.addView(Ui.scroll(c, body), new LinearLayout.LayoutParams(-1, 0, 1));
                 return root;

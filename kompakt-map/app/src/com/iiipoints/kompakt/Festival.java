@@ -25,13 +25,37 @@ final class Festival {
     static final class Set {
         final int start, end;
         final String artist, note;
+        Stage stage;
+        int day;
 
         Set(int start, int end, String artist, String note) {
             this.start = start;
             this.end = end;
-            this.artist = artist;
-            this.note = note;
+            this.artist = display(artist);
+            this.note = display(note);
         }
+
+        /** Key used for favorites: one artist (favoriting an artist stars all their sets). */
+        String key() {
+            return artist.toUpperCase(Locale.US);
+        }
+    }
+
+    private static final java.util.Set<String> KEEP = new java.util.HashSet<>(java.util.Arrays.asList(
+            "DJ", "MD", "MPH", "INVT", "VTSS", "GZA", "ML", "II", "III", "EZ", "JBZ", "RES_", "HAAI", "VIP", "R/V"));
+
+    /** "BELTRAN B2B BEN STERLING" -> "Beltran b2b Ben Sterling"; acronyms and names with digits stay as written. */
+    static String display(String s) {
+        if (s == null || s.isEmpty()) return "";
+        StringBuilder out = new StringBuilder();
+        for (String w : s.trim().split("\\s+")) {
+            if (out.length() > 0) out.append(' ');
+            String lw = w.toLowerCase(Locale.US);
+            if (lw.equals("b2b")) out.append("b2b");
+            else if (KEEP.contains(w) || w.matches(".*[0-9].*")) out.append(w);
+            else out.append(Character.toUpperCase(lw.charAt(0))).append(lw.substring(1));
+        }
+        return out.toString();
     }
 
     static final class Stage {
@@ -92,13 +116,28 @@ final class Festival {
                 JSONArray arr = sets.optJSONArray(day);
                 for (int j = 0; arr != null && j < arr.length(); j++) {
                     JSONArray r = arr.getJSONArray(j);
-                    list.add(new Set(minutes(r.getString(0)), minutes(r.getString(1)), r.getString(2),
-                            r.length() > 3 ? r.getString(3) : ""));
+                    Set set = new Set(minutes(r.getString(0)), minutes(r.getString(1)), r.getString(2),
+                            r.length() > 3 ? r.getString(3) : "");
+                    set.stage = stage;
+                    set.day = stage.days.size();
+                    list.add(set);
                 }
                 stage.days.add(list);
             }
             stages.add(stage);
         }
+    }
+
+    /** All sets of a day, in start order. */
+    List<Set> sets(int day) {
+        List<Set> all = new ArrayList<>();
+        for (Stage s : stages) all.addAll(s.sets(day));
+        java.util.Collections.sort(all, new java.util.Comparator<Set>() {
+            public int compare(Set a, Set b) {
+                return a.start != b.start ? a.start - b.start : a.artist.compareToIgnoreCase(b.artist);
+            }
+        });
+        return all;
     }
 
     Stage stage(String id) {

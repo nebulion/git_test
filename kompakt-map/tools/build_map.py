@@ -27,7 +27,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from icons import ICONS  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FONTS = os.path.join(ROOT, "app", "assets", "fonts")
+FONTS = os.path.join(ROOT, "tools", "fonts")         # preview fonts only; the app uses the system font
 from proj import MODE, K, S, STREET_ANGLE, AVENUE_ANGLE, P, from_pic  # noqa: E402
 VIEW = (60, 115, 1450, 1520) if MODE == "oblique" else (360, 60, 1400, 1540)   # x, y, w, h (tight to the venue)
 WALL = (7, 56)                                     # extrusion of the raised city blocks
