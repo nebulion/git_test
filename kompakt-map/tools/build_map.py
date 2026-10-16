@@ -127,20 +127,6 @@ def wall(pts):
     poly([(x + ex, y + ey) for x, y in pts], fill="b")
 
 
-def box3d(base, height, lvl=0):
-    """Extruded building: white walls with black edges, hatched roof (drawn back to front)."""
-    top = [(x, y - height) for x, y in base]
-    n = len(base)
-    walls = []
-    for i in range(n):
-        a, b = base[i], base[(i + 1) % n]
-        at, bt = top[i], top[(i + 1) % n]
-        walls.append(((a[1] + b[1]) / 2, [a, b, bt, at]))
-    for _, q in sorted(walls):
-        poly(q, fill="w", stroke=2.5, lvl=lvl)
-    poly(top, fill="h", stroke=3, lvl=lvl)
-
-
 # --------------------------------------------------------------------------------------------
 # Ground: raised plates (streets, black) carrying the city blocks (white)
 # --------------------------------------------------------------------------------------------
@@ -186,27 +172,32 @@ for (u, w, t, on) in [(1002, 1290, "NW 23rd ST", True), (1341, 1290, "NW 22nd ST
     text(x + 11, y, t, font="bc6i", size=32 if on else 28, color="w" if on else "b", rot=STREET_ANGLE)
 
 # --------------------------------------------------------------------------------------------
-# Stage buildings: extruded 3D boxes (footprint centre, size along the grid, height)
+# Stages: flat drawings recreated from the official artwork (tools/stages.py)
 # --------------------------------------------------------------------------------------------
-BUILDINGS = {
-    "mind-melt": ((1047, 470), 200, 70, 60),
-    "players-club": ((835, 615), 110, 50, 45),
-    "444": ((1235, 639), 90, 60, 40),
-    "s3qu3nce": ((568, 809), 80, 55, 22),
-    "door-iv": ((853, 870), 100, 30, 14),
-    "isotropic": ((290, 1033), 130, 55, 34),
-    "iii-points-radio": ((725, 948), 60, 40, 28),
-    "halo-88": ((441, 1112), 150, 120, 55),
-    "fortune-row": ((611, 1094), 140, 110, 45),
-    "rc95": ((566, 1375), 60, 45, 28),
-    "sec3": ((956, 1112), 150, 70, 40),
-    "vertex": ((1320, 1033), 120, 90, 40),
-    "grand-central": ((1132, 1209), 60, 70, 55),
+from stages import shapes  # noqa: E402
+
+PART_STYLE = {  # style -> (fill, stroke width, stroke colour, dash)
+    "floor": ("w", 3, "b", [12, 8]), "roof": ("b", 2, "w", None), "side": ("h", 2.5, "b", None),
+    "screen": ("w", 2.5, "b", None), "struct": ("w", 3, "b", None), "wline": (None, 2.5, "w", None),
 }
-FOOTPRINTS = {k: around(c[0], c[1], du, dw) for k, (c, du, dw, _) in BUILDINGS.items()}
-op({"o": "ellipse", "x": 1187, "y": 1179, "rx": 110, "ry": 60, "f": "n", "s": 2.5, "c": "b", "d": [10, 7]}, DETAIL)
-for key in sorted(BUILDINGS, key=lambda k: BUILDINGS[k][0][1]):   # back to front
-    box3d(FOOTPRINTS[key], BUILDINGS[key][3])
+FOOTPRINTS = {}
+for stage, part, style, shape in shapes():
+    fill, sw, sc, dash = PART_STYLE[style]
+    if isinstance(shape, tuple) and shape and shape[0] == "ellipse":
+        _, cx, cy, rx, ry = shape
+        d = {"o": "ellipse", "x": cx, "y": cy, "rx": rx, "ry": ry, "f": fill, "s": sw, "c": sc}
+        if dash:
+            d["d"] = dash
+        op(d)
+        continue
+    FOOTPRINTS[f"{stage}/{part}"] = shape
+    if fill is None:
+        line(shape, stroke=sw, color=sc)
+    elif dash:
+        poly(shape, fill=fill)
+        line(list(shape) + [shape[0]], stroke=sw, color=sc, dash=dash)
+    else:
+        poly(shape, fill=fill, stroke=sw, color=sc)
 
 # --------------------------------------------------------------------------------------------
 # Facilities: positions/types detected on the official map, a few fixed by hand
@@ -253,7 +244,7 @@ for t, x, y in [("MOKIWORLD", 1113, 583), ("SKATE SPACE", 1238, 794), ("FORTUNE 
 
 STAGES = [  # id, label, tag centre (from the official map)
     ("mind-melt", "MIND MELT", 1103.5, 529), ("players-club", "PLAYER'S CLUB", 815, 581),
-    ("444", "::444::", 1248.5, 627), ("unforeseen", "UNFORESEEN", 1257, 700),
+    ("444", "::444::", 1248.5, 627), ("unforeseen", "UNFORESEEN", 1247, 762),
     ("s3qu3nce", "S3QUENC3", 578, 758), ("door-iv", "DOOR IV", 853.5, 840),
     ("isotropic", "ISOTROPIC", 294, 963), ("vertex", "VERTEX", 1280, 979),
     ("iii-points-radio", "III POINTS RADIO", 624, 997), ("sec3", "SECTOR 3", 938, 1014),
@@ -345,8 +336,8 @@ def to_svg(ops_list):
                        f'stroke-linecap="round"{dash}/>')
         elif k == "ellipse":
             dash = f' stroke-dasharray="{o["d"][0]} {o["d"][1]}"' if "d" in o else ""
-            out.append(f'<ellipse cx="{o["x"]}" cy="{o["y"]}" rx="{o["rx"]}" ry="{o["ry"]}" fill="none" '
-                       f'stroke="#000" stroke-width="{o["s"]}"{dash}/>')
+            out.append(f'<ellipse cx="{o["x"]}" cy="{o["y"]}" rx="{o["rx"]}" ry="{o["ry"]}" fill="{col[o.get("f", "n")]}" '
+                       f'stroke="{col[o.get("c", "b")]}" stroke-width="{o["s"]}"{dash}/>')
         elif k == "rect":
             st = f' stroke="{col[o["c"]]}" stroke-width="{o["s"]}"' if o["s"] else ""
             tr = ""
