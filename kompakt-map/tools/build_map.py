@@ -29,7 +29,7 @@ from icons import ICONS  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FONTS = os.path.join(ROOT, "tools", "fonts")         # preview fonts only; the app uses the system font
 from proj import MODE, K, S, STREET_ANGLE, AVENUE_ANGLE, P, from_pic  # noqa: E402
-VIEW = (60, 115, 1450, 1520) if MODE == "oblique" else (360, 60, 1400, 1540)   # x, y, w, h (tight to the venue)
+VIEW = (60, 115, 1450, 1520) if MODE == "oblique" else None   # diagram: computed from the geometry in main()
 WALL = (7, 56)                                     # extrusion of the raised city blocks
 DETAIL = 1                                         # level of ops only shown when zoomed in
 
@@ -117,7 +117,7 @@ W_BLOCK, W_EDGE, W_STRUCT, W_DETAIL, W_FLOOR = 5, 2.5, 3, 1.6, 2.6
 # --------------------------------------------------------------------------------------------
 # Ground (flat): white paper, streets are the gaps between the blocks, blocks carry a fine texture
 # --------------------------------------------------------------------------------------------
-SOUTH = [P(612, 840), P(1700, 840), P(1700, 1425), P(612, 1425)]    # 3 south blocks + NW 5th / 6th Ave
+SOUTH = [P(612, 840), P(1700, 840), P(1700, 881), P(1700, 1425), P(612, 1425), P(612, 881)]  # 3 south blocks + avenues
 ISO = [P(452, 840), P(612, 840), P(612, 1112), P(452, 1112)]        # Isotropic lot
 NORTH_S3 = [P(695, 648), P(868, 648), P(868, 840), P(695, 840)]     # S3QUENC3 lot
 NORTH_E = [P(868, 402), P(1490, 402), P(1490, 840), P(868, 840)]    # Players Club / Mind Melt block
@@ -459,8 +459,33 @@ def svg_labels(labels):
     return "\n".join(out)
 
 
+def fit_view():
+    """Bounding box of everything drawn, plus a margin (diagram mode)."""
+    xs, ys = [], []
+    for o in ops:
+        if "p" in o:
+            xs += o["p"][0::2]
+            ys += o["p"][1::2]
+        elif "x" in o:
+            xs.append(o["x"])
+            ys.append(o["y"])
+    for lb in LABELS:
+        xs.append(lb.get("lx", lb["x"]))
+        ys.append(lb.get("ly", lb["y"]))
+        if lb["kind"] == "entrance":   # the pill sits behind the arrow
+            a = math.radians(lb["dir"])
+            xs.append(lb["x"] - 170 * math.cos(a))
+            ys.append(lb["y"] - 150 * math.sin(a))
+    m = 70
+    x0, y0 = int(min(xs) - m), int(min(ys) - m)
+    return (x0, y0, int(max(xs) + m) - x0, int(max(ys) + m) - y0)
+
+
 def main():
     """diagram mode writes the app assets and mockup/map*.svg; oblique mode only mockup/map-oblique*.svg."""
+    global VIEW
+    if VIEW is None:
+        VIEW = fit_view()
     assets = os.path.join(ROOT, "app", "assets")
     os.makedirs(os.path.join(ROOT, "mockup"), exist_ok=True)
     svg = to_svg(ops)

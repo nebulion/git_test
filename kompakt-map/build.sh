@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Build the III Points Kompakt APK without Gradle (Debian android-sdk + platform 23).
+# One APK for the Mudita Kompakt and any Android 5+ phone (targets API 34 so current Pixels install it).
 #   sudo apt-get install android-sdk android-sdk-platform-23 dalvik-exchange
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -13,7 +14,7 @@ python3 tools/build_map.py >/dev/null                     # refresh map.json / i
 
 "$BT/aapt2" compile --dir app/res -o "$OUT/res.zip"
 "$BT/aapt2" link -I "$JAR" --manifest app/AndroidManifest.xml -A app/assets \
-    --java "$OUT/gen" -o "$OUT/unsigned.apk" "$OUT/res.zip" --min-sdk-version 21 --target-sdk-version 23
+    --java "$OUT/gen" -o "$OUT/unsigned.apk" "$OUT/res.zip" --min-sdk-version 21 --target-sdk-version 34
 
 javac -nowarn -source 8 -target 8 -bootclasspath "$JAR" -d "$OUT/classes" \
     $(find app/src "$OUT/gen" -name '*.java') 2>&1 | grep -v "bootstrap class path\|^1 warning\|^warning: \[options\]" || true

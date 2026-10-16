@@ -260,7 +260,7 @@ final class MapView extends View {
             focus(x, pendingY, pendingScale);
             placed = true;
         } else if (!placed) {
-            focus(1030, 760, Math.max(ICON_ZOOM, w / 900f));   // open on the middle of the grounds, icons visible
+            focus(view.centerX(), view.centerY(), Math.max(ICON_ZOOM, w / 900f));   // middle of the grounds, icons visible
             placed = true;
         } else {
             clamp();

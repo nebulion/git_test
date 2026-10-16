@@ -152,7 +152,8 @@ public class MainActivity extends Activity {
 
     private boolean hasPermission() {
         return android.os.Build.VERSION.SDK_INT < 23
-                || checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+                || checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
 
     private void toggleLocate() {
@@ -167,7 +168,8 @@ public class MainActivity extends Activity {
         tracking = true;
         recenter = true;
         if (!hasPermission()) {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
             return;
         }
         startGps();
@@ -176,7 +178,9 @@ public class MainActivity extends Activity {
 
     @Override
     public void onRequestPermissionsResult(int code, String[] perms, int[] results) {
-        if (results.length > 0 && results[0] == PackageManager.PERMISSION_GRANTED) {
+        boolean any = false;
+        for (int r : results) any |= r == PackageManager.PERMISSION_GRANTED;
+        if (any) {
             startGps();
         } else {
             tracking = false;
@@ -212,7 +216,7 @@ public class MainActivity extends Activity {
                 && l.getTime() - lastFix.getTime() < 30_000) return;   // ignore a much worse fix right after a good one
         lastFix = l;
         float[] p = gps.toMap(l.getLatitude(), l.getLongitude());
-        MapView m = map();
+        MapView m = mapView();   // don't detach it: this runs while the map is on screen
         m.setYou(p[0], p[1], l.getAccuracy() * gps.unitsPerMetre());
         if (recenter && m.youOnMap()) {
             m.focus(p[0], p[1], Math.max(MapView.ICON_ZOOM, 0.7f));
@@ -317,7 +321,15 @@ public class MainActivity extends Activity {
         return root;
     }
 
+    /** The map view, detached from any previous layout so a screen can add it. */
     private MapView map() {
+        MapView m = mapView();
+        if (m.getParent() != null) ((ViewGroup) m.getParent()).removeView(m);
+        return m;
+    }
+
+    /** The map view, created on first use; stays wherever it is on screen. */
+    private MapView mapView() {
         if (map == null) {
             try {
                 map = new MapView(this);
@@ -328,7 +340,6 @@ public class MainActivity extends Activity {
             map.favs = favs;
             map.hiddenCats = favs.hiddenCats;
         }
-        if (map.getParent() != null) ((ViewGroup) map.getParent()).removeView(map);
         return map;
     }
 

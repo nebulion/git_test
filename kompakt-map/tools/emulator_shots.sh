@@ -50,6 +50,11 @@ sleep 3
 adb shell input tap 447 257
 for i in 1 2 3 4; do adb emu geo fix -80.2026731 25.7983930; sleep 3; done
 adb exec-out screencap -p > $OUT/12-gps-real-provider.png
+# Pixel-sized screen
+adb shell wm size 1080x2400
+adb shell wm density 420
+shot 13-pixel-map map
+shot 14-pixel-lineup lineup
 adb logcat -d -s AndroidRuntime:E > $OUT/logcat.txt
 grep -q "FATAL EXCEPTION" $OUT/logcat.txt && echo "CRASH" > $OUT/CRASHED || true
 exit 0
