@@ -1,0 +1,267 @@
+--------- beginning of system
+10-16 07:27:04.774   518   518 W ActivityManager: Unable to start service Intent { act=android.service.contentsuggestions.ContentSuggestionsService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentSuggestionsService } U=0: not found
+10-16 07:27:04.789   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@f2e91a
+10-16 07:27:04.903   518  1173 W ActivityManager: Unable to start service Intent { act=android.service.appprediction.AppPredictionService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiPredictionService } U=0: not found
+10-16 07:27:04.915   518   548 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:04.916   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@875c5c9
+10-16 07:27:04.916   518  1213 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:04.917   518  1843 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:04.917   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@40bf585
+10-16 07:27:04.917   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@69fcc0b
+10-16 07:27:04.917   518  1813 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:04.919   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@db76ae8
+10-16 07:27:05.067   518  1713 W ActivityManager: Unable to start service Intent { act=android.service.search.SearchUiService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSearchUiService } U=0: not found
+10-16 07:27:05.068   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@64b07e6
+10-16 07:27:05.553   518   607 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:05.557   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@691d31c
+10-16 07:27:05.587   518  1805 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:05.589   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@126a7e4
+10-16 07:27:05.793   518  1805 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:05.799   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@a3ace1e
+10-16 07:27:05.806   518  1213 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:05.807   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@51f67cd
+10-16 07:27:07.827   518   564 W ActivityManager: Slow operation: 68ms so far, now at startProcess: done updating battery stats
+10-16 07:27:07.828   518   564 W ActivityManager: Slow operation: 69ms so far, now at startProcess: building log message
+10-16 07:27:07.830   518   564 W ActivityManager: Slow operation: 72ms so far, now at startProcess: starting to update pids map
+10-16 07:27:07.832   518   564 W ActivityManager: Slow operation: 73ms so far, now at startProcess: done updating pids map
+10-16 07:27:08.891   518  2450 W ActivityManager: Unable to start service Intent { act=com.google.android.gms.home.service.START pkg=com.google.android.gms } U=0: not found
+10-16 07:27:08.893   518  1224 W ActivityManager: Unbind failed: could not find connection for android.os.BinderProxy@b7f0d4a
+10-16 07:27:09.774   518  1743 W ActivityManager: Background start not allowed: service Intent { cmp=com.google.android.apps.messaging/.shared.datamodel.action.execution.ActionExecutorImpl$EmptyService } to com.google.android.apps.messaging/.shared.datamodel.action.execution.ActionExecutorImpl$EmptyService from pid=2520 uid=10100 pkg=com.google.android.apps.messaging startFg?=false
+10-16 07:27:10.543   518  1805 W ActivityManager: Background start not allowed: service Intent { cmp=com.google.android.apps.messaging/.shared.datamodel.action.execution.ActionExecutorImpl$EmptyService } to com.google.android.apps.messaging/.shared.datamodel.action.execution.ActionExecutorImpl$EmptyService from pid=2520 uid=10100 pkg=com.google.android.apps.messaging startFg?=false
+10-16 07:27:10.543   518   555 W ActivityManager: setHasOverlayUi called on unknown pid: 1904
+10-16 07:27:10.557   518   607 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:10.558   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@df3ddec
+10-16 07:27:10.954   518  1050 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:10.954   518  1843 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:10.955   518   548 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:10.956   518   897 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:10.956   518  1050 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:10.957   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@a413417
+10-16 07:27:10.957   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@c6c6004
+10-16 07:27:10.957   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@67e49ed
+10-16 07:27:10.957   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@899e022
+10-16 07:27:10.957   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@81afab3
+10-16 07:27:11.013   518  2450 W ActivityManager: Foreground service started from background can not have location/camera/microphone access: service com.google.android.inputmethod.latin/com.google.android.apps.inputmethod.libs.dataservice.superpacks.SuperpacksForegroundTaskService
+--------- beginning of crash
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: FATAL EXCEPTION: main
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: Process: com.iiipoints.kompakt, PID: 2749
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: java.lang.RuntimeException: Unable to resume activity {com.iiipoints.kompakt/com.iiipoints.kompakt.MainActivity}: java.lang.IllegalStateException: The specified child already has a parent. You must call removeView() on the child's parent first.
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.app.ActivityThread.performResumeActivity(ActivityThread.java:4757)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.app.ActivityThread.handleResumeActivity(ActivityThread.java:4790)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.app.servertransaction.ResumeActivityItem.execute(ResumeActivityItem.java:54)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.app.servertransaction.ActivityTransactionItem.execute(ActivityTransactionItem.java:45)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeLifecycleState(TransactionExecutor.java:176)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:97)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2210)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.os.Looper.loopOnce(Looper.java:201)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:288)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:7839)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1003)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: Caused by: java.lang.IllegalStateException: The specified child already has a parent. You must call removeView() on the child's parent first.
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.view.ViewGroup.addViewInner(ViewGroup.java:5247)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.view.ViewGroup.addView(ViewGroup.java:5076)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.view.ViewGroup.addView(ViewGroup.java:5048)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at com.iiipoints.kompakt.MainActivity$3.build(MainActivity.java:196)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at com.iiipoints.kompakt.MainActivity.show(MainActivity.java:80)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at com.iiipoints.kompakt.MainActivity.onResume(MainActivity.java:61)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.app.Instrumentation.callActivityOnResume(Instrumentation.java:1476)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.app.Activity.performResume(Activity.java:8191)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	at android.app.ActivityThread.performResumeActivity(ActivityThread.java:4747)
+10-16 07:27:11.132  2749  2749 E AndroidRuntime: 	... 13 more
+10-16 07:27:11.141   518   819 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:11.142   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@d717cca
+10-16 07:27:11.143   518   819 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:11.143   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@84dc958
+10-16 07:27:11.144   518   819 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:11.144   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@929b96
+10-16 07:27:11.149   518   607 E ActivityManager: App crashed on incremental package com.iiipoints.kompakt which is 100% loaded.
+10-16 07:27:11.414   518   548 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:11.415   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@7281beb
+10-16 07:27:11.424   518   548 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:11.468   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@42a1f92
+10-16 07:27:12.667   518  1844 W ActivityManager: Background start not allowed: service Intent { cmp=com.google.android.apps.messaging/.shared.datamodel.action.execution.ActionExecutorImpl$EmptyService } to com.google.android.apps.messaging/.shared.datamodel.action.execution.ActionExecutorImpl$EmptyService from pid=2520 uid=10100 pkg=com.google.android.apps.messaging startFg?=false
+10-16 07:27:16.180   518   555 W ActivityManager: setHasOverlayUi called on unknown pid: 1054
+10-16 07:27:16.291   518  1843 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:16.301   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@3a1da24
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: FATAL EXCEPTION: main
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: Process: com.iiipoints.kompakt, PID: 3184
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: java.lang.RuntimeException: Unable to resume activity {com.iiipoints.kompakt/com.iiipoints.kompakt.MainActivity}: java.lang.IllegalStateException: The specified child already has a parent. You must call removeView() on the child's parent first.
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.app.ActivityThread.performResumeActivity(ActivityThread.java:4757)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.app.ActivityThread.handleResumeActivity(ActivityThread.java:4790)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.app.servertransaction.ResumeActivityItem.execute(ResumeActivityItem.java:54)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.app.servertransaction.ActivityTransactionItem.execute(ActivityTransactionItem.java:45)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeLifecycleState(TransactionExecutor.java:176)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:97)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2210)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.os.Looper.loopOnce(Looper.java:201)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:288)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:7839)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1003)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: Caused by: java.lang.IllegalStateException: The specified child already has a parent. You must call removeView() on the child's parent first.
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.view.ViewGroup.addViewInner(ViewGroup.java:5247)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.view.ViewGroup.addView(ViewGroup.java:5076)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.view.ViewGroup.addView(ViewGroup.java:5048)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at com.iiipoints.kompakt.MainActivity$3.build(MainActivity.java:196)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at com.iiipoints.kompakt.MainActivity.show(MainActivity.java:80)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at com.iiipoints.kompakt.MainActivity.onResume(MainActivity.java:61)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.app.Instrumentation.callActivityOnResume(Instrumentation.java:1476)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.app.Activity.performResume(Activity.java:8191)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	at android.app.ActivityThread.performResumeActivity(ActivityThread.java:4747)
+10-16 07:27:16.424  3184  3184 E AndroidRuntime: 	... 13 more
+10-16 07:27:16.439   518  1743 E ActivityManager: App crashed on incremental package com.iiipoints.kompakt which is 100% loaded.
+10-16 07:27:16.619   518  3170 W ActivityManager: Background start not allowed: service Intent { cmp=com.google.android.apps.messaging/.shared.datamodel.action.execution.ActionExecutorImpl$EmptyService } to com.google.android.apps.messaging/.shared.datamodel.action.execution.ActionExecutorImpl$EmptyService from pid=2520 uid=10100 pkg=com.google.android.apps.messaging startFg?=false
+10-16 07:27:16.623   518  1805 W ActivityManager: Background start not allowed: service Intent { cmp=com.google.android.apps.messaging/.shared.datamodel.action.execution.ActionExecutorImpl$EmptyService } to com.google.android.apps.messaging/.shared.datamodel.action.execution.ActionExecutorImpl$EmptyService from pid=2520 uid=10100 pkg=com.google.android.apps.messaging startFg?=false
+10-16 07:27:16.959   518  3018 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:16.960   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@f55b382
+10-16 07:27:17.226   518  1713 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:17.227   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@796032e
+10-16 07:27:18.921   518   563 W ActivityManager: UserLifecycleEvent 6 received without an active userJourneySession.
+10-16 07:27:19.546   518  2482 W ActivityManager: Background start not allowed: service Intent { cmp=com.google.android.apps.messaging/.shared.datamodel.action.execution.ActionExecutorImpl$EmptyService } to com.google.android.apps.messaging/.shared.datamodel.action.execution.ActionExecutorImpl$EmptyService from pid=2520 uid=10100 pkg=com.google.android.apps.messaging startFg?=false
+10-16 07:27:19.586   518  2482 W ActivityManager: Background start not allowed: service Intent { cmp=com.google.android.apps.messaging/.shared.datamodel.action.execution.ActionExecutorImpl$EmptyService } to com.google.android.apps.messaging/.shared.datamodel.action.execution.ActionExecutorImpl$EmptyService from pid=2520 uid=10100 pkg=com.google.android.apps.messaging startFg?=false
+10-16 07:27:21.048   518  1743 W ActivityManager: Ignoring remove of inactive process: ProcessRecord{966658c 0:com.iiipoints.kompakt/u0a145}
+10-16 07:27:21.350   518  3151 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:21.351   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@9c42419
+10-16 07:27:21.351   518  1213 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:21.351   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@cd7eebf
+10-16 07:27:25.822   518  1713 W ActivityManager: Foreground service started from background can not have location/camera/microphone access: service com.google.android.apps.messaging/.shared.net.DittoForegroundService
+10-16 07:27:26.755   518   555 W ActivityManager: setHasOverlayUi called on unknown pid: 3606
+10-16 07:27:26.756   518  2699 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:26.792   518  2699 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:26.794   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@174a343
+10-16 07:27:26.796   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@13a1dc0
+10-16 07:27:27.159   518  1224 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:27.161   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@82eb783
+10-16 07:27:30.743   518  3170 W ActivityManager: Unable to start service Intent { cmp=com.google.android.googlequicksearchbox/com.google.android.libraries.mdi.download.d.a.a (has extras) } U=0: not found
+10-16 07:27:30.939   518   820 W ActivityManager: Unable to start service Intent { cmp=com.google.android.googlequicksearchbox/com.google.android.libraries.mdi.download.d.a.a (has extras) } U=0: not found
+10-16 07:27:31.890   518   555 W ActivityManager: setHasOverlayUi called on unknown pid: 4014
+10-16 07:27:31.890   518  3117 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:31.891   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@646ce74
+10-16 07:27:31.900   518  1813 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:31.900   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@4d7575e
+10-16 07:27:31.996   518  3117 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:31.997   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@197007d
+10-16 07:27:33.938   518  1743 W ActivityManager: ProcessRecord{389b166 3543:com.google.android.calendar/u0a121} is attached to a previous process
+10-16 07:27:33.938   518  1743 W ActivityManager: Existing proc ProcessRecord{389b166 3543:com.google.android.calendar/u0a121} was killed 3ms ago when adding ProcessRecord{aa495a9 0:com.google.android.calendar/u0a121}
+10-16 07:27:33.999   518   564 W ActivityManager: Slow operation: 61ms so far, now at startProcess: returned from zygote!
+10-16 07:27:33.999   518   564 W ActivityManager: Slow operation: 61ms so far, now at startProcess: done updating battery stats
+10-16 07:27:33.999   518   564 W ActivityManager: Slow operation: 61ms so far, now at startProcess: building log message
+10-16 07:27:33.999   518   564 W ActivityManager: Slow operation: 61ms so far, now at startProcess: starting to update pids map
+10-16 07:27:34.003   518   564 W ActivityManager: Slow operation: 65ms so far, now at startProcess: done updating pids map
+10-16 07:27:34.488   518   584 W ActivityManager: Scheduling restart of crashed service com.google.android.gm/com.android.email.job.BootCompletedJob$BootCompletedJobService in 1000ms for connection
+10-16 07:27:34.488   518   584 W ActivityManager: Scheduling restart of crashed service com.google.android.gm/com.android.email.job.UpgradeJob$UpgradeJobService in 11000ms for connection
+10-16 07:27:34.490   518   563 W ActivityManager: ProcessRecord{c2ad150 0:com.google.android.gm/u0a123} is attached to a previous process 2120
+10-16 07:27:36.785   518   555 W ActivityManager: setHasOverlayUi called on unknown pid: 4111
+10-16 07:27:36.813   518  1813 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:36.814   518  1224 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:36.817   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@f5d4e77
+10-16 07:27:36.817   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@facdae4
+10-16 07:27:36.969   518  1514 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:36.969   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@39ad62
+10-16 07:27:38.783   518   518 W ActivityManager: Unable to start service Intent { act=android.service.contentcapture.ContentCaptureService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiContentCaptureService } U=0: not found
+10-16 07:27:39.238   518   869 W ActivityManager: Unable to start service Intent { act=com.google.pixel.exo.WIRECUTTER pkg=com.google.pixel.exo.bootstrapping } U=0: not found
+10-16 07:27:42.294   518   555 W ActivityManager: setHasOverlayUi called on unknown pid: 4670
+10-16 07:27:42.327   518  2482 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:42.328   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@5e0c909
+10-16 07:27:42.332   518  2482 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:42.332   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@e6e061a
+10-16 07:27:42.452   518  3170 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:42.453   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@262250b
+10-16 07:27:45.094   518   607 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.ads.identifier.service.AdvertisingIdService in 1000ms for connection
+10-16 07:27:45.095   518   607 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.chimera.GmsBoundBrokerService in 10999ms for connection
+10-16 07:27:45.095   518   607 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.icing.service.IndexService in 20999ms for connection
+10-16 07:27:45.095   518   607 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.chimera.container.ExternalFileApkService in 30999ms for start-requested
+10-16 07:27:45.095   518   607 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.chimera.GmsIntentOperationService in 40999ms for start-requested
+10-16 07:27:45.095   518   607 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.icing.service.AppIndexingService in 50999ms for connection
+10-16 07:27:45.095   518   607 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.measurement.service.MeasurementBrokerService in 60998ms for connection
+10-16 07:27:45.095   518   607 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.ads.social.GcmSchedulerWakeupService in 70998ms for connection
+10-16 07:27:45.095   518   607 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.nearby.exposurenotification.WakeUpService in 80998ms for connection
+10-16 07:27:45.095   518   607 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.nearby.sharing.SharingTileService in 90998ms for connection
+10-16 07:27:45.142   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/com.google.android.location.fused.FusedLocationService in 70952ms for connection
+10-16 07:27:45.142   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.location.geocode.GeocodeService in 100951ms for connection
+10-16 07:27:45.142   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.chimera.PersistentDirectBootAwareApiService in 110951ms for connection
+10-16 07:27:45.143   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/com.google.android.contextmanager.service.ContextManagerService in 120951ms for start-requested
+10-16 07:27:45.143   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.auth.setup.devicesignals.LockScreenService in 130950ms for start-requested
+10-16 07:27:45.144   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.deviceconnection.service.DeviceConnectionWatcherService in 140950ms for start-requested
+10-16 07:27:45.144   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.gcm.nts.SchedulerService in 150950ms for start-requested
+10-16 07:27:45.144   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.location.persistent.LocationPersistentService in 160950ms for start-requested
+10-16 07:27:45.144   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/com.google.android.location.internal.server.HardwareArProviderService in 170950ms for connection
+10-16 07:27:45.144   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.presencemanager.service.PresenceManagerPresenceReportService in 180950ms for start-requested
+10-16 07:27:45.144   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.nearby.exposurenotification.service.ExposureMatchingService in 190950ms for start-requested
+10-16 07:27:45.144   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.common.stats.GmsCoreStatsService in 200950ms for start-requested
+10-16 07:27:45.144   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.thunderbird.EmergencyPersistentService in 210950ms for start-requested
+10-16 07:27:45.145   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/com.google.android.location.network.NetworkLocationService in 220950ms for connection
+10-16 07:27:45.145   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/com.google.android.location.internal.GoogleLocationManagerService in 230950ms for start-requested
+10-16 07:27:45.145   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.auth.GetToken in 240950ms for connection
+10-16 07:27:45.145   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.gcm.GcmService in 250950ms for start-requested
+10-16 07:27:45.145   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.chimera.PersistentBoundBrokerService in 260950ms for connection
+10-16 07:27:45.145   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.chimera.PersistentApiService in 270950ms for connection
+10-16 07:27:45.145   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.clearcut.debug.ClearcutDebugDumpService in 280950ms for start-requested
+10-16 07:27:45.145   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.nearby.sharing.ReceiveSurfaceService in 290950ms for start-requested
+10-16 07:27:45.145   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.geotimezone.GeoTimeZoneService in 300950ms for connection
+10-16 07:27:45.145   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.chimera.PersistentIntentOperationService in 310950ms for start-requested
+10-16 07:27:45.145   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.nearby.messages.service.NearbyMessagesService in 320950ms for start-requested
+10-16 07:27:45.145   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/.nearby.exposurenotification.service.ExposureNotificationInternalService in 330950ms for start-requested
+10-16 07:27:45.145   518   897 W ActivityManager: Scheduling restart of crashed service com.google.android.gms/com.google.android.location.internal.server.GoogleLocationService in 340950ms for start-requested
+10-16 07:27:45.147   518  3170 W ActivityManager: ProcessRecord{ecfab51 0:com.google.android.gms.persistent/u0a102} is attached to a previous process 1049
+10-16 07:27:45.862   518   548 W ActivityManager: Unable to start service Intent { act=com.google.android.gms.home.service.START pkg=com.google.android.gms } U=0: not found
+10-16 07:27:45.863   518   548 W ActivityManager: Unbind failed: could not find connection for android.os.BinderProxy@42ddf0e
+10-16 07:27:47.137   518   555 W ActivityManager: setHasOverlayUi called on unknown pid: 5374
+10-16 07:27:47.169   518  3117 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:47.183   518  1173 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:47.187   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@7e0b486
+10-16 07:27:47.200   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@751e147
+10-16 07:27:47.214   518  1173 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:47.217   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@533b23f
+10-16 07:27:47.218   518  1173 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:47.218   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@43a726a
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: FATAL EXCEPTION: main
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: Process: com.iiipoints.kompakt, PID: 5755
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: java.lang.RuntimeException: Unable to resume activity {com.iiipoints.kompakt/com.iiipoints.kompakt.MainActivity}: java.lang.IllegalStateException: The specified child already has a parent. You must call removeView() on the child's parent first.
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.app.ActivityThread.performResumeActivity(ActivityThread.java:4757)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.app.ActivityThread.handleResumeActivity(ActivityThread.java:4790)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.app.servertransaction.ResumeActivityItem.execute(ResumeActivityItem.java:54)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.app.servertransaction.ActivityTransactionItem.execute(ActivityTransactionItem.java:45)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.executeLifecycleState(TransactionExecutor.java:176)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:97)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2210)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.os.Looper.loopOnce(Looper.java:201)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:288)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:7839)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1003)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: Caused by: java.lang.IllegalStateException: The specified child already has a parent. You must call removeView() on the child's parent first.
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.view.ViewGroup.addViewInner(ViewGroup.java:5247)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.view.ViewGroup.addView(ViewGroup.java:5076)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.view.ViewGroup.addView(ViewGroup.java:5048)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at com.iiipoints.kompakt.MainActivity$3.build(MainActivity.java:196)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at com.iiipoints.kompakt.MainActivity.show(MainActivity.java:80)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at com.iiipoints.kompakt.MainActivity.onResume(MainActivity.java:61)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.app.Instrumentation.callActivityOnResume(Instrumentation.java:1476)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.app.Activity.performResume(Activity.java:8191)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	at android.app.ActivityThread.performResumeActivity(ActivityThread.java:4747)
+10-16 07:27:47.315  5755  5755 E AndroidRuntime: 	... 13 more
+10-16 07:27:47.317   518  1173 E ActivityManager: App crashed on incremental package com.iiipoints.kompakt which is 100% loaded.
+10-16 07:27:47.384   518  1173 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:47.390   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@9773c1f
+10-16 07:27:47.487   518  2467 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:47.487   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@c7ba258
+10-16 07:27:51.547   518  3018 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:51.550   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@cb0263d
+10-16 07:27:51.550   518  3018 W ActivityManager: Unable to start service Intent { act=android.service.smartspace.SmartspaceService cmp=com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiSmartspaceService } U=0: not found
+10-16 07:27:51.552   518   518 W ActivityManager: Unbind failed: could not find connection for android.app.LoadedApk$ServiceDispatcher$InnerConnection@bb67783
+10-16 07:27:51.810   518   564 W ActivityManager: Slow operation: 146ms so far, now at startProcess: done updating battery stats
+10-16 07:27:51.810   518   564 W ActivityManager: Slow operation: 146ms so far, now at startProcess: building log message
+10-16 07:27:51.810   518   564 W ActivityManager: Slow operation: 146ms so far, now at startProcess: starting to update pids map
+10-16 07:27:51.975   518   564 W ActivityManager: Slow operation: 289ms so far, now at startProcess: done updating pids map
+10-16 07:27:52.942   518  1843 W ActivityManager: Slow operation: 60ms so far, now at attachApplicationLocked: immediately before bindApplication
+10-16 07:27:52.943   518  1843 W ActivityManager: Slow operation: 60ms so far, now at attachApplicationLocked: immediately after bindApplication
+10-16 07:27:52.943   518  1843 W ActivityManager: Slow operation: 60ms so far, now at attachApplicationLocked: after updateLruProcessLocked
+10-16 07:27:52.991   518  1843 W ActivityManager: Slow operation: 109ms so far, now at attachApplicationLocked: after mServices.attachApplicationLocked
