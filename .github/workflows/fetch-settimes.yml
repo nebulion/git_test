@@ -1,0 +1,33 @@
+name: Fetch official III Points pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ccr-84c56106-kllwcz]
+    paths: [.github/workflows/fetch-settimes.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download pages (raw HTML and rendered DOM)
+        run: |
+          mkdir -p kompakt-map/source
+          UA="Mozilla/5.0 (Linux; Android 12) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Mobile Safari/537.36"
+          for p in set-times stages lineup experience; do
+            curl -sSL -A "$UA" "https://www.iiipoints.com/$p/" -o "kompakt-map/source/$p.raw.html" || true
+            timeout 90 google-chrome --headless=new --no-sandbox --disable-gpu --virtual-time-budget=15000 \
+              --user-agent="$UA" --dump-dom "https://www.iiipoints.com/$p/" > "kompakt-map/source/$p.dom.html" 2>/dev/null || true
+          done
+          ls -la kompakt-map/source
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kompakt-map/source
+          git commit -m "Add snapshot of official III Points pages" || exit 0
+          git push
