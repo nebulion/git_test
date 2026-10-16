@@ -1,0 +1,49 @@
+"""Monochrome pictograms for the map legend, drawn in a 24x24 box.
+
+Each icon is a list of ops, painted in the icon's foreground colour unless marked "bg":
+  ["p", d]                 SVG path data (M/L/H/V/C/Q/Z, absolute or relative)
+  ["c", cx, cy, r, "fg"|"bg"]  filled circle
+  ["t", text, size]        centred text (Barlow Condensed 800)
+
+Shared by the SVG generator and the Android renderer (exported to assets/icons.json).
+"""
+
+ICONS = {
+    "firstaid": [["p", "M9.5 4.5h5v5h5v5h-5v5h-5v-5h-5v-5h5z"]],
+    "water": [["p", "M8.5 5.5C8.5 5.5 5 9.8 5 12.2C5 14.3 6.6 15.8 8.5 15.8C10.4 15.8 12 14.3 12 12.2C12 9.8 8.5 5.5 8.5 5.5Z"],
+              ["p", "M15.5 5.5C15.5 5.5 12.6 9.1 12.6 11.1C12.6 12.8 13.9 14.1 15.5 14.1C17.1 14.1 18.4 12.8 18.4 11.1C18.4 9.1 15.5 5.5 15.5 5.5Z"],
+              ["p", "M12 11.5C12 11.5 9.2 15 9.2 16.9C9.2 18.5 10.5 19.7 12 19.7C13.5 19.7 14.8 18.5 14.8 16.9C14.8 15 12 11.5 12 11.5Z"]],
+    "restroom": [["c", 8.2, 5.6, 1.9, "fg"], ["p", "M6 8.4h4.4v6.2h-1.1v5h-2.2v-5H6z"],
+                 ["c", 15.8, 5.6, 1.9, "fg"], ["p", "M15.8 8.4L19 15h-2.1v4.6h-2.2V15h-2.1z"],
+                 ["p", "M11.6 4.5h0.8v15h-0.8z"]],
+    "food": [["p", "M6.5 4.5h1v5h1v-5h1v5h1v-5h1v6.2c0 1.1-.8 1.9-1.8 2V19.5H8.3v-6.8c-1-.1-1.8-.9-1.8-2z"],
+             ["p", "M15.2 4.5c2 .3 3.3 2.8 3.3 6.3v1.7h-1.6v7h-1.7z"]],
+    "bar": [["p", "M5 5h14l-6.1 7v5.3h3.3v2.2H7.8v-2.2h3.3V12z"]],
+    "merch": [["p", "M8.6 4.5L4 7.3l2 3.6 1.7-.9v9.5h8.6V10l1.7.9 2-3.6-4.6-2.8C14.9 5.9 13.6 6.6 12 6.6S9.1 5.9 8.6 4.5z"]],
+    "info": [["c", 12, 6.6, 1.9, "fg"], ["p", "M10.2 9.8h3.6v9.7h-3.6z"]],
+    "lockers": [["c", 9.5, 9, 4.3, "fg"], ["c", 9.5, 9, 1.7, "bg"],
+                ["p", "M12 11.8l7.2 7.2-1.5 1.5-1-1-1.1 1.1-1.4-1.4 1.1-1.1-4.7-4.7z"]],
+    "accessible": [["c", 12.6, 4.8, 1.9, "fg"], ["c", 10, 15.2, 4.6, "fg"], ["c", 10, 15.2, 3, "bg"],
+                   ["p", "M11 7.6h2.6v4.2h3.5l2.4 5.6-1.6.7-1.9-4.3H11z"]],
+    "tickets": [["p", "M4 8h16v2.6c-.9 0-1.4.6-1.4 1.4s.5 1.4 1.4 1.4V16H4v-2.6c.9 0 1.4-.6 1.4-1.4S4.9 10.6 4 10.6z"],
+                ["p", "M14.6 8.8h.8v1.2h-.8zM14.6 11.4h.8v1.2h-.8zM14.6 14h.8v1.2h-.8z", "bg"]],
+    "lostfound": [["t", "?", 15]],
+    "table": [["p", "M6.5 5h11c.8 0 1.5.7 1.5 1.5v11c0 .8-.7 1.5-1.5 1.5h-11c-.8 0-1.5-.7-1.5-1.5v-11C5 5.7 5.7 5 6.5 5z"],
+              ["t", "S", 12, "bg"]],
+    "vip": [["t", "VIP", 9.5]],
+    "vipplus": [["t", "VIP+", 8.5]],
+    "photo": [["p", "M4.5 8.5h3.6l1.6-2.2h4.6l1.6 2.2h3.6v10H4.5z"], ["c", 12, 13.4, 3.1, "bg"], ["c", 12, 13.4, 1.7, "fg"]],
+    "boxoffice": [["p", "M6 5.5h12v14H6z"], ["p", "M8 7.5h8v5H8z", "bg"], ["c", 12, 9.6, 1.4, "fg"],
+                  ["p", "M9.8 12.5c0-1.2 1-1.6 2.2-1.6s2.2.4 2.2 1.6z"], ["p", "M8 14.5h8v1.3H8z", "bg"]],
+    "willcall": [["p", "M6 5.5h12v14H6z"], ["p", "M8 7.5h8v6H8z", "bg"], ["c", 12, 9.8, 1.5, "fg"],
+                 ["p", "M9.6 13.5c0-1.4 1.1-1.9 2.4-1.9s2.4.5 2.4 1.9z"], ["p", "M9 15.6h6v1.4H9z", "bg"]],
+}
+
+# Legend rows as printed on the official map (label, icon, style).
+LEGEND = [
+    [("FIRST AID", "firstaid", "ga"), ("ACCESSIBLE VIEWING", "accessible", "ga"), ("LOCKERS", "lockers", "ga"), ("FOOD", "food", "ga")],
+    [("WATER STATIONS", "water", "ga"), ("VIP WATER STATIONS", "water", "vip"), ("VIP & VIP+ UPGRADE", "vip", "vip"), ("VIP CONCIERGE", "vip", "vipring")],
+    [("VIP BAR", "bar", "vip"), ("VIP FOOD", "food", "vip"), ("MERCH", "merch", "ga"), ("TABLE SERVICE", "table", "ga")],
+    [("INFO", "info", "ga"), ("TICKET HELP", "tickets", "ga"), ("WILL CALL", "willcall", "ga"), ("BOX OFFICE", "boxoffice", "vip")],
+    [("LOST & FOUND", "lostfound", "ga"), ("RESTROOMS", "restroom", "ga"), ("VIP RESTROOMS", "restroom", "vip"), ("GA+ RESTROOMS", "restroom", "gaplus")],
+]
