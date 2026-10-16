@@ -25,7 +25,10 @@ for name, (x0, y0, x1, y1) in REGIONS.items():
     Z = 2
     a = cv2.resize(h[(y0 - 19) * 3:(y1 - 19) * 3, (x0 - 61) * 3:(x1 - 61) * 3], ((x1 - x0) * Z, (y1 - y0) * Z), interpolation=cv2.INTER_AREA)
     a = (a * 0.55 + 115).astype(np.uint8)
-    e = edges[(y0 - VIEW[1]) * 2:(y1 - VIEW[1]) * 2, (x0 - VIEW[0]) * 2:(x1 - VIEW[0]) * 2]
+    e = np.zeros((y1 - y0) * 2 * (x1 - x0) * 2, np.uint8).reshape((y1 - y0) * 2, (x1 - x0) * 2)
+    sy0, sx0 = (y0 - VIEW[1]) * 2, (x0 - VIEW[0]) * 2
+    src = edges[max(sy0, 0):max(sy0 + e.shape[0], 0), max(sx0, 0):max(sx0 + e.shape[1], 0)]
+    e[max(-sy0, 0):max(-sy0, 0) + src.shape[0], max(-sx0, 0):max(-sx0, 0) + src.shape[1]] = src
     e = cv2.dilate(e, np.ones((2, 2), np.uint8)) > 0
     a[e[:a.shape[0], :a.shape[1]]] = (0, 0, 235)
     cv2.imwrite(os.path.join(out, name + ".jpg"), a, [cv2.IMWRITE_JPEG_QUALITY, 85])
