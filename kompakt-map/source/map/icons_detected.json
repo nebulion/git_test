@@ -1,0 +1,542 @@
+[
+ {
+  "type": "vipbar",
+  "alt": "vipupgrade",
+  "dist": 46.0,
+  "margin": 2.0,
+  "x": 1177.3,
+  "y": 316.0,
+  "r": 21.5
+ },
+ {
+  "type": "vipconcierge",
+  "alt": "vipupgrade",
+  "dist": 22.9,
+  "margin": 16.7,
+  "x": 816.0,
+  "y": 460.7,
+  "r": 22.9
+ },
+ {
+  "type": "vipupgrade",
+  "alt": "vipfood",
+  "dist": 51.3,
+  "margin": 3.1,
+  "x": 863.3,
+  "y": 463.3,
+  "r": 22.9
+ },
+ {
+  "type": "vipwater",
+  "alt": "vipbar",
+  "dist": 33.8,
+  "margin": 6.4,
+  "x": 909.3,
+  "y": 474.7,
+  "r": 22.2
+ },
+ {
+  "type": "viprestroom",
+  "alt": "restroom",
+  "dist": 8.6,
+  "margin": 29.6,
+  "x": 773.3,
+  "y": 484.0,
+  "r": 21.2
+ },
+ {
+  "type": "vipfood",
+  "alt": "vipupgrade",
+  "dist": 19.7,
+  "margin": 28.6,
+  "x": 897.3,
+  "y": 524.0,
+  "r": 22.9
+ },
+ {
+  "type": "vipbar",
+  "alt": "tickets",
+  "dist": 20.1,
+  "margin": 17.6,
+  "x": 850.0,
+  "y": 532.0,
+  "r": 21.5
+ },
+ {
+  "type": "vipfood",
+  "alt": "vipwater",
+  "dist": 8.6,
+  "margin": 38.8,
+  "x": 794.7,
+  "y": 533.3,
+  "r": 21.3
+ },
+ {
+  "type": "vipbar",
+  "alt": "vipconcierge",
+  "dist": 37.0,
+  "margin": 2.3,
+  "x": 973.3,
+  "y": 563.3,
+  "r": 21.2
+ },
+ {
+  "type": "restroom",
+  "alt": "viprestroom",
+  "dist": 37.1,
+  "margin": 5.2,
+  "x": 1216.0,
+  "y": 568.7,
+  "r": 23.1
+ },
+ {
+  "type": "vipbar",
+  "alt": "tickets",
+  "dist": 18.9,
+  "margin": 20.2,
+  "x": 922.0,
+  "y": 598.0,
+  "r": 22.3
+ },
+ {
+  "type": "firstaid",
+  "alt": "food",
+  "dist": 19.3,
+  "margin": 31.1,
+  "x": 786.0,
+  "y": 632.7,
+  "r": 22.9
+ },
+ {
+  "type": "table",
+  "alt": "restroom",
+  "dist": 51.9,
+  "margin": 7.1,
+  "x": 1029.3,
+  "y": 640.0,
+  "r": 24.0
+ },
+ {
+  "type": "vipupgrade",
+  "alt": "viprestroom",
+  "dist": 52.1,
+  "margin": 1.9,
+  "x": 1150.7,
+  "y": 650.7,
+  "r": 20.9
+ },
+ {
+  "type": "vipupgrade",
+  "alt": "vipconcierge",
+  "dist": 22.2,
+  "margin": 20.9,
+  "x": 840.0,
+  "y": 672.0,
+  "r": 21.1
+ },
+ {
+  "type": "food",
+  "alt": "lostfound",
+  "dist": 5.5,
+  "margin": 37.2,
+  "x": 627.3,
+  "y": 675.3,
+  "r": 21.2
+ },
+ {
+  "type": "water",
+  "alt": "tickets",
+  "dist": 13.8,
+  "margin": 16.9,
+  "x": 886.0,
+  "y": 689.3,
+  "r": 22.9
+ },
+ {
+  "type": "accessible",
+  "alt": "info",
+  "dist": 27.5,
+  "margin": 21.7,
+  "x": 934.7,
+  "y": 690.0,
+  "r": 22.9
+ },
+ {
+  "type": "info",
+  "alt": "vipbar",
+  "dist": 55.4,
+  "margin": 4.1,
+  "x": 1244.0,
+  "y": 708.0,
+  "r": 19.9
+ },
+ {
+  "type": "merch",
+  "alt": "vipbar",
+  "dist": 34.6,
+  "margin": 14.5,
+  "x": 1080.7,
+  "y": 738.7,
+  "r": 23.5
+ },
+ {
+  "type": "gaplusrestroom",
+  "alt": "water",
+  "dist": 28.4,
+  "margin": 13.5,
+  "x": 745.3,
+  "y": 781.3,
+  "r": 22.9
+ },
+ {
+  "type": "restroom",
+  "alt": "viprestroom",
+  "dist": 38.4,
+  "margin": 6.6,
+  "x": 1096.0,
+  "y": 786.7,
+  "r": 23.5
+ },
+ {
+  "type": "food",
+  "alt": "lostfound",
+  "dist": 6.0,
+  "margin": 36.7,
+  "x": 635.3,
+  "y": 816.7,
+  "r": 21.4
+ },
+ {
+  "type": "restroom",
+  "alt": "viprestroom",
+  "dist": 36.8,
+  "margin": 5.4,
+  "x": 1251.3,
+  "y": 883.3,
+  "r": 23.1
+ },
+ {
+  "type": "accessible",
+  "alt": "info",
+  "dist": 32.8,
+  "margin": 16.2,
+  "x": 354.7,
+  "y": 916.0,
+  "r": 23.5
+ },
+ {
+  "type": "firstaid",
+  "alt": "food",
+  "dist": 22.1,
+  "margin": 28.6,
+  "x": 456.0,
+  "y": 929.3,
+  "r": 22.2
+ },
+ {
+  "type": "vipbar",
+  "alt": "tickets",
+  "dist": 13.5,
+  "margin": 25.3,
+  "x": 198.0,
+  "y": 965.3,
+  "r": 23.3
+ },
+ {
+  "type": "food",
+  "alt": "lostfound",
+  "dist": 7.0,
+  "margin": 35.7,
+  "x": 792.0,
+  "y": 974.0,
+  "r": 21.4
+ },
+ {
+  "type": "restroom",
+  "alt": "viprestroom",
+  "dist": 39.6,
+  "margin": 5.3,
+  "x": 1152.0,
+  "y": 980.7,
+  "r": 23.5
+ },
+ {
+  "type": "firstaid",
+  "alt": "food",
+  "dist": 19.3,
+  "margin": 31.7,
+  "x": 1042.0,
+  "y": 987.3,
+  "r": 23.1
+ },
+ {
+  "type": "water",
+  "alt": "tickets",
+  "dist": 12.4,
+  "margin": 19.2,
+  "x": 1090.7,
+  "y": 987.3,
+  "r": 21.3
+ },
+ {
+  "type": "merch",
+  "alt": "vipbar",
+  "dist": 23.1,
+  "margin": 25.1,
+  "x": 834.0,
+  "y": 1007.3,
+  "r": 22.2
+ },
+ {
+  "type": "restroom",
+  "alt": "viprestroom",
+  "dist": 27.0,
+  "margin": 2.0,
+  "x": 435.3,
+  "y": 1018.7,
+  "r": 20.7
+ },
+ {
+  "type": "gaplusrestroom",
+  "alt": "restroom",
+  "dist": 23.0,
+  "margin": 16.6,
+  "x": 484.7,
+  "y": 1018.7,
+  "r": 22.9
+ },
+ {
+  "type": "viprestroom",
+  "alt": "vipbar",
+  "dist": 26.5,
+  "margin": 19.5,
+  "x": 174.7,
+  "y": 1026.7,
+  "r": 22.5
+ },
+ {
+  "type": "food",
+  "alt": "lostfound",
+  "dist": 16.8,
+  "margin": 26.2,
+  "x": 644.7,
+  "y": 1049.3,
+  "r": 22.2
+ },
+ {
+  "type": "food",
+  "alt": "lostfound",
+  "dist": 3.4,
+  "margin": 39.3,
+  "x": 1192.0,
+  "y": 1050.7,
+  "r": 20.9
+ },
+ {
+  "type": "accessible",
+  "alt": "info",
+  "dist": 28.4,
+  "margin": 20.5,
+  "x": 1012.0,
+  "y": 1062.7,
+  "r": 22.9
+ },
+ {
+  "type": "table",
+  "alt": "restroom",
+  "dist": 55.0,
+  "margin": 3.8,
+  "x": 193.3,
+  "y": 1084.0,
+  "r": 23.5
+ },
+ {
+  "type": "vipbar",
+  "alt": "tickets",
+  "dist": 10.6,
+  "margin": 27.9,
+  "x": 254.0,
+  "y": 1086.0,
+  "r": 21.3
+ },
+ {
+  "type": "vipupgrade",
+  "alt": "viprestroom",
+  "dist": 52.7,
+  "margin": 1.2,
+  "x": 810.7,
+  "y": 1117.3,
+  "r": 20.9
+ },
+ {
+  "type": "food",
+  "alt": "lostfound",
+  "dist": 5.5,
+  "margin": 37.2,
+  "x": 1254.7,
+  "y": 1127.3,
+  "r": 21.4
+ },
+ {
+  "type": "vipbar",
+  "alt": "tickets",
+  "dist": 12.0,
+  "margin": 26.5,
+  "x": 804.7,
+  "y": 1167.3,
+  "r": 23.1
+ },
+ {
+  "type": "viprestroom",
+  "alt": "restroom",
+  "dist": 4.0,
+  "margin": 33.6,
+  "x": 875.3,
+  "y": 1171.3,
+  "r": 20.8
+ },
+ {
+  "type": "accessible",
+  "alt": "info",
+  "dist": 31.9,
+  "margin": 17.3,
+  "x": 556.0,
+  "y": 1186.7,
+  "r": 23.4
+ },
+ {
+  "type": "vipupgrade",
+  "alt": "lockers",
+  "dist": 29.6,
+  "margin": 15.8,
+  "x": 548.0,
+  "y": 1252.0,
+  "r": 23.4
+ },
+ {
+  "type": "lockers",
+  "alt": "vipupgrade",
+  "dist": 15.7,
+  "margin": 29.8,
+  "x": 847.3,
+  "y": 1264.0,
+  "r": 22.9
+ },
+ {
+  "type": "vipconcierge",
+  "alt": "vipupgrade",
+  "dist": 22.3,
+  "margin": 15.0,
+  "x": 413.3,
+  "y": 1287.3,
+  "r": 22.9
+ },
+ {
+  "type": "lostfound",
+  "alt": "food",
+  "dist": 10.4,
+  "margin": 32.2,
+  "x": 897.3,
+  "y": 1313.3,
+  "r": 21.1
+ },
+ {
+  "type": "info",
+  "alt": "water",
+  "dist": 12.4,
+  "margin": 34.5,
+  "x": 848.7,
+  "y": 1314.0,
+  "r": 22.9
+ },
+ {
+  "type": "viprestroom",
+  "alt": "restroom",
+  "dist": 29.1,
+  "margin": 9.6,
+  "x": 360.0,
+  "y": 1325.3,
+  "r": 23.1
+ },
+ {
+  "type": "vipbar",
+  "alt": "vipconcierge",
+  "dist": 36.9,
+  "margin": 2.4,
+  "x": 484.0,
+  "y": 1326.7,
+  "r": 21.4
+ },
+ {
+  "type": "boxoffice",
+  "alt": "water",
+  "dist": 17.4,
+  "margin": 14.3,
+  "x": 844.0,
+  "y": 1382.7,
+  "r": 22.9
+ },
+ {
+  "type": "willcall",
+  "alt": "info",
+  "dist": 38.2,
+  "margin": 8.4,
+  "x": 910.7,
+  "y": 1383.3,
+  "r": 23.3
+ },
+ {
+  "type": "vipfood",
+  "alt": "vipwater",
+  "dist": 6.4,
+  "margin": 39.7,
+  "x": 382.7,
+  "y": 1394.0,
+  "r": 21.4
+ },
+ {
+  "type": "vipbar",
+  "alt": "tickets",
+  "dist": 13.9,
+  "margin": 24.1,
+  "x": 618.0,
+  "y": 1396.0,
+  "r": 22.2
+ },
+ {
+  "type": "tickets",
+  "alt": "water",
+  "dist": 13.0,
+  "margin": 17.9,
+  "x": 280.7,
+  "y": 1397.3,
+  "r": 21.2
+ },
+ {
+  "type": "vipbar",
+  "alt": "tickets",
+  "dist": 14.4,
+  "margin": 24.4,
+  "x": 432.0,
+  "y": 1399.3,
+  "r": 23.5
+ },
+ {
+  "type": "vipbar",
+  "alt": "tickets",
+  "dist": 9.5,
+  "margin": 28.9,
+  "x": 500.0,
+  "y": 1399.3,
+  "r": 21.4
+ },
+ {
+  "type": "tickets",
+  "alt": "water",
+  "dist": 17.8,
+  "margin": 12.9,
+  "x": 693.3,
+  "y": 1399.3,
+  "r": 22.9
+ }
+]

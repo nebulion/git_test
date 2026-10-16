@@ -1,14 +1,19 @@
-"""Build the black & white III Points 2026 festival map.
+"""Build the black & white III Points 2026 map for the Mudita Kompakt (E Ink).
+
+Hand-built vector map, checked against the hi-res stitch of the official map
+(source/map/hires.png, see tools/stitch_zoom.py and tools/overlay_check.py):
+  * raised city blocks and streets on the map's oblique street grid (3D, like the original)
+  * stage buildings as extruded 3D boxes
+  * icon positions and types from tools/detect_icons.py (matched against the official legend)
+  * stage labels at the official tag positions
+  * no sponsor logos, no trees, no poster title/legend (the legend is its own app screen)
 
 Outputs:
-  app/assets/map.json   display list rendered by the Android app (MapView)
-  mockup/map.svg        the same drawing as SVG (reference / mockup)
-  app/assets/icons.json pictograms shared by both renderers
-
-Geometry was traced from the official map (iiipoints.com/assets/campaign/festival-map-2026-1080.webp)
-and full-resolution app screenshots. Coordinates are in the stitched-screenshot pixel space; the
-official image maps into it as x*1.404+61, y*1.404+18.7. The ground plane is an oblique grid:
-a ground point (u, w) sits at picture (u - K*w, S*u + w).
+  app/assets/map.json    display list rendered by the Android app (MapView)
+  app/assets/icons.json  pictograms
+  mockup/map.svg         the same drawing as a standalone SVG for review
+Coordinates are "reference" pixels of the official map stitched from app screenshots
+(hires.png pixel = (ref - (61, 19)) * 3).
 """
 import base64
 import json
@@ -19,15 +24,16 @@ import sys
 from PIL import ImageFont
 
 sys.path.insert(0, os.path.dirname(__file__))
-from icons import ICONS, LEGEND  # noqa: E402
+from icons import ICONS  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FONTS = os.path.join(ROOT, "app", "assets", "fonts")
-K, S = 0.2586, 0.044
-STREET_ANGLE = -math.degrees(math.atan2(1, K))      # cross streets, about -75.5 degrees
-AVENUE_ANGLE = math.degrees(math.atan(S))           # avenues, about 2.5 degrees
-VIEW = (61, 19, 1516, 1895)                         # x, y, w, h of the whole poster
-WALL = (7, 56)                                       # extrusion of the raised city blocks
+K, S = 0.2586, 0.044                               # oblique grid: ground (u, w) -> picture (u - K*w, S*u + w)
+STREET_ANGLE = -math.degrees(math.atan2(1, K))     # cross streets, about -75.5 degrees
+AVENUE_ANGLE = math.degrees(math.atan(S))          # avenues, about 2.5 degrees
+VIEW = (130, 80, 1400, 1500)                       # x, y, w, h of the map area
+WALL = (7, 56)                                     # extrusion of the raised city blocks
+DETAIL = 1                                         # level of ops only shown when zoomed in
 
 FONT_FILES = {
     "bc8": "BarlowCondensed-800.ttf",
@@ -50,8 +56,20 @@ def P(u, w):
     return (round(u - K * w, 1), round(S * u + w, 1))
 
 
+def UV(x, y):
+    """Picture -> ground grid."""
+    u = (x + K * y) / (1 + K * S)
+    return u, y - S * u
+
+
 def rect_uv(u0, w0, u1, w1):
     return [P(u0, w0), P(u1, w0), P(u1, w1), P(u0, w1)]
+
+
+def around(x, y, du, dw):
+    """Ground-aligned rectangle of size du x dw centred on picture point (x, y)."""
+    u, w = UV(x, y)
+    return rect_uv(u - du / 2, w - dw / 2, u + du / 2, w + dw / 2)
 
 
 def flat(pts):
@@ -61,45 +79,42 @@ def flat(pts):
     return out
 
 
-ops = []        # display list
-hits = []       # tap targets
+ops = []
+hits = []
 
 
-def poly(pts, fill="w", stroke=0, color="b"):
-    ops.append({"o": "poly", "p": flat(pts), "f": fill, "s": stroke, "c": color})
+def op(d, lvl=0):
+    if lvl:
+        d["lvl"] = lvl
+    ops.append(d)
 
 
-def line(pts, stroke=2, color="b", dash=None):
-    op = {"o": "line", "p": flat(pts), "s": stroke, "c": color}
+def poly(pts, fill="w", stroke=0, color="b", lvl=0):
+    op({"o": "poly", "p": flat(pts), "f": fill, "s": stroke, "c": color}, lvl)
+
+
+def line(pts, stroke=2, color="b", dash=None, lvl=0):
+    d = {"o": "line", "p": flat(pts), "s": stroke, "c": color}
     if dash:
-        op["d"] = dash
-    ops.append(op)
+        d["d"] = dash
+    op(d, lvl)
 
 
-def text(x, y, t, font="bc8", size=24, color="b", align="c", rot=0, fit=None):
-    op = {"o": "text", "x": round(x, 1), "y": round(y, 1), "t": t, "font": font, "sz": size, "c": color, "a": align}
+def text(x, y, t, font="bc8", size=24, color="b", align="c", rot=0, fit=None, lvl=0):
+    d = {"o": "text", "x": round(x, 1), "y": round(y, 1), "t": t, "font": font, "sz": size, "c": color, "a": align}
     if rot:
-        op["r"] = round(rot, 2)
+        d["r"] = round(rot, 2)
     if fit:
-        op["fit"] = fit
-    ops.append(op)
+        d["fit"] = fit
+    op(d, lvl)
 
 
-def circle(x, y, r, fill="b", stroke=0, color="b"):
-    ops.append({"o": "circle", "x": round(x, 1), "y": round(y, 1), "r": r, "f": fill, "s": stroke, "c": color})
-
-
-def rect(x, y, w, h, fill="w", stroke=0, color="b", rx=0, rot=0):
-    op = {"o": "rect", "x": round(x, 1), "y": round(y, 1), "w": w, "h": h, "f": fill, "s": stroke, "c": color, "rx": rx}
+def rect(x, y, w, h, fill="w", stroke=0, color="b", rx=0, rot=0, lvl=0):
+    d = {"o": "rect", "x": round(x, 1), "y": round(y, 1), "w": round(w, 1), "h": round(h, 1),
+         "f": fill, "s": stroke, "c": color, "rx": rx}
     if rot:
-        op["r"] = round(rot, 2)
-    ops.append(op)
-
-
-def icon(kind, x, y, style="ga", r=22, hit=None):
-    ops.append({"o": "icon", "k": kind, "x": round(x, 1), "y": round(y, 1), "r": r, "st": style})
-    if hit:
-        hits.append({"id": hit, "x": round(x - r, 1), "y": round(y - r, 1), "w": 2 * r, "h": 2 * r})
+        d["r"] = round(rot, 2)
+    op(d, lvl)
 
 
 def wall(pts):
@@ -112,70 +127,33 @@ def wall(pts):
     poly([(x + ex, y + ey) for x, y in pts], fill="b")
 
 
-def street_text(x, y, t, on_street, rot):
-    text(x, y + 8, t, font="bc6i", size=27, color="w" if on_street else "b", rot=rot)
-
-
-def label(x, y, t, w, h, kind="stage", hit=None, size=None, sub=None):
-    """Stage tags: white box, black frame and offset shadow (the original's blue tags).
-    Sponsor / attraction tags (yellow on the original) are inverted: black box, white type."""
-    if kind == "stage":
-        rect(x - w / 2 + 5, y - h / 2 + 5, w, h, fill="b")
-        rect(x - w / 2, y - h / 2, w, h, fill="w", stroke=3)
-        fg = "b"
-    else:
-        rect(x - w / 2, y - h / 2, w, h, fill="b", stroke=3, color="b")
-        fg = "w"
-    size = size or round(h * (0.46 if sub else 0.78))
-    if sub:
-        text(x, y - h * 0.04, t, size=size, color=fg, fit=w - 12)
-        text(x, y + h * 0.34, sub, font="bc7", size=round(size * 0.8), color=fg, fit=w - 12)
-    else:
-        text(x, y + size * 0.36, t, size=size, color=fg, fit=w - 12)
-    if hit:
-        hits.append({"id": hit, "x": round(x - w / 2, 1), "y": round(y - h / 2, 1), "w": w, "h": h})
-
-
-def arrow(x0, y0, x1, y1, color="w", width=3, head=9):
-    line([(x0, y0), (x1, y1)], stroke=width, color=color)
-    ang = math.atan2(y1 - y0, x1 - x0)
-    a1, a2 = ang + math.radians(150), ang - math.radians(150)
-    poly([(x1, y1), (x1 + head * math.cos(a1), y1 + head * math.sin(a1)),
-          (x1 + head * math.cos(a2), y1 + head * math.sin(a2))], fill=color)
-
-
-def tree(x, y, s=1.0):
-    """Picture-space tree: trunk base at (x, y)."""
-    line([(x, y), (x, y - 16 * s)], stroke=3.2 * s)
-    circle(x, y - 24 * s, 12 * s, fill="b", stroke=2 * s, color="w")
-    circle(x - 7 * s, y - 17 * s, 7.5 * s, fill="b", stroke=2 * s, color="w")
-    circle(x + 7 * s, y - 18 * s, 7.5 * s, fill="b", stroke=2 * s, color="w")
-
-
-def stage_box(pts_top, h):
-    """A simple extruded stage structure drawn in outline."""
-    base = [(x, y + h) for x, y in pts_top]
-    for i in range(len(pts_top)):
-        a, b = pts_top[i], pts_top[(i + 1) % len(pts_top)]
-        poly([a, b, base[(i + 1) % len(pts_top)], base[i]], fill="w", stroke=2)
-    poly(pts_top, fill="h", stroke=2)
+def box3d(base, height, lvl=0):
+    """Extruded building: white walls with black edges, hatched roof (drawn back to front)."""
+    top = [(x, y - height) for x, y in base]
+    n = len(base)
+    walls = []
+    for i in range(n):
+        a, b = base[i], base[(i + 1) % n]
+        at, bt = top[i], top[(i + 1) % n]
+        walls.append(((a[1] + b[1]) / 2, [a, b, bt, at]))
+    for _, q in sorted(walls):
+        poly(q, fill="w", stroke=2.5, lvl=lvl)
+    poly(top, fill="h", stroke=3, lvl=lvl)
 
 
 # --------------------------------------------------------------------------------------------
-# Ground plane
+# Ground: raised plates (streets, black) carrying the city blocks (white)
 # --------------------------------------------------------------------------------------------
-SOUTH = [P(612, 840), P(1700, 840), P(1700, 1425), P(612, 1425)]          # five south blocks + avenues
-ISO = [P(452, 840), P(612, 840), P(612, 1112), P(452, 1112)]              # Isotropic corner lot
-NORTH_S3 = [P(695, 648), P(868, 648), P(868, 840), P(695, 840)]           # S3QUENC3 lot
-NORTH_E = [P(868, 402), P(1490, 402), P(1490, 840), P(868, 840)]          # Players Club / Mind Melt block
+SOUTH = [P(612, 840), P(1700, 840), P(1700, 1425), P(612, 1425)]    # 3 south blocks + NW 5th / 6th Ave
+ISO = [P(452, 840), P(612, 840), P(612, 1112), P(452, 1112)]        # Isotropic lot
+NORTH_S3 = [P(695, 648), P(868, 648), P(868, 840), P(695, 840)]     # S3QUENC3 lot
+NORTH_E = [P(868, 402), P(1490, 402), P(1490, 840), P(868, 840)]    # Players Club / Mind Melt block
 VIP_LOUNGE = [P(1062, 122), P(1282, 122), P(1282, 402), P(1062, 402)]
-VIP_PLUS_PATH = [P(872, 191), P(918, 191), P(918, 402), P(872, 402)]
+CHECK_SHAPES = ["SOUTH", "ISO", "NORTH_S3", "NORTH_E", "VIP_LOUNGE"]
 
 for shape in (SOUTH, ISO, NORTH_E, VIP_LOUNGE):
     wall(shape)
-
-# streets (black) under the blocks (white)
-for shape in (SOUTH, ISO, NORTH_S3, NORTH_E, VIP_LOUNGE, VIP_PLUS_PATH):
+for shape in (SOUTH, ISO, NORTH_S3, NORTH_E, VIP_LOUNGE):
     poly(shape, fill="b")
 
 BLOCKS = {
@@ -187,243 +165,144 @@ BLOCKS = {
     "e": rect_uv(911, 408, 1484, 840),
     "lounge": rect_uv(1068, 128, 1276, 396),
 }
-for key, pts in BLOCKS.items():
-    poly(pts, fill="w", stroke=3)
+for pts in BLOCKS.values():
+    poly(pts, fill="w")
 
-# thin street lines on the open lots north of NW 5th Ave
-for u in (402, 450, 647, 694):
-    line([P(u, 560), P(u, 840)], stroke=2.5)
-
-# --------------------------------------------------------------------------------------------
-# Stage structures and features (outline drawings)
-# --------------------------------------------------------------------------------------------
-# Sector 3 stage field (orange blob on the original) - dashed outline
-poly([P(1105, 890), P(1290, 890), P(1305, 1000), P(1290, 1100), P(1175, 1112), P(1110, 1050)], fill="w", stroke=0)
-line([P(1105, 890), P(1290, 890), P(1305, 1000), P(1290, 1100), P(1175, 1112), P(1110, 1050), P(1105, 890)],
-     stroke=2.5, dash=[10, 7])
-stage_box([P(1150, 1075), P(1290, 1075), P(1290, 1100), P(1150, 1100)], 28)
-# Grand Central dance floor (light ellipse) - dashed ring and stage screen
-ops.append({"o": "ellipse", "x": P(1560, 1150)[0], "y": P(1560, 1150)[1], "rx": 130, "ry": 72, "f": "n", "s": 2.5, "c": "b", "d": [10, 7]})
-stage_box([P(1460, 1150), P(1512, 1150), P(1512, 1185), P(1460, 1185)], 50)
-# Vertex L-shaped stage
-stage_box([P(1600, 912), P(1655, 912), P(1655, 1042), P(1540, 1042), P(1540, 992), P(1600, 992)], 34)
-# RC95 booth
-stage_box([P(905, 1325), P(960, 1325), P(960, 1365), P(905, 1365)], 26)
-# Halo 88 building
-stage_box([P(668, 1020), P(830, 1020), P(830, 1140), P(668, 1140)], 0)
-# Mind Melt stage roof
-stage_box([P(1080, 330), P(1300, 330), P(1300, 420), P(1080, 420)], 40)
-# ::444:: room
-stage_box([P(1340, 590), P(1470, 590), P(1470, 700), P(1340, 700)], 0)
-
-# lane arrows on NW 24th St (in/out of the VIP entrance) and the ones into the VIP+ lounge
-for w0 in (900, 990, 1080, 1180, 1270):
-    a = P(626, w0 + 10)
-    b = P(626, w0 + 50)
-    arrow(a[0], a[1], b[0], b[1])
-    a = P(647, w0 + 60)
-    b = P(647, w0 + 20)
-    arrow(a[0], a[1], b[0], b[1])
-for u0 in (700, 780):
-    a, b = P(u0 + 60, 860), P(u0, 860)
-    arrow(a[0], a[1], b[0], b[1])
-for u0 in (1040, 1100):
-    a, b = P(u0, 330), P(u0 + 35, 330)
-    arrow(a[0], a[1], b[0], b[1], color="b")
-
-# trees (ground anchored)
-TREES = [  # picture space, trunk base
-    (241, 848), (346, 848), (391, 850), (541, 664), (616, 668), (736, 898), (806, 938), (1030, 937),
-    (1136, 937), (1426, 937), (1442, 913), (1111, 1075), (1086, 1127), (1081, 1175), (1056, 1225),
-    (1076, 1280), (1346, 1253), (1281, 1314), (1146, 1350), (1216, 1380), (1251, 1362), (1291, 1355),
-    (1321, 1340), (1086, 1360), (1051, 1395), (1111, 1405), (1156, 1420), (991, 1180), (986, 1240),
-    (961, 1310), (951, 1395), (1466, 865), (1376, 1290)]
-for x, y in TREES:
-    tree(x, y, 1.25)
+# streets drawn as outlines on open ground north of the blocks
+for u0, u1, w0, w1 in [(403, 451, 560, 840), (647, 694, 560, 840), (868, 911, 150, 402), (1020, 1062, 150, 402)]:
+    line([P(u0, w0), P(u0, w1)], stroke=3)
+    line([P(u1, w0), P(u1, w1)], stroke=3)
 
 # --------------------------------------------------------------------------------------------
-# Street names
+# Street names (big, on the black streets)
 # --------------------------------------------------------------------------------------------
-for (u, w, t, on) in [(425, 690, "NW 25th ST", False), (668, 720, "NW 24th ST", False),
-                      (895, 300, "NW 23rd ST", False), (1035, 250, "NW 22nd LN", False),
-                      (1000, 1270, "NW 23rd ST", True), (1340, 1280, "NW 22nd ST", True)]:
+for (u, w, t) in [(1150, 861, "NW 5th AVE"), (800, 1404, "NW 6th AVE")]:
     x, y = P(u, w)
-    street_text(x, y, t, on, STREET_ANGLE)
-for (u, w, t) in [(1140, 862, "NW 5th AVE"), (765, 1405, "NW 6th AVE")]:
+    text(x, y + 11, t, font="bc6i", size=32, color="w", rot=AVENUE_ANGLE)
+for (u, w, t, on) in [(1002, 1290, "NW 23rd ST", True), (1341, 1290, "NW 22nd ST", True), (636, 1000, "NW 24th ST", True),
+                      (427, 700, "NW 25th ST", False), (670, 700, "NW 24th ST", False),
+                      (889, 260, "NW 23rd ST", False), (1041, 260, "NW 22nd LN", False)]:
     x, y = P(u, w)
-    street_text(x, y - 2, t, True, AVENUE_ANGLE)
+    text(x + 11, y, t, font="bc6i", size=32 if on else 28, color="w" if on else "b", rot=STREET_ANGLE)
 
 # --------------------------------------------------------------------------------------------
-# Facilities (billboard icons anchored on the ground)
+# Stage buildings: extruded 3D boxes (footprint centre, size along the grid, height)
 # --------------------------------------------------------------------------------------------
-FACILITIES = [
-    # Isotropic lot
-    ("bar", 450, 938, "vip"), ("restroom", 435, 1005, "vip"), ("table", 462, 1065, "ga"), ("bar", 528, 1062, "vip"),
-    ("accessible", 584, 890, "ga"),
-    # Halo 88 / RC95 block
-    ("firstaid", 690, 898, "ga"), ("restroom", 692, 986, "ga"), ("restroom", 738, 986, "gaplus"), ("food", 906, 1007, "ga"),
-    ("accessible", 852, 1145, "ga"), ("vip", 862, 1215, "vip"), ("vip", 738, 1255, "vipring"), ("restroom", 693, 1293, "vip"),
-    ("vip", 812, 1293, "vip"), ("food", 735, 1358, "vip"), ("bar", 782, 1358, "vip"), ("bar", 847, 1358, "vip"),
-    ("bar", 962, 1350, "vip"), ("tickets", 633, 1370, "ga"),
-    # Sector 3 block
-    ("food", 1030, 920, "ga"), ("merch", 1085, 958, "ga"), ("photo", 1088, 1070, "vip"), ("bar", 1092, 1120, "vip"),
-    ("restroom", 1165, 1120, "vip"), ("lockers", 1162, 1212, "ga"), ("info", 1175, 1262, "ga"),
-    ("lostfound", 1225, 1262, "ga"), ("boxoffice", 1188, 1327, "vip"), ("willcall", 1255, 1327, "ga"),
-    ("firstaid", 1282, 933, "ga"), ("water", 1330, 930, "ga"), ("accessible", 1272, 1007, "ga"), ("tickets", 1040, 1350, "ga"),
-    # Grand Central / Vertex block
-    ("restroom", 1390, 920, "ga"), ("food", 1447, 987, "ga"), ("food", 1530, 1060, "ga"),
-    # S3QUENC3 lot
-    ("food", 790, 637, "ga"), ("food", 837, 780, "ga"),
-    # Players Club / Mind Melt block
-    ("restroom", 888, 445, "vip"), ("vip", 925, 420, "vipring"), ("photo", 970, 420, "vip"), ("water", 1020, 425, "vip"),
-    ("food", 922, 490, "vip"), ("bar", 977, 490, "vip"), ("food", 1020, 478, "vip"), ("firstaid", 940, 592, "ga"),
-    ("vip", 1005, 628, "vip"), ("water", 1055, 640, "ga"), ("accessible", 1100, 640, "ga"), ("restroom", 938, 740, "gaplus"),
-    ("vip", 1105, 515, "vip"), ("bar", 1065, 548, "vip"), ("restroom", 1348, 505, "ga"), ("table", 1180, 588, "ga"),
-    ("photo", 1300, 592, "vip"), ("merch", 1257, 682, "ga"), ("restroom", 1285, 730, "ga"), ("restroom", 1462, 818, "ga"),
-    # VIP+ lounge
-    ("vipplus", 1245, 262, "vip"),
+BUILDINGS = {
+    "mind-melt": ((1047, 470), 200, 70, 60),
+    "players-club": ((835, 615), 110, 50, 45),
+    "444": ((1235, 639), 90, 60, 40),
+    "s3qu3nce": ((568, 809), 80, 55, 22),
+    "door-iv": ((853, 870), 100, 30, 14),
+    "isotropic": ((290, 1033), 130, 55, 34),
+    "iii-points-radio": ((725, 948), 60, 40, 28),
+    "halo-88": ((441, 1112), 150, 120, 55),
+    "fortune-row": ((611, 1094), 140, 110, 45),
+    "rc95": ((566, 1375), 60, 45, 28),
+    "sec3": ((956, 1112), 150, 70, 40),
+    "vertex": ((1320, 1033), 120, 90, 40),
+    "grand-central": ((1132, 1209), 60, 70, 55),
+}
+FOOTPRINTS = {k: around(c[0], c[1], du, dw) for k, (c, du, dw, _) in BUILDINGS.items()}
+op({"o": "ellipse", "x": 1187, "y": 1179, "rx": 110, "ry": 60, "f": "n", "s": 2.5, "c": "b", "d": [10, 7]}, DETAIL)
+for key in sorted(BUILDINGS, key=lambda k: BUILDINGS[k][0][1]):   # back to front
+    box3d(FOOTPRINTS[key], BUILDINGS[key][3])
+
+# --------------------------------------------------------------------------------------------
+# Facilities: positions/types detected on the official map, a few fixed by hand
+# --------------------------------------------------------------------------------------------
+STYLE = {  # detected type -> (glyph, disc style, filter category)
+    "firstaid": ("firstaid", "ga", "firstaid"), "water": ("water", "ga", "water"),
+    "vipwater": ("water", "vip", "vip"), "restroom": ("restroom", "ga", "restroom"),
+    "viprestroom": ("restroom", "vip", "vip"), "gaplusrestroom": ("restroom", "gaplus", "gaplus"),
+    "food": ("food", "ga", "food"), "vipfood": ("food", "vip", "vip"), "vipbar": ("bar", "vip", "vip"),
+    "merch": ("merch", "ga", "merch"), "accessible": ("accessible", "ga", "access"),
+    "lockers": ("lockers", "ga", "help"), "info": ("info", "ga", "help"), "lostfound": ("lostfound", "ga", "help"),
+    "tickets": ("tickets", "ga", "help"), "willcall": ("willcall", "ga", "help"),
+    "boxoffice": ("boxoffice", "ga", "help"), "vipupgrade": ("vip", "vip", "help"),
+    "vipconcierge": ("vip", "vipring", "vip"), "table": ("table", "ga", "vip"),
+    "photo": ("photo", "ga", "photo"), "vipplus": ("vipplus", "vip", "vip"), "vipexit": ("vip", "vip", "vip"),
+}
+FIX = {  # (x, y) of a detection -> corrected type (None drops it)
+    (1177.3, 316.0): "vipplus", (863.3, 463.3): "photo", (1150.7, 650.7): "photo", (810.7, 1117.3): "photo",
+    (1244.0, 708.0): None, (973.3, 563.3): "vipexit", (484.0, 1326.7): "vipconcierge",
+}
+detected = json.load(open(os.path.join(ROOT, "source", "map", "icons_detected.json")))
+ICON_R = 21
+CHECK_POINTS = []
+for d in detected:
+    t = FIX.get((d["x"], d["y"]), d["type"])
+    if t is None:
+        continue
+    glyph, style, cat = STYLE[t]
+    CHECK_POINTS.append((d["x"], d["y"]))
+    op({"o": "icon", "k": glyph, "x": d["x"], "y": d["y"], "r": ICON_R, "st": style, "cat": cat}, DETAIL)
+# Access Center (a pill on the original)
+op({"o": "icon", "k": "accessible", "x": 790, "y": 1217, "r": ICON_R, "st": "ga", "cat": "access"}, DETAIL)
+text(814, 1213, "ACCESS", font="bc8", size=19, align="l", lvl=DETAIL)
+text(814, 1231, "CENTER", font="bc8", size=19, align="l", lvl=DETAIL)
+
+# --------------------------------------------------------------------------------------------
+# Attractions (smaller boxed labels, zoomed in) and stages (big labels, tap targets)
+# --------------------------------------------------------------------------------------------
+for t, x, y in [("MOKIWORLD", 1113, 583), ("SKATE SPACE", 1238, 794), ("FORTUNE ROW", 611, 1093),
+                ("DIGITAL GALLERY", 1105, 867), ("VIP+ LOUNGE", 1119, 206)]:
+    w = text_width(t, "bc8", 22) + 16
+    rect(x - w / 2, y - 14, w, 28, fill="w", stroke=2.5, lvl=DETAIL)
+    text(x, y + 8, t, font="bc8", size=22, lvl=DETAIL)
+
+STAGES = [  # id, label, tag centre (from the official map)
+    ("mind-melt", "MIND MELT", 1103.5, 529), ("players-club", "PLAYER'S CLUB", 815, 581),
+    ("444", "::444::", 1248.5, 627), ("unforeseen", "UNFORESEEN", 1257, 700),
+    ("s3qu3nce", "S3QUENC3", 578, 758), ("door-iv", "DOOR IV", 853.5, 840),
+    ("isotropic", "ISOTROPIC", 294, 963), ("vertex", "VERTEX", 1280, 979),
+    ("iii-points-radio", "III POINTS RADIO", 624, 997), ("sec3", "SECTOR 3", 938, 1014),
+    ("halo-88", "HALO 88", 433, 1126), ("grand-central", "GRAND CENTRAL", 1274, 1188),
+    ("rc95", "RC95", 560, 1325),
 ]
-for kind, u, w, style in FACILITIES:
-    x, y = P(u, w)
-    icon(kind, x, y, style)
-
-# small captions next to facilities
-for (u, w, t, dy) in [(462, 1065, "speakeasy", 38), (1180, 588, "speakeasy", 38), (812, 1293, "VIEWING AREA", 34),
-                      (1105, 515, "EXIT", 34)]:
-    x, y = P(u, w)
-    cw = text_width(t, "bc7", 17) + 14
-    rect(x - cw / 2, y + dy - 14, cw, 22, fill="b")
-    text(x, y + dy + 3, t, font="bc7", size=17, color="w")
-
-# Access Center pill
-x, y = P(1120, 1165)
-rect(x - 62, y - 22, 124, 44, fill="b", rx=22)
-icon("accessible", x - 40, y, "ga", r=18)
-text(x + 14, y - 3, "ACCESS", font="bc8", size=16, color="w")
-text(x + 14, y + 14, "CENTER", font="bc8", size=16, color="w")
+STAGE_SIZE = 30
+for sid, t, x, y in STAGES:
+    w = text_width(t, "bc8", STAGE_SIZE) + 20
+    h = STAGE_SIZE * 1.25
+    op({"o": "stage", "id": sid, "t": t, "x": x, "y": y, "sz": STAGE_SIZE, "w": round(w, 1), "h": round(h, 1)})
+    hits.append({"id": "stage:" + sid, "x": round(x - w / 2, 1), "y": round(y - h / 2, 1), "w": round(w, 1), "h": round(h, 1)})
 
 # --------------------------------------------------------------------------------------------
-# Brand / venue lettering (outline-free, plain type)
+# Entrances: arrow + label
 # --------------------------------------------------------------------------------------------
-for (u, w, t, font, size) in [(855, 905, "lyft", "b7", 40), (898, 1100, "SPIKED ADE", "bc8", 22),
-                              (790, 1185, "Cafetera", "bc6i", 18), (760, 1318, "400 CONEJOS", "bc7", 14),
-                              (685, 1362, "VIP", "bc8", 26), (1063, 1005, "EARGASM", "bc8", 16),
-                              (1215, 1165, "END OVERDOSE", "bc8", 18), (1110, 1045, "VIP", "bc8", 30),
-                              (856, 678, "spicy", "b6", 20), (856, 700, "pie", "b6", 20), (815, 820, "four", "b7", 26),
-                              (970, 675, "Hennessy", "b6", 24), (950, 785, "BEATBOX", "bc8", 18),
-                              (1330, 690, "Electrolit", "bc6i", 24), (1105, 210, "TAM TAM", "bc8", 20),
-                              (1215, 205, "Foogs", "bc6i", 24), (1172, 262, "Ghee", "bc6i", 26),
-                              (1100, 285, "STRANGE WATER", "bc7", 14), (1225, 322, "Grape Coast", "bc6i", 20)]:
-    x, y = P(u, w)
-    text(x, y + size * 0.35, t, font=font, size=size)
-
-hx, hy = P(850, 650)
-ops.append({"o": "path", "d": f"M{hx} {hy + 6}c-7-5-9-8-9-11 0-3 4-5 9-1 5-4 9-2 9 1 0 3-2 6-9 11z", "f": "b"})
-text(hx - 12, hy + 7, "I", font="b6", size=20)
-
-# --------------------------------------------------------------------------------------------
-# Stage tags (tap targets) and attraction tags
-# --------------------------------------------------------------------------------------------
-STAGE_TAGS = [
-    ("isotropic", "ISOTROPIC", 535, 938, 130, 36), ("iii-points-radio", "III POINTS RADIO", 870, 957, 182, 36),
-    ("halo-88", "HALO 88", 715, 1095, 104, 38), ("rc95", "RC95", 895, 1285, 96, 38),
-    ("sec3", "SECTOR 3", 1190, 962, 126, 38), ("vertex", "VERTEX", 1515, 910, 104, 38),
-    ("grand-central", "GRAND CENTRAL", 1565, 1120, 178, 38), ("s3qu3nce", "S3QUENC3", 745, 725, 118, 36),
-    ("players-club", "PLAYER'S CLUB", 955, 540, 162, 36), ("door-iv", "DOOR IV", 1055, 792, 104, 36),
-    ("mind-melt", "MIND MELT", 1225, 470, 142, 40), ("444", "::444::", 1395, 567, 84, 36),
-    ("unforeseen", "UNFORESEEN", 1420, 640, 112, 32),
+ENTRANCES = [  # id, label, label centre, arrow tip, arrow direction (degrees, screen)
+    ("main", "ENTRANCE", (705, 1530), (725, 1440), -80),
+    ("vip", "VIP ENTRANCE", (220, 1285), (296, 1260), -10),
+    ("vipplus", "VIP+ ENTRANCE", (935, 175), (930, 260), 95),
 ]
-for sid, t, u, w, bw, bh in STAGE_TAGS:
-    x, y = P(u, w)
-    label(x, y, t, bw, bh, hit="stage:" + sid)
-
-for t, sub, u, w, bw, bh in [("FORTUNE ROW", None, 880, 1055, 162, 36), ("DIGITAL GALLERY", "LIT BY THE FLOWERY", 1315, 800, 196, 62),
-                             ("MOKIWORLD", "IGNITE", 1255, 530, 160, 54), ("SKATE", "SPACE", 1432, 718, 72, 54),
-                             ("VIP+ LOUNGE", None, 1155, 155, 152, 36)]:
-    x, y = P(u, w)
-    label(x, y, t, bw, bh, kind="attraction", sub=sub)
-
-# Entrances
-x, y = 708, 1514
-rect(x - 128, y - 43, 256, 86, fill="b")
-rect(x - 122, y - 37, 244, 74, fill="w", stroke=3)
-text(x, y + 22, "ENTRANCE", font="bc8", size=64, fit=228)
-hits.append({"id": "place:entrance", "x": x - 128, "y": y - 43, "w": 256, "h": 86})
-for (u, w, t, bw, bh) in [(565, 1265, "VIP ENTRANCE", 62, 300), (968, 240, "VIP+ ENTRANCE", 66, 300)]:
-    x, y = P(u, w)
-    rect(x - bh / 2, y - bw / 2, bh, bw, fill="b", rot=STREET_ANGLE, rx=0)
-    text(x, y + bw * 0.3, t, font="bc8", size=round(bw * 0.8), color="w", rot=STREET_ANGLE, fit=bh - 16)
-
-# --------------------------------------------------------------------------------------------
-# Poster furniture: title block, highways, legend
-# --------------------------------------------------------------------------------------------
-def O(x, y):
-    """Official-image coordinates to map space."""
-    return (x * 1.404 + 61, y * 1.404 + 18.7)
-
-
-x0, y0 = O(25, 75)
-x1, y1 = O(505, 180)
-rect(x0 + 6, y0 + 6, x1 - x0, y1 - y0, fill="b", rx=14)
-rect(x0, y0, x1 - x0, y1 - y0, fill="w", stroke=5, rx=14)
-text((x0 + x1) / 2, y1 - 26, "III POINTS", font="bc8", size=150, fit=(x1 - x0) - 40)
-for (c, t, w, h, size) in [(O(100, 62), "MIAMI", 120, 36, 30), (O(405, 58), "OCTOBER 16 & 17", 252, 42, 32),
-                           (O(205, 198), "2026", 112, 34, 30)]:
-    rect(c[0] - w / 2, c[1] - h / 2, w, h, fill="b")
-    text(c[0], c[1] + size * 0.36, t, font="bc8", size=size, color="w", fit=w - 10)
-tx, ty = O(262, 285)
-text(tx, ty + 38, "FESTIVAL MAP", font="bc8", size=118, fit=430)
-tx, ty = O(265, 350)
-text(tx, ty + 12, "13 STAGES  |  150+ ARTISTS  |  5 CITY BLOCKS", font="bc7", size=33, fit=432)
-
-for (lx, ly0, ly1, t, up) in [(25, 250, 1150, "I-95", True), (1050, 330, 1150, "I-195", True)]:
-    a, b = O(lx, ly0), O(lx, ly1)
-    line([a, b], stroke=3)
-    poly([(a[0], a[1] - 4), (a[0] - 9, a[1] + 18), (a[0] + 9, a[1] + 18)], fill="b")
-    mx, my = O(lx, (ly0 + ly1) / 2)
-    rect(mx - 22, my - 50, 44, 100, fill="w")
-    text(mx + 10, my, t, font="bc8", size=30, rot=90 if lx > 500 else -90)
-
-lx0, ly0 = O(150, 1118)
-lx1, ly1 = O(935, 1298)
-rect(lx0 + 8, ly0 + 8, lx1 - lx0, ly1 - ly0, fill="b")
-rect(lx0, ly0, lx1 - lx0, ly1 - ly0, fill="w", stroke=6)
-cols = [202, 352, 498, 657, 798]
-rows = [1146, 1188, 1230, 1272]
-for ci, col in enumerate(LEGEND):
-    for ri, (name, kind, style) in enumerate(col):
-        ix, iy = O(cols[ci], rows[ri])
-        icon(kind, ix, iy, style, r=21)
-        words = name.split(" ")
-        if len(name) > 11 and len(words) > 1:
-            split = len(words) // 2 if len(words) > 2 else 1
-            l1, l2 = " ".join(words[:split]), " ".join(words[split:])
-            text(ix + 30, iy - 2, l1, font="bc7", size=23, align="l")
-            text(ix + 30, iy + 20, l2, font="bc7", size=23, align="l")
-        else:
-            text(ix + 30, iy + 8, name, font="bc7", size=23, align="l")
+for eid, t, (lx, ly), (ax, ay), ang in ENTRANCES:
+    op({"o": "entrance", "id": eid, "t": t, "x": lx, "y": ly, "ax": ax, "ay": ay, "ang": ang, "sz": 26})
+    w = text_width(t, "bc8", 26) + 20
+    hits.append({"id": "entrance:" + eid, "x": lx - w / 2, "y": ly - 18, "w": w, "h": 36})
 
 
 # --------------------------------------------------------------------------------------------
-# Output
+# SVG output
 # --------------------------------------------------------------------------------------------
-def svg_path_icon(kind, x, y, r, style):
+def svg_icon(kind, x, y, r, style):
     s = r / 12.0 * 0.82
-    fg, bg = ("#fff", "#000") if style in ("ga", "gaplus") else ("#000", "#fff")
-    out = [f'<circle cx="{x}" cy="{y}" r="{r}" fill="{bg}" stroke="#000" stroke-width="{3 if bg == "#fff" else 0}"/>']
+    dark = style in ("ga", "gaplus")
+    fg, bg = ("#fff", "#000") if dark else ("#000", "#fff")
+    out = [f'<circle cx="{x}" cy="{y}" r="{r + 3}" fill="#fff"/>',
+           f'<circle cx="{x}" cy="{y}" r="{r}" fill="{bg}" stroke="#000" stroke-width="{0 if dark else 3}"/>']
     if style == "gaplus":
         out.append(f'<circle cx="{x}" cy="{y}" r="{r - 4}" fill="none" stroke="#fff" stroke-width="1.6"/>')
     if style == "vipring":
         out.append(f'<circle cx="{x}" cy="{y}" r="{r - 5.5}" fill="none" stroke="#000" stroke-width="1.6"/>')
     out.append(f'<g transform="translate({x - 12 * s} {y - 12 * s}) scale({s})">')
-    for op in ICONS[kind]:
-        col = bg if op[-1] == "bg" else fg
-        if op[0] == "p":
-            out.append(f'<path d="{op[1]}" fill="{col}"/>')
-        elif op[0] == "c":
-            out.append(f'<circle cx="{op[1]}" cy="{op[2]}" r="{op[3]}" fill="{col}"/>')
-        elif op[0] == "t":
-            out.append(f'<text x="12" y="{12 + op[2] * 0.36}" font-family="BC8" font-size="{op[2]}" text-anchor="middle" fill="{col}">{op[1]}</text>')
+    for o in ICONS[kind]:
+        col = bg if o[-1] == "bg" else fg
+        if o[0] == "p":
+            out.append(f'<path d="{o[1]}" fill="{col}"/>')
+        elif o[0] == "c":
+            out.append(f'<circle cx="{o[1]}" cy="{o[2]}" r="{o[3]}" fill="{col}"/>')
+        elif o[0] == "t":
+            out.append(f'<text x="12" y="{12 + o[2] * 0.36}" font-family="BC8" font-size="{o[2]}" text-anchor="middle" fill="{col}">{o[1]}</text>')
     out.append("</g>")
     return "".join(out)
 
@@ -432,54 +311,73 @@ def esc(t):
     return t.replace("&", "&amp;").replace("<", "&lt;")
 
 
+def svg_text(x, y, t, font, size, color, anchor="middle", rot=0, fit=None):
+    fitattr = ""
+    if fit and text_width(t, font, size) > fit:
+        fitattr = f' textLength="{fit}" lengthAdjust="spacingAndGlyphs"'
+    tr = f' transform="rotate({rot} {x} {y})"' if rot else ""
+    return (f'<text x="{x}" y="{y}" font-family="{font.upper()}" font-size="{size}" text-anchor="{anchor}" '
+            f'fill="{color}"{fitattr}{tr}>{esc(t)}</text>')
+
+
 def to_svg(ops_list):
     col = {"b": "#000", "w": "#fff", "n": "none", "h": "url(#hatch)"}
     vx, vy, vw, vh = VIEW
-    out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vx} {vy} {vw} {vh}" width="{vw}" height="{vh}">',
-           "<style>"]
+    out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vx} {vy} {vw} {vh}" width="{vw}" height="{vh}">', "<style>"]
     for key, f in FONT_FILES.items():
         with open(os.path.join(FONTS, f), "rb") as fh:
             b64 = base64.b64encode(fh.read()).decode()
         out.append(f'@font-face{{font-family:"{key.upper()}";src:url(data:font/ttf;base64,{b64})}}')
     out.append("</style>")
-    out.append('<defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">'
-               '<rect width="8" height="8" fill="#fff"/><rect width="2" height="8" fill="#000"/></pattern></defs>')
+    out.append('<defs><pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">'
+               '<rect width="9" height="9" fill="#fff"/><rect width="2.5" height="9" fill="#000"/></pattern></defs>')
     out.append(f'<rect x="{vx}" y="{vy}" width="{vw}" height="{vh}" fill="#fff"/>')
-    for op in ops_list:
-        o = op["o"]
-        if o == "poly":
-            pts = " ".join(f"{op['p'][i]},{op['p'][i + 1]}" for i in range(0, len(op["p"]), 2))
-            st = f' stroke="{col[op["c"]]}" stroke-width="{op["s"]}" stroke-linejoin="round"' if op["s"] else ""
-            out.append(f'<polygon points="{pts}" fill="{col[op["f"]]}"{st}/>')
-        elif o == "line":
-            pts = " ".join(f"{op['p'][i]},{op['p'][i + 1]}" for i in range(0, len(op["p"]), 2))
-            dash = f' stroke-dasharray="{op["d"][0]} {op["d"][1]}"' if "d" in op else ""
-            out.append(f'<polyline points="{pts}" fill="none" stroke="{col[op["c"]]}" stroke-width="{op["s"]}" stroke-linecap="round" stroke-linejoin="round"{dash}/>')
-        elif o == "circle":
-            st = f' stroke="{col[op["c"]]}" stroke-width="{op["s"]}"' if op["s"] else ""
-            out.append(f'<circle cx="{op["x"]}" cy="{op["y"]}" r="{op["r"]}" fill="{col[op["f"]]}"{st}/>')
-        elif o == "ellipse":
-            dash = f' stroke-dasharray="{op["d"][0]} {op["d"][1]}"' if "d" in op else ""
-            out.append(f'<ellipse cx="{op["x"]}" cy="{op["y"]}" rx="{op["rx"]}" ry="{op["ry"]}" fill="{col[op["f"]]}" stroke="{col[op["c"]]}" stroke-width="{op["s"]}"{dash}/>')
-        elif o == "rect":
-            st = f' stroke="{col[op["c"]]}" stroke-width="{op["s"]}"' if op["s"] else ""
+    for o in ops_list:
+        k = o["o"]
+        if k == "poly":
+            pts = " ".join(f"{o['p'][i]},{o['p'][i + 1]}" for i in range(0, len(o["p"]), 2))
+            st = f' stroke="{col[o["c"]]}" stroke-width="{o["s"]}" stroke-linejoin="round"' if o["s"] else ""
+            out.append(f'<polygon points="{pts}" fill="{col[o["f"]]}"{st}/>')
+        elif k == "line":
+            pts = " ".join(f"{o['p'][i]},{o['p'][i + 1]}" for i in range(0, len(o["p"]), 2))
+            dash = f' stroke-dasharray="{o["d"][0]} {o["d"][1]}"' if "d" in o else ""
+            out.append(f'<polyline points="{pts}" fill="none" stroke="{col[o["c"]]}" stroke-width="{o["s"]}" '
+                       f'stroke-linecap="round"{dash}/>')
+        elif k == "ellipse":
+            dash = f' stroke-dasharray="{o["d"][0]} {o["d"][1]}"' if "d" in o else ""
+            out.append(f'<ellipse cx="{o["x"]}" cy="{o["y"]}" rx="{o["rx"]}" ry="{o["ry"]}" fill="none" '
+                       f'stroke="#000" stroke-width="{o["s"]}"{dash}/>')
+        elif k == "rect":
+            st = f' stroke="{col[o["c"]]}" stroke-width="{o["s"]}"' if o["s"] else ""
             tr = ""
-            if op.get("r"):
-                cx, cy = op["x"] + op["w"] / 2, op["y"] + op["h"] / 2
-                tr = f' transform="rotate({op["r"]} {cx} {cy})"'
-            out.append(f'<rect x="{op["x"]}" y="{op["y"]}" width="{op["w"]}" height="{op["h"]}" rx="{op["rx"]}" fill="{col[op["f"]]}"{st}{tr}/>')
-        elif o == "text":
-            anchor = {"l": "start", "c": "middle", "r": "end"}[op["a"]]
-            fit = ""
-            if op.get("fit") and text_width(op["t"], op["font"], op["sz"]) > op["fit"]:
-                fit = f' textLength="{op["fit"]}" lengthAdjust="spacingAndGlyphs"'
-            tr = f' transform="rotate({op["r"]} {op["x"]} {op["y"]})"' if op.get("r") else ""
-            out.append(f'<text x="{op["x"]}" y="{op["y"]}" font-family="{op["font"].upper()}" font-size="{op["sz"]}" '
-                       f'text-anchor="{anchor}" fill="{col[op["c"]]}"{fit}{tr}>{esc(op["t"])}</text>')
-        elif o == "path":
-            out.append(f'<path d="{op["d"]}" fill="{col[op["f"]]}"/>')
-        elif o == "icon":
-            out.append(svg_path_icon(op["k"], op["x"], op["y"], op["r"], op["st"]))
+            if o.get("r"):
+                tr = f' transform="rotate({o["r"]} {o["x"] + o["w"] / 2} {o["y"] + o["h"] / 2})"'
+            out.append(f'<rect x="{o["x"]}" y="{o["y"]}" width="{o["w"]}" height="{o["h"]}" rx="{o["rx"]}" '
+                       f'fill="{col[o["f"]]}"{st}{tr}/>')
+        elif k == "text":
+            anchor = {"l": "start", "c": "middle", "r": "end"}[o["a"]]
+            out.append(svg_text(o["x"], o["y"], o["t"], o["font"], o["sz"], col[o["c"]], anchor, o.get("r", 0), o.get("fit")))
+        elif k == "icon":
+            out.append(svg_icon(o["k"], o["x"], o["y"], o["r"], o["st"]))
+        elif k == "stage":
+            x, y, w, h = o["x"], o["y"], o["w"], o["h"]
+            out.append(f'<rect x="{x - w / 2 + 5}" y="{y - h / 2 + 5}" width="{w}" height="{h}" fill="#000"/>')
+            out.append(f'<rect x="{x - w / 2}" y="{y - h / 2}" width="{w}" height="{h}" fill="#fff" stroke="#000" stroke-width="3.5"/>')
+            out.append(svg_text(x, y + o["sz"] * 0.36, o["t"], "bc8", o["sz"], "#000"))
+        elif k == "entrance":
+            x, y, s = o["x"], o["y"], o["sz"]
+            w = text_width(o["t"], "bc8", s) + 20
+            a = math.radians(o["ang"])
+            tx, ty = o["ax"], o["ay"]
+            L = 70
+            bx, by = tx - L * math.cos(a), ty - L * math.sin(a)
+            hx1, hy1 = tx - 22 * math.cos(a - 0.5), ty - 22 * math.sin(a - 0.5)
+            hx2, hy2 = tx - 22 * math.cos(a + 0.5), ty - 22 * math.sin(a + 0.5)
+            out.append(f'<line x1="{bx:.1f}" y1="{by:.1f}" x2="{tx}" y2="{ty}" stroke="#fff" stroke-width="15" stroke-linecap="round"/>')
+            out.append(f'<line x1="{bx:.1f}" y1="{by:.1f}" x2="{tx}" y2="{ty}" stroke="#000" stroke-width="8" stroke-linecap="round"/>')
+            out.append(f'<polygon points="{tx},{ty} {hx1:.1f},{hy1:.1f} {hx2:.1f},{hy2:.1f}" fill="#000" stroke="#fff" stroke-width="3"/>')
+            out.append(f'<rect x="{x - w / 2}" y="{y - s * 0.7}" width="{w}" height="{s * 1.4}" rx="{s * 0.7}" fill="#000" stroke="#fff" stroke-width="3"/>')
+            out.append(svg_text(x, y + s * 0.36, o["t"], "bc8", s, "#fff"))
     out.append("</svg>")
     return "\n".join(out)
 
