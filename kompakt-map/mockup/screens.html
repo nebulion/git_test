@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>III Points for Mudita Kompakt · mockup</title>
+<style>
+  @font-face { font-family: "Barlow"; font-weight: 400; src: url("../app/assets/fonts/Barlow-400.ttf"); }
+  @font-face { font-family: "Barlow"; font-weight: 500; src: url("../app/assets/fonts/Barlow-500.ttf"); }
+  @font-face { font-family: "Barlow"; font-weight: 600; src: url("../app/assets/fonts/Barlow-600.ttf"); }
+  @font-face { font-family: "Barlow"; font-weight: 700; src: url("../app/assets/fonts/Barlow-700.ttf"); }
+  @font-face { font-family: "BC"; font-weight: 800; src: url("../app/assets/fonts/BarlowCondensed-800.ttf"); }
+  @font-face { font-family: "BC"; font-weight: 700; src: url("../app/assets/fonts/BarlowCondensed-700.ttf"); }
+
+  :root { --ink: #000; --paper: #fff; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #fff; font-family: "Barlow", sans-serif; color: var(--ink); padding: 40px; }
+  h1.sheet { font: 800 44px/1 "BC"; letter-spacing: .5px; margin-bottom: 6px; }
+  p.sheet { font: 500 20px/1.35 "Barlow"; max-width: 1400px; margin-bottom: 28px; }
+  .row { display: flex; gap: 36px; flex-wrap: wrap; align-items: flex-start; }
+  .cap { font: 600 18px/1.3 "Barlow"; margin-top: 12px; width: 480px; }
+  .cap b { font-weight: 700; }
+
+  /* Device: Mudita Kompakt, 4.3" E Ink, 480 x 800 px */
+  .phone { width: 480px; height: 800px; border: 3px solid var(--ink); border-radius: 26px; overflow: hidden;
+           background: var(--paper); position: relative; display: flex; flex-direction: column; }
+  .status { height: 34px; flex: none; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 22px; font: 600 18px "Barlow"; }
+  .status .bat { display: inline-block; width: 30px; height: 14px; border: 2px solid var(--ink); border-radius: 3px;
+                 position: relative; vertical-align: -1px; margin-left: 8px; }
+  .status .bat::after { content: ""; position: absolute; left: 2px; top: 2px; bottom: 2px; width: 60%; background: var(--ink); }
+
+  .bar { height: 64px; flex: none; display: flex; align-items: center; padding: 0 10px 0 6px; border-bottom: 2px solid var(--ink); }
+  .bar .back { width: 52px; height: 52px; display: grid; place-items: center; }
+  .bar .title { font: 700 30px/1 "Barlow"; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar .act { font: 600 20px "Barlow"; padding: 0 10px; }
+
+  .content { flex: 1; overflow: hidden; }
+  .list > div { min-height: 76px; display: flex; align-items: center; justify-content: space-between;
+                padding: 0 24px; border-bottom: 1px solid var(--ink); }
+  .list .big { font: 600 30px/1.1 "Barlow"; }
+  .list .sub { font: 500 18px/1.3 "Barlow"; margin-top: 3px; }
+  .chev { width: 14px; height: 14px; border-right: 3px solid var(--ink); border-top: 3px solid var(--ink); transform: rotate(45deg); flex: none; }
+
+  .seg { display: flex; margin: 14px 24px; border: 2px solid var(--ink); border-radius: 26px; overflow: hidden; height: 48px; }
+  .seg > div { flex: 1; display: grid; place-items: center; font: 700 22px "Barlow"; }
+  .seg > .on { background: var(--ink); color: var(--paper); }
+
+  .sets > div { display: flex; gap: 16px; padding: 12px 24px; border-bottom: 1px solid var(--ink); align-items: baseline; }
+  .sets .t { width: 108px; flex: none; font: 600 19px/1.25 "Barlow"; }
+  .sets .a { font: 600 23px/1.2 "Barlow"; }
+  .sets .now { background: var(--ink); color: var(--paper); }
+  .sets .now .tag { display: inline-block; border: 2px solid var(--paper); border-radius: 4px; font: 700 14px "Barlow"; padding: 1px 6px; margin-left: 8px; vertical-align: 3px; }
+  .sets .past .a, .sets .past .t { text-decoration: line-through; text-decoration-thickness: 2px; }
+
+  .home-head { padding: 26px 24px 18px; border-bottom: 2px solid var(--ink); }
+  .home-head .name { font: 800 64px/0.95 "BC"; letter-spacing: .5px; }
+  .home-head .meta { font: 600 20px/1.3 "Barlow"; margin-top: 8px; }
+  .nowline { margin: 0; padding: 14px 24px; border-bottom: 2px solid var(--ink); font: 600 20px/1.3 "Barlow"; }
+  .nowline b { font-weight: 700; }
+
+  .np > div { padding: 12px 24px 12px; border-bottom: 1px solid var(--ink); }
+  .np .st { font: 800 18px/1 "BC"; letter-spacing: 1.2px; }
+  .np .now { font: 700 25px/1.15 "Barlow"; margin-top: 4px; }
+  .np .meta { font: 500 17px/1.3 "Barlow"; margin-top: 2px; }
+
+  .mapview { position: relative; flex: 1; overflow: hidden; border-bottom: 2px solid var(--ink); }
+  .mapview img { position: absolute; transform-origin: 0 0; }
+  .mapbtns { height: 72px; flex: none; display: flex; gap: 12px; padding: 12px 16px; }
+  .mapbtns > div { flex: 1; border: 2px solid var(--ink); border-radius: 24px; display: grid; place-items: center; font: 700 22px "Barlow"; }
+  .mapbtns > .sq { flex: none; width: 64px; font-size: 30px; }
+  .callout { position: absolute; left: 16px; right: 16px; bottom: 14px; background: var(--paper); border: 2px solid var(--ink);
+             border-radius: 14px; padding: 12px 16px; box-shadow: 5px 5px 0 var(--ink); }
+  .callout .st { font: 800 22px/1 "BC"; letter-spacing: 1px; }
+  .callout .now { font: 700 24px/1.2 "Barlow"; margin-top: 4px; }
+  .callout .meta { font: 500 17px/1.3 "Barlow"; }
+  .btn { margin: 16px 24px; height: 56px; border: 2px solid var(--ink); border-radius: 28px; display: grid; place-items: center; font: 700 22px "Barlow"; }
+</style>
+</head>
+<body>
+<h1 class="sheet">III POINTS 2026 · MUDITA KOMPAKT</h1>
+<p class="sheet">Mockup at the Kompakt's native 480 × 800 px. Pure black on white with no grey fills, large type, list navigation and no animation, so screens redraw cleanly on E Ink.
+The map is the B/W vector redraw. Tap a stage tag to see who's playing, and pan or zoom with buttons as well as drag. Example time shown: Friday 9:42 PM.</p>
+
+<div class="row">
+  <!-- 1 Home -->
+  <div>
+    <div class="phone">
+      <div class="status"><span>9:42</span><span>E-ink <span class="bat"></span></span></div>
+      <div class="home-head">
+        <div class="name">III POINTS</div>
+        <div class="meta">Mana Wynwood · Oct 16 &amp; 17</div>
+      </div>
+      <div class="nowline"><b>Friday · live now</b><br>13 stages playing · doors close 4:00 AM</div>
+      <div class="content list">
+        <div><div class="big">Map</div><div class="chev"></div></div>
+        <div><div class="big">Now playing</div><div class="chev"></div></div>
+        <div><div class="big">Stages</div><div class="chev"></div></div>
+        <div><div class="big">Facilities</div><div class="chev"></div></div>
+        <div><div class="big">Info</div><div class="chev"></div></div>
+      </div>
+    </div>
+    <div class="cap"><b>Home.</b> A Mudita-style launcher list. The status line shows which day it is and whether doors are open.</div>
+  </div>
+
+  <!-- 2 Map -->
+  <div>
+    <div class="phone">
+      <div class="status"><span>9:42</span><span>E-ink <span class="bat"></span></span></div>
+      <div class="bar">
+        <div class="back"><svg width="26" height="26" viewBox="0 0 26 26"><path d="M17 3 7 13l10 10" fill="none" stroke="#000" stroke-width="3.2"/></svg></div>
+        <div class="title">Map</div><div class="act">Legend</div>
+      </div>
+      <div class="mapview">
+        <img src="map.svg" style="width:1516px;height:1895px;transform:translate(-505px,-320px) scale(0.62)">
+        <div class="callout">
+          <div class="st">MIND MELT · MAIN STAGE</div>
+          <div class="now">Parcels</div>
+          <div class="meta">Now until 10:00 PM · Next: Tokischa 10:30 PM</div>
+        </div>
+      </div>
+      <div class="mapbtns"><div class="sq">−</div><div>Fit</div><div class="sq">+</div><div>Schedule</div></div>
+    </div>
+    <div class="cap"><b>Map.</b> The full B/W map. Drag to pan or use the − / + buttons; each step redraws once. Tapping a stage tag opens a card with what's playing now.</div>
+  </div>
+
+  <!-- 3 Stage -->
+  <div>
+    <div class="phone">
+      <div class="status"><span>9:42</span><span>E-ink <span class="bat"></span></span></div>
+      <div class="bar">
+        <div class="back"><svg width="26" height="26" viewBox="0 0 26 26"><path d="M17 3 7 13l10 10" fill="none" stroke="#000" stroke-width="3.2"/></svg></div>
+        <div class="title">Mind Melt</div><div class="act">Map</div>
+      </div>
+      <div class="seg"><div class="on">Fri 16</div><div>Sat 17</div></div>
+      <div class="content sets">
+        <div class="past"><div class="t">4:00 PM</div><div class="a">Ackdaddy</div></div>
+        <div class="past"><div class="t">6:00 PM</div><div class="a">Connan Mockasin</div></div>
+        <div class="past"><div class="t">7:25 PM</div><div class="a">Men I Trust</div></div>
+        <div class="now"><div class="t">8:45 PM<br>–10:00</div><div class="a">Parcels <span class="tag">NOW</span></div></div>
+        <div><div class="t">10:30 PM</div><div class="a">Tokischa</div></div>
+        <div><div class="t">11:30 PM</div><div class="a">Cloonee</div></div>
+        <div><div class="t">1:00 AM</div><div class="a">Beltran b2b Ben Sterling</div></div>
+        <div><div class="t">2:30 AM</div><div class="a">Pawsa</div></div>
+      </div>
+    </div>
+    <div class="cap"><b>Stage.</b> Fri/Sat toggle; finished sets are struck through and the current set is inverted. “Map” jumps to the stage on the map.</div>
+  </div>
+
+  <!-- 4 Now playing -->
+  <div>
+    <div class="phone">
+      <div class="status"><span>9:42</span><span>E-ink <span class="bat"></span></span></div>
+      <div class="bar">
+        <div class="back"><svg width="26" height="26" viewBox="0 0 26 26"><path d="M17 3 7 13l10 10" fill="none" stroke="#000" stroke-width="3.2"/></svg></div>
+        <div class="title">Now playing</div><div class="act">9:42 PM</div>
+      </div>
+      <div class="content np">
+        <div><div class="st">MIND MELT</div><div class="now">Parcels</div><div class="meta">until 10:00 PM · next Tokischa 10:30</div></div>
+        <div><div class="st">SECTOR 3</div><div class="now">Lil’ Kim</div><div class="meta">until 10:00 PM · next Mind Enterprises 10:20</div></div>
+        <div><div class="st">::444::</div><div class="now">DJ Harvey</div><div class="meta">until 12:00 AM · next Floating Points 12:00</div></div>
+        <div><div class="st">ISOTROPIC</div><div class="now">Miguelle &amp; Tons</div><div class="meta">until 11:00 PM · next Brunello b2b Rafael 11:00</div></div>
+        <div><div class="st">RC95</div><div class="now">Mary Droppinz</div><div class="meta">until 10:15 PM · next Ivy Lab 10:15</div></div>
+        <div><div class="st">S3QUENC3</div><div class="now">Jacques Greene</div><div class="meta">until 10:00 PM · next Eli Escobar b2b Jubilee 10:00</div></div>
+      </div>
+    </div>
+    <div class="cap"><b>Now playing.</b> Every stage at a glance, ordered as on the official schedule. Tap a row to open that stage.</div>
+  </div>
+
+  <!-- 5 Stages -->
+  <div>
+    <div class="phone">
+      <div class="status"><span>9:42</span><span>E-ink <span class="bat"></span></span></div>
+      <div class="bar">
+        <div class="back"><svg width="26" height="26" viewBox="0 0 26 26"><path d="M17 3 7 13l10 10" fill="none" stroke="#000" stroke-width="3.2"/></svg></div>
+        <div class="title">Stages</div>
+      </div>
+      <div class="content list">
+        <div><div><div class="big">Mind Melt</div><div class="sub">Main stage</div></div><div class="chev"></div></div>
+        <div><div><div class="big">Sector 3</div><div class="sub">Sector 3</div></div><div class="chev"></div></div>
+        <div><div><div class="big">Isotropic</div><div class="sub">Isotropic</div></div><div class="chev"></div></div>
+        <div><div><div class="big">RC95</div><div class="sub">Bass &amp; hard dance</div></div><div class="chev"></div></div>
+        <div><div><div class="big">::444::</div><div class="sub">4-hour extended sets</div></div><div class="chev"></div></div>
+        <div><div><div class="big">S3QUENC3</div><div class="sub">House &amp; techno</div></div><div class="chev"></div></div>
+        <div><div><div class="big">Grand Central</div><div class="sub">With Poplife &amp; Miami Community Radio</div></div><div class="chev"></div></div>
+      </div>
+    </div>
+    <div class="cap"><b>Stages.</b> All 13 stages, with the host line taken from the official site.</div>
+  </div>
+</div>
+</body>
+</html>

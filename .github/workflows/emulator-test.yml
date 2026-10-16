@@ -1,0 +1,39 @@
+name: Kompakt emulator screenshots
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ccr-84c56106-kllwcz]
+    paths: [kompakt-map/iiipoints-kompakt.apk, .github/workflows/emulator-test.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  shots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+      - name: Run app on an Android 12 emulator at Kompakt resolution
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 31
+          arch: x86_64
+          target: google_apis
+          profile: Nexus S
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          script: bash kompakt-map/tools/emulator_shots.sh
+      - name: Commit screenshots
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f kompakt-map/test-shots || true
+          git commit -m "Add emulator screenshots of the Kompakt app" || exit 0
+          git pull --rebase origin ${{ github.ref_name }} && git push
