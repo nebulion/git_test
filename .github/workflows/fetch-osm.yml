@@ -1,0 +1,32 @@
+name: Fetch OSM streets around Mana Wynwood
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ccr-84c56106-kllwcz]
+    paths: [.github/workflows/fetch-osm.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Query Overpass
+        run: |
+          mkdir -p kompakt-map/source/osm
+          Q='[out:json][timeout:60];(way["highway"]["name"~"^(Northwest|NW) (2[0-7](st|nd|rd|th) (Street|Terrace|Lane)|[3-8](st|nd|rd|th) (Avenue|Court|Place))$"](25.793,-80.210,25.806,-80.196););out geom;'
+          for host in overpass-api.de overpass.kumi.systems lz4.overpass-api.de; do
+            curl -sS -m 90 -A "kompakt-map" --data-urlencode "data=$Q" "https://$host/api/interpreter" -o kompakt-map/source/osm/streets.json && \
+              python3 -c "import json;d=json.load(open('kompakt-map/source/osm/streets.json'));assert d['elements'];print(len(d['elements']),'ways')" && break
+          done
+          curl -sS -m 30 -A "kompakt-map (festival map)" "https://nominatim.openstreetmap.org/search?q=Mana+Wynwood+Convention+Center+Miami&format=json" -o kompakt-map/source/osm/mana.json || true
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f kompakt-map/source/osm
+          git commit -m "Add OSM street geometry around Mana Wynwood" || exit 0
+          git pull --rebase origin ${{ github.ref_name }} && git push
