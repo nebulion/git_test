@@ -168,7 +168,7 @@ for (u, w, t) in [(1002, 1290, "NW 23rd St"), (1341, 1300, "NW 22nd St"), (636, 
 from plan import shapes, LABEL_AT, ZONES  # noqa: E402
 
 PART_STYLE = {  # style -> (fill, stroke width, dash)
-    "floor": ("w", W_FLOOR, [11, 7]), "stage": ("h", W_STRUCT, None),
+    "floor": ("w", W_FLOOR, [11, 7]), "court": ("w", W_FLOOR, [11, 7]), "stage": ("h", W_STRUCT, None),
     "bldg": ("w", W_STRUCT * 0.8, None), "detail": (None, W_DETAIL, None), "zone": ("vipz", 1.6, [5, 4]),
 }
 FOOTPRINTS = {}
@@ -242,7 +242,7 @@ for sid, name, tx, ty in STAGES:
     c = centroid(sid) or (tx, ty)
     lx, ly = P(*LABEL_AT[sid])
     LABELS.append({"kind": "stage", "id": sid, "t": name, "x": c[0], "y": c[1], "lx": lx, "ly": ly, "tag": [tx, ty]})
-for name, x, y in [("Mokiworld", *P(1246, 570)), ("Skate Space", 1238, 794), ("Fortune Row", *P(892, 1075)),
+for name, x, y in [("Mokiworld", *P(1246, 570)), ("Skate Space", 1238, 794), ("Fortune Row", *P(880, 1095)),
                    ("Digital Gallery", *P(1300, 760)), ("VIP+ Lounge", *P(1172, 170))]:
     LABELS.append({"kind": "attraction", "id": name.lower().replace(" ", "-"), "t": name, "x": x, "y": y})
 for eid, name, (x, y), ang in [("main", "Entrance", P(1106, 1428), -75.5), ("vip", "VIP Entrance", P(612, 1300), AVENUE_ANGLE),

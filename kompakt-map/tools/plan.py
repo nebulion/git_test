@@ -94,68 +94,60 @@ SEC3_FIELD = smooth([(858, 1122), (856, 1060), (856, 985), (862, 958), (876, 942
                      (990, 1112), (940, 1118)])
 
 
-# (stage or structure id, part, style, points)
+# Bird's-eye footprints: where each structure meets the ground. Heights in the original art are
+# discarded (roofs, screens, speaker stacks, arch bumps), so tall buildings sit at their base, not
+# where their roof is drawn. Base edges and angles measured on the original (see v6 notes in git log).
 PARTS = [
-    # Mind Melt (main stage): big stage, wide open floor in front
-    ("mind-melt", "floor", "floor", rect(1045, 450, 1285, 560)),
-    ("mind-melt", "stage", "stage", [P(1088, 348), P(1212, 348), P(1212, 400), P(1284, 400), P(1284, 440),
-                                     P(1036, 440), P(1036, 400), P(1088, 400)]),
-    ("mind-melt", "screen-l", "bldg", rect(1040, 372, 1082, 396)),
-    ("mind-melt", "screen-r", "bldg", rect(1218, 372, 1280, 396)),
-    # Player's Club: building with its stage on the east end; scaffold tower
-    ("players-club", "building", "bldg", rrect(977, 593, 140, 52, 3.8)),
-    ("players-club", "stage", "stage", turn([(36, -24), (66, -24), (66, 24), (36, 24)], 977, 593, 3.8)),
-    ("players-club", "scaffold", "bldg", rect(1052, 572, 1099, 622)),
-    ("players-club", "x1", "detail", line(1052, 572, 1099, 622)),
-    ("players-club", "x2", "detail", line(1099, 572, 1052, 622)),
-    # Mokiworld seating, Digital Gallery building holding ::444:: (north room) and Unforeseen (south room)
+    # Mind Melt (main stage): stage deck, open floor in front
+    ("mind-melt", "floor", "floor", rect(1045, 462, 1285, 560)),
+    ("mind-melt", "stage", "stage", rrect(1168, 418, 248, 62, -3)),
+    # Player's Club: building (base), stage at its east end; scaffold tower base
+    ("players-club", "building", "bldg", rrect(977, 612, 140, 46, 3.8)),
+    ("players-club", "stage", "stage", turn([(40, -21), (68, -21), (68, 21), (40, 21)], 977, 612, 3.8)),
+    ("players-club", "scaffold", "bldg", rect(1054, 590, 1098, 630)),
+    # Digital Gallery building holding ::444:: (north room) and Unforeseen (south room)
     ("digital-gallery", "building", "bldg", [P(1320, 545), P(1478, 545), P(1478, 822), P(1232, 822),
                                               P(1232, 702), P(1320, 702)]),
     ("444", "room", "bldg", rect(1336, 550, 1472, 615)),
     ("444", "stage", "stage", rect(1440, 556, 1466, 609)),
     ("unforeseen", "room", "bldg", rect(1336, 619, 1472, 690)),
     ("unforeseen", "stage", "stage", rect(1440, 625, 1466, 684)),
-    # Door IV: DJ platform in front of the building and the arch towers
-    ("door-iv", "floor", "floor", rect(1012, 776, 1112, 812)),
+    # Door IV: building and two towers at their bases (bridge overhead), DJ platform in front
     ("door-iv", "stage", "stage", rect(1016, 814, 1108, 836)),
-    ("door-iv", "building", "bldg", rect(1042, 700, 1098, 772)),
-    ("door-iv", "tower-l", "bldg", rect(1102, 728, 1140, 772)),
-    ("door-iv", "bridge", "bldg", rect(1140, 742, 1190, 758)),
-    ("door-iv", "tower-r", "bldg", rect(1190, 728, 1232, 768)),
-    # S3QUENC3 glass cube: dance floor inside, stage at the back
-    ("s3qu3nce", "floor", "floor", rect(694, 749, 785, 830)),
-    ("s3qu3nce", "stage", "stage", rect(700, 754, 779, 772)),
-    # Isotropic: paved floor and arched stage
+    ("door-iv", "building", "bldg", rect(1042, 748, 1098, 800)),
+    ("door-iv", "tower-l", "bldg", rect(1104, 774, 1138, 804)),
+    ("door-iv", "tower-r", "bldg", rect(1192, 772, 1230, 802)),
+    ("door-iv", "bridge", "detail", line(1138, 789, 1192, 787)),
+    # S3QUENC3 glass cube (base): dance floor inside, stage at the back
+    ("s3qu3nce", "floor", "floor", rect(696, 770, 786, 836)),
+    ("s3qu3nce", "stage", "stage", rect(700, 774, 782, 790)),
+    # Isotropic: paved floor and the stage deck
     ("isotropic", "floor", "floor", rect(507, 872, 612, 968)),
-    ("isotropic", "stage", "stage", arch(466, 990, 600, 1028, 500, 562, 22)),
-    # Halo 88 (indoor, stage along the west wall), Fortune Row structure, III Points Radio booth
-    ("halo-88", "building", "bldg", rrect(744, 1062, 160, 122, -6)),
-    ("halo-88", "stage", "stage", turn([(-76, -55), (-50, -55), (-50, 55), (-76, 55)], 744, 1062, -6)),
-    ("fortune-row", "structure", "bldg", rect(824, 991, 959, 1158)),
-    ("iii-points-radio", "stage", "stage", rrect(936, 893, 58, 22, 25)),
-    # VIP area west of RC95: bar tent, VIP floor, viewing platform; RC95 floor and booth
-    ("vip-area", "tent", "bldg", rect(652, 1196, 848, 1252)),
-    ("vip-area", "viewing", "bldg", rect(803, 1320, 836, 1360)),
+    ("isotropic", "stage", "stage", rrect(536, 1008, 129, 36, -1.6)),
+    # Halo 88 (indoor, stage along the west wall), Fortune Row next to it, III Points Radio booth
+    # Halo 88 is one wide building across the block; Fortune Row is the open courtyard in its east end
+    ("halo-88", "building", "bldg", rrect(807, 1095, 290, 138, -4)),
+    ("halo-88", "stage", "stage", turn([(-142, -66), (-120, -66), (-120, 66), (-142, 66)], 807, 1095, -4)),
+    ("fortune-row", "courtyard", "court", turn([(-2, -58), (134, -58), (134, 56), (-2, 56)], 807, 1095, -4)),
+    ("iii-points-radio", "stage", "stage", rrect(940, 905, 50, 16, 25)),
+    # VIP area west of RC95: bar tent, viewing platform; RC95 floor and booth
+    ("vip-area", "tent", "bldg", rect(652, 1216, 848, 1258)),
+    ("vip-area", "viewing", "bldg", rect(803, 1330, 836, 1366)),
     ("rc95", "floor", "floor", rect(842, 1245, 980, 1345)),
-    ("rc95", "stage", "stage", rect(868, 1345, 950, 1382)),
-    # Sector 3: teardrop field and arched stage
+    ("rc95", "stage", "stage", rect(872, 1350, 946, 1380)),
+    # Sector 3: field as drawn on the original, stage deck along its angled front edge
     ("sec3", "floor", "floor", SEC3_FIELD),
-    ("sec3", "stage", "stage", rarch(1229, 1086, 150, 46, 70, 16, -22)),
-    ("sec3", "speaker-l", "bldg", turn([(-90, -8), (-78, -8), (-78, 8), (-90, 8)], 1229, 1086, -22)),
-    ("sec3", "speaker-r", "bldg", turn([(78, -8), (90, -8), (90, 8), (78, 8)], 1229, 1086, -22)),
+    ("sec3", "stage", "stage", rrect(1244.5, 1087.5, 128, 35, -21.9)),
     # Entrance security lanes
     ("lanes", "box", "bldg", rect(1040, 1293, 1172, 1440)),
     *[("lanes", f"lane{i}", "detail", line(1040 + 22 * i, 1330, 1040 + 22 * i, 1440)) for i in range(1, 6)],
-    # Vertex: round floor and the L-shaped stage wall
+    # Vertex: round floor and the L-shaped wall at its base
     ("vertex", "floor", "floor", ellipse(1556, 960, 84, 66)),
-    ("vertex", "stage", "stage", [P(1508, 970), P(1616, 970), P(1626, 904), P(1658, 904), P(1648, 1000),
-                                  P(1508, 1000)]),
-    # Grand Central: oval floor, stage on its west end
+    ("vertex", "stage", "stage", [P(1508, 996), P(1614, 996), P(1614, 930), P(1644, 930), P(1644, 1024),
+                                  P(1508, 1024)]),
+    # Grand Central: oval floor, stage deck turned 31 deg toward it
     ("grand-central", "floor", "floor", ellipse(1497, 1146, 118, 66)),
-    ("grand-central", "stage", "stage", rrect(1440, 1157, 92, 40, 31)),
-    ("grand-central", "deck", "stage", rrect(1432, 1189, 78, 22, 31)),
-    ("grand-central", "screen-l", "bldg", turn([(-56, -20), (-46, -20), (-46, 28), (-56, 28)], 1440, 1165, 31)),
-    ("grand-central", "screen-r", "bldg", turn([(46, -20), (56, -20), (56, 28), (46, 28)], 1440, 1165, 31)),
+    ("grand-central", "stage", "stage", rrect(1434, 1180, 80, 38, 31)),
 ]
 
 # VIP-only areas (purple on the original), measured from the hi-res map: (id, ground polygon, label spot)
@@ -171,13 +163,13 @@ ZONES = [
 # label spot per stage (ground coordinates): inside the dance floor, or clear space beside the stage
 LABEL_AT = {
     "mind-melt": (1165, 508), "sec3": (1200, 965), "grand-central": (1525, 1146), "vertex": (1548, 935),
-    "isotropic": (560, 922), "rc95": (911, 1290), "s3qu3nce": (781, 696), "halo-88": (752, 1060),
-    "iii-points-radio": (932, 930), "players-club": (972, 594), "door-iv": (985, 760),
+    "isotropic": (560, 922), "rc95": (911, 1290), "s3qu3nce": (781, 696), "halo-88": (730, 1095),
+    "iii-points-radio": (932, 930), "players-club": (972, 560), "door-iv": (985, 775),
     "444": (1385, 582), "unforeseen": (1385, 655),
 }
 
 
 def shapes():
-    order = {"zone": -1, "floor": 0, "bldg": 1, "stage": 2, "detail": 3}
+    order = {"zone": -1, "floor": 0, "bldg": 1, "court": 1.5, "stage": 2, "detail": 3}
     parts = PARTS + [(zid, "zone", "zone", pts) for zid, pts, _ in ZONES]
     return sorted(parts, key=lambda p: order[p[2]])
