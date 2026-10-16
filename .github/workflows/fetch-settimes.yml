@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches: [ccr-84c56106-kllwcz]
-    paths: [.github/workflows/fetch-settimes.yml, kompakt-map/source/.refetch]
+    paths: [.github/workflows/fetch-settimes.yml, .github/scripts/**, kompakt-map/source/.refetch]
 
 permissions:
   contents: write
@@ -44,10 +44,31 @@ jobs:
             curl -sSL -A "$UA" "https://www.iiipoints.com/$p/" -o "kompakt-map/source/$p.raw.html" || true
           done
           ls -laR kompakt-map/source
+      - name: Capture map images from the live site (Chrome)
+        run: |
+          npm init -y >/dev/null && npm i --no-save playwright@1.48.2 >/dev/null
+          node .github/scripts/capture_map.mjs || true
+          # more size/format guesses for the campaign map
+          for n in 1200 1280 1440 1500 1600 1800 1920 2000 2048 2160 2400 2560 2700 3000 3240 3600 4000 4320; do
+            for ext in webp png jpg avif; do
+              f="kompakt-map/source/map/festival-map-2026-$n.$ext"
+              curl -sSfL -A "$UA" "https://www.iiipoints.com/assets/campaign/festival-map-2026-$n.$ext" -o "$f" || rm -f "$f"
+            done
+          done
+          for n in festival-map-2026 festival-map festival-map-2026-full festival-map-2026-hires festival-map-2026@2x festival-map-2026-2x; do
+            for ext in webp png jpg svg pdf avif; do
+              f="kompakt-map/source/map/$n.$ext"
+              curl -sSfL -A "$UA" "https://www.iiipoints.com/assets/campaign/$n.$ext" -o "$f" || rm -f "$f"
+              [ -f "$f" ] && ! file "$f" | grep -qiE 'image|pdf|RIFF|SVG' && rm -f "$f"
+            done
+          done
+          ls -la kompakt-map/source/map
+        env:
+          UA: "Mozilla/5.0 (Linux; Android 12) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Mobile Safari/537.36"
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add kompakt-map/source
+          git add -f kompakt-map/source
           git commit -m "Add snapshot of official III Points pages" || exit 0
           git push
