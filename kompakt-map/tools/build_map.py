@@ -117,30 +117,31 @@ def rect(x, y, w, h, fill="w", stroke=0, color="b", rx=0, rot=0, lvl=0):
     op(d, lvl)
 
 
-def wall(pts, ext=WALL):
-    """Visible side walls of a raised block: sweep the outline along the extrusion (light hatch)."""
-    ex, ey = ext
-    n = len(pts)
-    for i in range(n):
-        a, b = pts[i], pts[(i + 1) % n]
-        poly([a, b, (b[0] + ex, b[1] + ey), (a[0] + ex, a[1] + ey)], fill="h2", stroke=2.5)
-
+# Line weights: blocks heavy, structures medium, details thin
+W_BLOCK, W_PLATE, W_STRUCT, W_DETAIL, W_FLOOR = 5.5, 3.5, 3, 1.8, 2.5
 
 # --------------------------------------------------------------------------------------------
-# Ground: raised plates (streets, black) carrying the city blocks (white)
+# Ground (flat). Tones by texture: background dot screen < streets white < blocks fine "lawn"
 # --------------------------------------------------------------------------------------------
+vx, vy, vw, vh = VIEW
+poly([(vx, vy), (vx + vw, vy), (vx + vw, vy + vh), (vx, vy + vh)], fill="dots")
+
 SOUTH = [P(612, 840), P(1700, 840), P(1700, 1425), P(612, 1425)]    # 3 south blocks + NW 5th / 6th Ave
 ISO = [P(452, 840), P(612, 840), P(612, 1112), P(452, 1112)]        # Isotropic lot
 NORTH_S3 = [P(695, 648), P(868, 648), P(868, 840), P(695, 840)]     # S3QUENC3 lot
 NORTH_E = [P(868, 402), P(1490, 402), P(1490, 840), P(868, 840)]    # Players Club / Mind Melt block
 VIP_LOUNGE = [P(1062, 122), P(1282, 122), P(1282, 402), P(1062, 402)]
 CHECK_SHAPES = ["SOUTH", "ISO", "NORTH_S3", "NORTH_E", "VIP_LOUNGE"]
-
-for shape in (SOUTH, NORTH_E, VIP_LOUNGE):
-    wall(shape)
-wall(ISO, (6, 44))
 for shape in (SOUTH, ISO, NORTH_S3, NORTH_E, VIP_LOUNGE):
-    poly(shape, fill="w", stroke=3)
+    poly(shape, fill="w", stroke=W_PLATE)
+
+# side streets leaving the site: white bands (overlapping the plates to open the street mouths)
+STREETS = [(403, 451, 20, 1112), (647, 694, 20, 843), (868, 911, 20, 405), (1020, 1062, 20, 405)]
+for u0, u1, w0, w1 in STREETS:
+    poly(rect_uv(u0 + 1.5, w0, u1 - 1.5, w1), fill="w")
+for u0, u1, w0, w1 in STREETS:
+    line([P(u0, w0), P(u0, w1)], stroke=W_PLATE)
+    line([P(u1, w0), P(u1, w1)], stroke=W_PLATE)
 
 BLOCKS = {
     "iso": [P(458, 846), P(612, 846), P(612, 1106), P(458, 1106)],
@@ -152,52 +153,48 @@ BLOCKS = {
     "lounge": rect_uv(1068, 128, 1276, 396),
 }
 for pts in BLOCKS.values():
-    poly(pts, fill="w", stroke=3)
-
-# streets drawn as outlines on open ground north of the blocks
-for u0, u1, w0, w1 in [(403, 451, 560, 840), (647, 694, 560, 840), (868, 911, 150, 402), (1020, 1062, 150, 402)]:
-    line([P(u0, w0), P(u0, w1)], stroke=3)
-    line([P(u1, w0), P(u1, w1)], stroke=3)
+    poly(pts, fill="lawn", stroke=W_BLOCK)
 
 # --------------------------------------------------------------------------------------------
-# Street names (big, on the black streets)
+# Street names
 # --------------------------------------------------------------------------------------------
 for (u, w, t) in [(1152, 861, "NW 5th AVE"), (745, 1404, "NW 6th AVE")]:
     x, y = P(u, w)
     text(x, y + 13, t, font="bc6i", size=38, color="b", rot=AVENUE_ANGLE)
-for (u, w, t, on) in [(1002, 1290, "NW 23rd ST", True), (1341, 1310, "NW 22nd ST", True), (636, 1000, "NW 24th ST", True),
-                      (427, 700, "NW 25th ST", False), (670, 700, "NW 24th ST", False),
-                      (889, 260, "NW 23rd ST", False), (1041, 260, "NW 22nd LN", False)]:
+for (u, w, t, size) in [(1002, 1290, "NW 23rd ST", 32), (1341, 1310, "NW 22nd ST", 32), (636, 1000, "NW 24th ST", 32),
+                        (427, 640, "NW 25th ST", 30), (670, 560, "NW 24th ST", 30),
+                        (889, 220, "NW 23rd ST", 30), (1041, 220, "NW 22nd LN", 30)]:
     x, y = P(u, w)
-    text(x + 11, y, t, font="bc6i", size=32 if on else 28, color="b", rot=STREET_ANGLE)
+    text(x + 11, y, t, font="bc6i", size=size, color="b", rot=STREET_ANGLE)
 
 # --------------------------------------------------------------------------------------------
-# Stages: flat drawings recreated from the official artwork (tools/stages.py)
+# Stages and structures: flat plan shapes on the street grid (tools/plan.py)
 # --------------------------------------------------------------------------------------------
-from stages import shapes  # noqa: E402
+from plan import shapes  # noqa: E402
 
-PART_STYLE = {  # style -> (fill, stroke width, stroke colour, dash)
-    "floor": ("w", 3, "b", [12, 8]), "roof": ("h", 3, "b", None), "side": ("h2", 2.5, "b", None),
-    "screen": ("w", 2.5, "b", None), "struct": ("w", 3, "b", None), "line": (None, 2.5, "b", None), "tri": ("w", 2.5, "b", None),
+PART_STYLE = {  # style -> (fill, stroke width, dash)
+    "floor": ("w", W_FLOOR, [12, 8]), "roof": ("h", W_STRUCT, None), "side": ("h2", W_STRUCT, None),
+    "struct": ("w", W_STRUCT, None), "detail": (None, W_DETAIL, None), "tri": ("w", W_DETAIL, None),
 }
 FOOTPRINTS = {}
 for stage, part, style, shape in shapes():
-    fill, sw, sc, dash = PART_STYLE[style]
-    if isinstance(shape, tuple) and shape and shape[0] == "ellipse":
-        _, cx, cy, rx, ry = shape
-        d = {"o": "ellipse", "x": cx, "y": cy, "rx": rx, "ry": ry, "f": fill, "s": sw, "c": sc}
-        if dash:
-            d["d"] = dash
-        op(d)
-        continue
+    fill, sw, dash = PART_STYLE[style]
     FOOTPRINTS[f"{stage}/{part}"] = shape
     if fill is None:
-        line(shape, stroke=sw, color=sc)
+        line(shape, stroke=sw)
     elif dash:
         poly(shape, fill=fill)
-        line(list(shape) + [shape[0]], stroke=sw, color=sc, dash=dash)
+        line(list(shape) + [shape[0]], stroke=sw, dash=dash)
     else:
-        poly(shape, fill=fill, stroke=sw, color=sc)
+        poly(shape, fill=fill, stroke=sw)
+
+# VIP+ walkway arrows from the VIP+ entrance into the lounge
+for (u0, w0, u1, w1) in [(1075, 365, 1125, 365), (1140, 365, 1190, 365)]:
+    a, b = P(u0, w0), P(u1, w1)
+    line([a, b], stroke=W_DETAIL)
+    ang = math.atan2(b[1] - a[1], b[0] - a[0])
+    poly([b, (b[0] - 10 * math.cos(ang - 0.45), b[1] - 10 * math.sin(ang - 0.45)),
+          (b[0] - 10 * math.cos(ang + 0.45), b[1] - 10 * math.sin(ang + 0.45))], fill="b")
 
 # --------------------------------------------------------------------------------------------
 # Facilities: positions/types detected on the official map, a few fixed by hand
@@ -301,8 +298,39 @@ def svg_text(x, y, t, font, size, color, anchor="middle", rot=0, fit=None):
             f'fill="{color}"{fitattr}{tr}>{esc(t)}</text>')
 
 
+# Fill patterns, shared with the app (MapView reads PATTERNS from map.json)
+PATTERNS = {
+    "h": {"kind": "lines", "gap": 8, "width": 2.0, "angle": 90 + 14.5},     # dense, along the cross streets
+    "h2": {"kind": "lines", "gap": 10, "width": 1.4, "angle": AVENUE_ANGLE},  # light, along the avenues
+    "dots": {"kind": "dots", "gap": 5, "r": 1.05},                             # background screen
+    "lawn": {"kind": "dots", "gap": 14, "r": 0.8, "stagger": True},            # blocks: fine texture
+}
+
+
+def svg_defs():
+    out = ["<defs>"]
+    for key, p in PATTERNS.items():
+        pid = {"h": "hatch", "h2": "hatch2"}.get(key, key)
+        g = p["gap"]
+        if p["kind"] == "lines":
+            # vertical stripe rotated to the requested angle (0 deg = horizontal lines)
+            out.append(f'<pattern id="{pid}" width="{g}" height="{g}" patternUnits="userSpaceOnUse" '
+                       f'patternTransform="rotate({p["angle"] - 90})"><rect width="{g}" height="{g}" fill="#fff"/>'
+                       f'<rect width="{p["width"]}" height="{g}" fill="#000"/></pattern>')
+        else:
+            h = g * 2 if p.get("stagger") else g
+            dots = f'<circle cx="{g / 2}" cy="{g / 2}" r="{p["r"]}" fill="#000"/>'
+            if p.get("stagger"):
+                dots += f'<circle cx="0" cy="{g * 1.5}" r="{p["r"]}" fill="#000"/><circle cx="{g}" cy="{g * 1.5}" r="{p["r"]}" fill="#000"/>'
+            out.append(f'<pattern id="{pid}" width="{g}" height="{h}" patternUnits="userSpaceOnUse">'
+                       f'<rect width="{g}" height="{h}" fill="#fff"/>{dots}</pattern>')
+    out.append("</defs>")
+    return "".join(out)
+
+
 def to_svg(ops_list):
-    col = {"b": "#000", "w": "#fff", "n": "none", "h": "url(#hatch)", "h2": "url(#hatch2)"}
+    col = {"b": "#000", "w": "#fff", "n": "none", "h": "url(#hatch)", "h2": "url(#hatch2)",
+           "dots": "url(#dots)", "lawn": "url(#lawn)"}
     vx, vy, vw, vh = VIEW
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vx} {vy} {vw} {vh}" width="{vw}" height="{vh}">', "<style>"]
     for key, f in FONT_FILES.items():
@@ -310,10 +338,7 @@ def to_svg(ops_list):
             b64 = base64.b64encode(fh.read()).decode()
         out.append(f'@font-face{{font-family:"{key.upper()}";src:url(data:font/ttf;base64,{b64})}}')
     out.append("</style>")
-    out.append('<defs><pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">'
-               '<rect width="9" height="9" fill="#fff"/><rect width="2" height="9" fill="#000"/></pattern>'
-               '<pattern id="hatch2" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">'
-               '<rect width="14" height="14" fill="#fff"/><rect width="1.6" height="14" fill="#000"/></pattern></defs>')
+    out.append(svg_defs())
     out.append(f'<rect x="{vx}" y="{vy}" width="{vw}" height="{vh}" fill="#fff"/>')
     for o in ops_list:
         k = o["o"]
@@ -365,16 +390,53 @@ def to_svg(ops_list):
     return "\n".join(out)
 
 
+def svg_labels(labels):
+    """Preview of the app's Mudita-style labels: white pill, thin black outline, Barlow."""
+    out = []
+    for lb in labels:
+        k = lb["kind"]
+        if k == "stage":
+            x, y = lb["tag"]
+            size, font, h = 25, "b7", 40
+        elif k == "entrance":
+            a = math.radians(lb["dir"])
+            tx, ty = lb["x"], lb["y"]
+            x, y = tx - 95 * math.cos(a), ty - 95 * math.sin(a)
+            bx, by = tx - 40 * math.cos(a), ty - 40 * math.sin(a)
+            out.append(f'<line x1="{bx:.1f}" y1="{by:.1f}" x2="{tx}" y2="{ty}" stroke="#fff" stroke-width="9"/>')
+            out.append(f'<line x1="{bx:.1f}" y1="{by:.1f}" x2="{tx}" y2="{ty}" stroke="#000" stroke-width="4"/>')
+            hx1, hy1 = tx - 16 * math.cos(a - 0.5), ty - 16 * math.sin(a - 0.5)
+            hx2, hy2 = tx - 16 * math.cos(a + 0.5), ty - 16 * math.sin(a + 0.5)
+            out.append(f'<polygon points="{tx},{ty} {hx1:.1f},{hy1:.1f} {hx2:.1f},{hy2:.1f}" fill="#000"/>')
+            size, font, h = 23, "b7", 38
+        else:
+            x, y = lb["x"], lb["y"]
+            anchor = "middle"
+            if k == "place":  # beside its icon
+                x, anchor = x + 27, "start"
+            out.append(svg_text(x, y + 6, lb["t"], "b6", 17, "#000", anchor).replace(
+                "<text ", '<text stroke="#fff" stroke-width="5" paint-order="stroke" stroke-linejoin="round" '))
+            continue
+        w = text_width(lb["t"], font, size) + h * 0.8
+        out.append(f'<rect x="{x - w / 2:.1f}" y="{y - h / 2:.1f}" width="{w:.1f}" height="{h}" rx="{h / 2}" '
+                   f'fill="#fff" stroke="#000" stroke-width="{3 if k == "entrance" else 2.2}"/>')
+        out.append(svg_text(round(x, 1), round(y + size * 0.36, 1), lb["t"], font, size, "#000"))
+    return "\n".join(out)
+
+
 def main():
     assets = os.path.join(ROOT, "app", "assets")
-    doc = {"view": VIEW, "ops": ops, "labels": LABELS, "fonts": FONT_FILES}
+    doc = {"view": VIEW, "ops": ops, "labels": LABELS, "patterns": PATTERNS, "fonts": FONT_FILES}
     with open(os.path.join(assets, "map.json"), "w") as f:
         json.dump(doc, f, separators=(",", ":"))
     with open(os.path.join(assets, "icons.json"), "w") as f:
         json.dump(ICONS, f, separators=(",", ":"))
     os.makedirs(os.path.join(ROOT, "mockup"), exist_ok=True)
+    svg = to_svg(ops)
     with open(os.path.join(ROOT, "mockup", "map.svg"), "w") as f:
-        f.write(to_svg(ops))
+        f.write(svg)
+    with open(os.path.join(ROOT, "mockup", "map-labeled.svg"), "w") as f:
+        f.write(svg.replace("</svg>", svg_labels(LABELS) + "\n</svg>"))
     print(f"{len(ops)} ops, {len(LABELS)} labels")
 
 
