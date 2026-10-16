@@ -329,6 +329,10 @@ final class MapView extends View {
             }
         }
         boolean sel = l.id.equals(selected);
+        if (scale < ICON_ZOOM && !sel) {   // zoomed out: names only
+            sub = null;
+            star = false;
+        }
         float padX = Ui.px(12);
         String subShown = sub == null ? null : (star ? "★ " : "") + ellipsize(sub, subText, Ui.px(170));
         float w = Math.max(nameText.measureText(l.text), subShown == null ? 0 : subText.measureText(subShown)) + 2 * padX;
@@ -337,13 +341,19 @@ final class MapView extends View {
         RectF r = new RectF(x - w / 2, y - h / 2, x + w / 2, y + h / 2);
         // nudge away from labels already placed
         float[][] tries = {{0, 0}, {0, h * 0.8f}, {0, -h * 0.8f}, {w * 0.6f, 0}, {-w * 0.6f, 0}, {0, h * 1.6f}, {0, -h * 1.6f}};
+        boolean found = false;
         for (float[] t : tries) {
             RectF q = new RectF(r);
             q.offset(t[0], t[1]);
             if (free(q)) {
                 r = q;
+                found = true;
                 break;
             }
+        }
+        if (!found && !sel) {   // no room: keep it tappable, but don't draw over another label
+            stageHits.put(l.id, r);
+            return;
         }
         placedRects.add(r);
         stageHits.put(l.id, r);
