@@ -18,7 +18,12 @@ jobs:
               --data-urlencode 'query=query Get($section: String!) { getSection(name: $section) { post responseCode } }' \
               --data-urlencode "variables={\"section\":\"$sec\"}" -o "fests/primavera-2027/api/section-$sec.json" || true
           done
-          node .github/scripts/fest.mjs primavera-2027 https://www.primaverasound.com/en/barcelona || true
+          for sec in lineup barcelona-lineup-2027 lineup-barcelona-2027; do
+            curl -sS -m 30 -A "Mozilla/5.0" -G "https://graphql.primaverasound.com/prod/graphql" \
+              --data-urlencode 'query=query Get($section: String!) { getSection(name: $section) { post responseCode } }' \
+              --data-urlencode "variables={\"section\":\"$sec\"}" -o "fests/primavera-2027/api/section-$sec.json" || true
+          done
+          node .github/scripts/fest.mjs primavera-2027 https://www.primaverasound.com/en/barcelona/lineup || true
           ls -laR fests | head -100
       - run: |
           git config user.name "github-actions[bot]"
