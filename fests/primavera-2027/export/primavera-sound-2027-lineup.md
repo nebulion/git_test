@@ -1,0 +1,167 @@
+# Primavera Sound Barcelona 2027
+
+**Dates:** free opening day Wed June 2 · main days June 3–5 · Primavera Bits Sun June 6, 2027  
+**Venue:** Parc del Fòrum, Barcelona  
+**Status:** First lineup announcement (Oct 5, 2026). No day split, stages, set times or 2027 site map published yet.  
+**Source:** https://www.primaverasound.com/en/barcelona/lineup (fetched 2026-10-20)
+
+## Headliners
+Doechii, Phoebe Bridgers, Fontaines D.C., Massive Attack, Turnstile, The Chemical Brothers, Robyn, FKA twigs, Bad Gyal, Hayley Williams
+
+## Specials
+- Primavera Bits (June 6): Richie Hawtin, Four Tet and Dixon: 8-hour alternating sets
+- Closing set: Skrillex b2b Ninajirachi
+
+## Full lineup A–Z (152 acts)
+- ABHIR
+- ADÉLA
+- Aeronave Adolescente
+- AKRIILA
+- Alcalá Norte
+- Alemeda
+- aLex vs aLex
+- Al·lèrgiques al pol·len
+- Andy Stott
+- Angine de Poitrine
+- ANOHNI
+- Arca
+- @
+- Atlas Sound
+- Axolotes Mexicanos
+- B0YG1RL
+- Bad Gyal
+- BAE BAE
+- BASHKKA b2b Mike Servito
+- BICEP
+- Blackhaine
+- Blanco Palamera
+- BLAYA
+- Bleachers
+- Bonnie "Prince" Billy
+- Boy Harsher
+- Brutalismus 3000 b2b ISOxo
+- Carlos de Jacoba & Ciutat
+- Carmen Villain live
+- Caroline Polachek
+- Carré
+- Castle Rat
+- CHVRCHES
+- Converge
+- Dame Area
+- dani dicostas
+- Decoder
+- DIIV
+- Dinosaur Jr.
+- Dixon
+- DJ Fra
+- DJ /rupture
+- DJ Stingray 313 live
+- Doechii
+- Don Caballero
+- Dove Ellis
+- Dulce
+- ear
+- Eden Aurelius
+- El Buen Hijo
+- English Teacher
+- Erin LeCount
+- EsDeeKid
+- FADES
+- FKA twigs
+- Fontaines D.C.
+- Four Tet
+- Friko
+- Full Of Hell
+- Gazella
+- Gilla Band
+- Greg Freeman
+- Guillem Gisbert
+- Haute & Freddy
+- Have A Nice Life
+- Hayley Williams
+- Headache
+- Hearts2Hearts
+- Ibrahim Alfa Jnr
+- Irenegarry
+- Isaiah Rashad
+- Jersey
+- Jesu
+- John Talabot
+- Joy Orbison
+- JT
+- Juana Molina
+- Julien Baker
+- Jump Source live
+- Kelsey Lu
+- Kim Petras
+- King Gizzard & The Lizard Wizard
+- Klara Lewis
+- Lip Critic
+- Livwutang b2b Konduku
+- Lola Young
+- Loradeniz
+- Los Punsetes
+- Lux Lisbon
+- Mabe Fratti
+- mad miran b2b DJ Zero
+- Madra Salach
+- Malibu
+- Mark Fell and RP Boo
+- Marta Salogni live
+- Massive Attack
+- Memory Palace
+- Metrika
+- Metronomy
+- Mishima
+- mori
+- MUNA
+- Mushka
+- Naone
+- NAPA
+- Oceanic live A/V
+- pablopablo
+- Pavement
+- Perfecto Miserable
+- Phoebe Bridgers
+- Picture live
+- PISS
+- PLO Man
+- Pole 1 2 3 live
+- Polygonia live
+- Prospa
+- Prostitute
+- Racing Mount Pleasant
+- Rebe
+- Richie Hawtin
+- Robyn
+- Roly Porter
+- S.A.S.S (Saoirse, Moxie, Peach, Shanti Celeste)
+- Santiago Motorizado
+- Shygirl
+- Simian Mobile Disco
+- Skrillex b2b Ninajirachi
+- Sky H1 live
+- Snow Strippers
+- Sonido Underground: DNGDNGDNG & Phran
+- Sophia Stel
+- Tatyana Jane
+- The Chemical Brothers
+- Theodora
+- Tinashe
+- Tirzah
+- Tracey
+- trickpony
+- TRISTÁN!
+- TTSSFU
+- Turnstile
+- Twisted Teens
+- underscores
+- Underworld
+- Vashti Bunyan
+- Verushka b2b Acidheaven
+- Victoryland
+- Viva Belgrado
+- Wallows
+- Warning
+- Westside Cowboy
+- Weyes Blood
