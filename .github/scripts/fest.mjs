@@ -34,7 +34,7 @@ while (queue.length && visited.size < 14) {
   if (visited.has(url)) continue;
   visited.add(url);
   try {
-    await page.goto(url, { waitUntil: "networkidle", timeout: 60000 });
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 }); await page.waitForTimeout(9000);
     for (let i = 0; i < 30; i++) { await page.mouse.wheel(0, 1000); await page.waitForTimeout(200); }
     const slug = new URL(url).pathname.replace(/\//g, "_").replace(/^_|_$/g, "") || "home";
     fs.writeFileSync(path.join(out, slug + ".txt"), await page.evaluate(() => document.body.innerText));

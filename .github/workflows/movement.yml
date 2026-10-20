@@ -12,7 +12,13 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           npm init -y >/dev/null && npm i --no-save playwright@1.48.2 >/dev/null
-          node .github/scripts/fest.mjs primavera-2027 https://www.primaverasound.com/en/barcelona https://www.primaverasound.com/en/barcelona/line-up || true
+          mkdir -p fests/primavera-2027/api
+          for sec in barcelona barcelona-line-up line-up-barcelona barcelona-lineup lineup-barcelona barcelona-map map-barcelona barcelona-mapa barcelona-info; do
+            curl -sS -m 30 -A "Mozilla/5.0" -G "https://graphql.primaverasound.com/prod/graphql" \
+              --data-urlencode 'query=query Get($section: String!) { getSection(name: $section) { post responseCode } }' \
+              --data-urlencode "variables={\"section\":\"$sec\"}" -o "fests/primavera-2027/api/section-$sec.json" || true
+          done
+          node .github/scripts/fest.mjs primavera-2027 https://www.primaverasound.com/en/barcelona || true
           ls -laR fests | head -100
       - run: |
           git config user.name "github-actions[bot]"
