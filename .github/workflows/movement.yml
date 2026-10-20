@@ -1,0 +1,22 @@
+name: Fetch Movement Detroit data
+on:
+  push:
+    branches: [movement-fetch]
+    paths: [.github/workflows/movement.yml, .github/scripts/movement.mjs, movement/.refetch]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          npm init -y >/dev/null && npm i --no-save playwright@1.48.2 >/dev/null
+          node .github/scripts/movement.mjs || true
+          ls -laR movement | head -80
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f movement
+          git commit -m "Add Movement Detroit snapshot" || exit 0
+          git pull --rebase origin movement-fetch && git push
